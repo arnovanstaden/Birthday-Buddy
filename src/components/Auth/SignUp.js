@@ -55,7 +55,7 @@ export default function SignUp() {
         const authData = {
             email: emailRef.current.value.toLowerCase().trim(),
             password: passwordRef.current.value,
-            displayName: displayNameRef.current.value,
+            displayName: displayNameRef.current.value.trim(),
         }
 
         // Password Length
@@ -69,7 +69,7 @@ export default function SignUp() {
         signUp(authData)
             .then(result => {
                 hideLoader();
-                enqueueSnackbar(`Welcome to Blink ${result.displayName}!`, {
+                enqueueSnackbar(`Welcome to Birthday Buddy ${result.displayName}!`, {
                     variant: 'success',
                 });
                 return history.push('/')
