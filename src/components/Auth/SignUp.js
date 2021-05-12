@@ -10,10 +10,10 @@ import { LoaderContext } from "../../context/LoaderContext";
 // Components
 import Page from "../UI/Page/Page"
 import Button from "../UI/Library/Button/Button";
-import Container from "@material-ui/core/Container";
+import Input from "../UI/Library/Input/Input";
 
 // MUI
-import TextField from "@material-ui/core/TextField";
+import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 
 // Styles, Media
@@ -96,32 +96,27 @@ export default function SignUp() {
 
                         <h1>Sign Up</h1>
                     </div>
-                    <form name="signup-form" id="signup-form" ref={formRef}>
+                    <form name="signup-form" ref={formRef}>
                         <Grid container spacing={2}>
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
+                            <Input
                                 required
                                 type="text"
                                 label="Username"
-                                inputRef={displayNameRef} autoFocus
-                                fullWidth />
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                type="email"
-                                label="Email"
+                                inputRef={displayNameRef}
+                                autoFocus
+                            />
+                            <Input
                                 inputRef={emailRef}
-                                fullWidth />
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
+                                label="Email"
+                                type="email"
                                 required
-                                type="password"
-                                label="Password"
+                            />
+                            <Input
                                 inputRef={passwordRef}
-                                fullWidth />
+                                label="Password"
+                                type="password"
+                                required
+                            />
                             <Button fullWidth onClick={handleAuth}>Sign Up</Button>
                         </Grid>
                     </form>

@@ -5,7 +5,7 @@ $medium-grey: #7a8d9c;
 $grey: #242935;
 $white: #ffffff;
 $green: #29C13E;
-$green-gradient: linear-gradient(90deg, rgba(48, 125, 254, 1) 0%, rgba(29, 88, 251, 1) 100%);
+$green-gradient: linear-gradient(45deg, rgba(#29C13E, 1) 0%, rgba(#1fa130, 1) 100%);
 
 @mixin reset-list {
     margin: 0;
@@ -23,4 +23,31 @@ $green-gradient: linear-gradient(90deg, rgba(48, 125, 254, 1) 0%, rgba(29, 88, 2
     -webkit-box-shadow: 3px 3px 30px -10px rgba($grey, 0.3);
     -moz-box-shadow: 3px 3px 30px -10px rgba($grey, 0.3);
     box-shadow: 3px 3px 30px -10px rgba($grey, 0.3);
+}
+
+@mixin reset-input {
+    border: none;
+    outline: none;
+
+    // -webkit-autofill,
+    // -webkit-autofill:hover,
+    // -webkit-autofill:focus,
+    // -webkit-autofill:active {
+    //     -webkit-box-shadow: 0 0 0 0 white inset !important;
+    // }
+
+    :focus {
+        outline: none;
+    }
+
+    :active {
+        outline: none;
+    }
+}
+
+@mixin neumorph ($distance) {
+    background-color: $light-grey;
+    background: $light-grey;
+    box-shadow: 20px 20px 60px #cfcfcf,
+        -20px -20px 60px #ffffff;
 }
