@@ -1,10 +1,15 @@
-import React from 'react'
+import Page from "../UI/Page/Page";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext"
 
 const Dashboard = () => {
+    const { signOut } = useContext(UserContext);
+
     return (
-        <div>
+        <Page>
             <h1>Dashboard</h1>
-        </div>
+            <button onClick={signOut}>Logout</button>
+        </Page>
     )
 }
 

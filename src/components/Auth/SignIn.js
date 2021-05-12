@@ -11,15 +11,15 @@ import { LoaderContext } from "../../context/LoaderContext";
 // Components
 import Page from "../UI/Page/Page"
 import Button from "../UI/Library/Button/Button";
-import Container from "@material-ui/core/Container";
+import Input from "../UI/Library/Input/Input";
 
 // MUI
-import TextField from "@material-ui/core/TextField";
+import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 
 // Styles, Media
 import styles from "./auth.module.scss";
-import Logo from "../../assets/images/logos/logo.svg";
+import Logo from "../../assets/images/logos/logo-shadow.svg";
 
 export default function SignIn() {
 
@@ -30,6 +30,7 @@ export default function SignIn() {
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const emailRef = useRef();
     const passwordRef = useRef();
+    const formRef = useRef();
 
     // Check Already SignedIn
     useEffect(() => {
@@ -43,7 +44,7 @@ export default function SignIn() {
     const handleAuth = (e) => {
         showLoader("Signing You In")
 
-        if (!validateForm(e)) {
+        if (!validateForm(e, formRef.current)) {
             hideLoader()
             return enqueueSnackbar("Please complete all the relevant fields", {
                 variant: 'error',
@@ -85,25 +86,21 @@ export default function SignIn() {
                     <div className="heading">
                         <h1>Sign In</h1>
                     </div>
-                    <form name="signin-form" id="signin-form">
-                        <Grid container spacing={2}>
-                            <TextField
-                                margin="normal"
-                                required
-                                type="text"
-                                label="Email"
-                                inputRef={emailRef}
+                    <form name="signin-form" ref={formRef}>
+                        <Grid container spacing={2} required>
+                            <Input
                                 autoFocus
-                                variant="outlined"
-                                fullWidth />
-                            <TextField
-                                margin="normal"
+                                inputRef={emailRef}
+                                label="Email"
+                                type="email"
                                 required
-                                type="password"
-                                label="Password"
+                            />
+                            <Input
                                 inputRef={passwordRef}
-                                variant="outlined"
-                                fullWidth />
+                                label="Password"
+                                type="password"
+                                required
+                            />
                             <Button fullWidth onClick={handleAuth}>Sign In</Button>
                         </Grid>
                     </form>
@@ -112,7 +109,7 @@ export default function SignIn() {
                         <Link to="/signup">Sign Up</Link>
                     </Grid>
                 </div>
-            </Container>
-        </Page>
+            </Container >
+        </Page >
     )
 }
