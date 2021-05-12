@@ -29,6 +29,7 @@ export default function SignUp() {
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const emailRef = useRef();
     const passwordRef = useRef();
+    const passwordConfRef = useRef();
     const displayNameRef = useRef();
     const formRef = useRef();
 
@@ -42,14 +43,22 @@ export default function SignUp() {
 
     // Handlers
     const handleAuth = async (e) => {
-        showLoader("Creating Your Profile")
 
         if (!validateForm(e, formRef.current)) {
-            hideLoader()
             return enqueueSnackbar("Please complete all the relevant fields", {
                 variant: 'error',
             });
         }
+
+        // PW Confirm
+        if (passwordRef.current.value !== passwordConfRef.current.value) {
+            return enqueueSnackbar("Please ensure your passwords match", {
+                variant: 'error',
+            });
+        }
+
+
+        showLoader("Creating Your Profile")
 
         // Data
         const authData = {
@@ -89,7 +98,7 @@ export default function SignUp() {
             center
             fullscreen
         >
-            <Container maxWidth="xs">
+            <Container maxWidth="sm">
                 <div className={styles.auth}>
                     <img src={Logo} alt="" />
                     <div className={styles.heading}>
@@ -97,26 +106,41 @@ export default function SignUp() {
                         <h2>Welcome</h2>
                     </div>
                     <form name="signup-form" ref={formRef}>
-                        <Grid container>
-                            <Input
-                                required
-                                type="text"
-                                label="Username"
-                                inputRef={displayNameRef}
-                                autoFocus
-                            />
-                            <Input
-                                inputRef={emailRef}
-                                label="Email"
-                                type="email"
-                                required
-                            />
-                            <Input
-                                inputRef={passwordRef}
-                                label="Password"
-                                type="password"
-                                required
-                            />
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
+                                <Input
+                                    required
+                                    type="text"
+                                    label="Username"
+                                    inputRef={displayNameRef}
+                                    autoFocus
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Input
+                                    inputRef={emailRef}
+                                    label="Email"
+                                    type="email"
+                                    required
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+
+                                <Input
+                                    inputRef={passwordRef}
+                                    label="Password"
+                                    type="password"
+                                    required
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Input
+                                    inputRef={passwordConfRef}
+                                    label="Password Confirmation"
+                                    type="password"
+                                    required
+                                />
+                            </Grid>
                             <Button fullWidth onClick={handleAuth}>Sign Up</Button>
                         </Grid>
                     </form>

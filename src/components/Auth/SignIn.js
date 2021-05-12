@@ -89,20 +89,26 @@ export default function SignIn() {
                     </div>
                     <form name="signin-form" ref={formRef}>
                         <Grid container required>
-                            <Input
-                                autoFocus
-                                inputRef={emailRef}
-                                label="Email"
-                                type="email"
-                                required
-                            />
-                            <Input
-                                inputRef={passwordRef}
-                                label="Password"
-                                type="password"
-                                required
-                            />
-                            <Button fullWidth onClick={handleAuth}>Sign In</Button>
+                            <Grid item xs={12}>
+                                <Input
+                                    autoFocus
+                                    inputRef={emailRef}
+                                    label="Email"
+                                    type="email"
+                                    required
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Input
+                                    inputRef={passwordRef}
+                                    label="Password"
+                                    type="password"
+                                    required
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button fullWidth onClick={handleAuth}>Sign In</Button>
+                            </Grid>
                         </Grid>
                     </form>
                     <Grid container justify="space-between" className={styles.options}>

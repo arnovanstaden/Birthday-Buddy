@@ -64,7 +64,6 @@ export default function ResetPassword() {
     return (
         <Page
             title="Reset Password"
-            className={styles.auth}
             center
             fullscreen
         >
@@ -77,13 +76,17 @@ export default function ResetPassword() {
                     </div>
                     <form name="reset-password-form" ref={formRef}>
                         <Grid container>
-                            <Input
-                                inputRef={emailRef}
-                                label="Email"
-                                type="email"
-                                required
-                            />
-                            <Button fullWidth onClick={handlePasswordReset}>Reset Password</Button>
+                            <Grid item xs={12}>
+                                <Input
+                                    inputRef={emailRef}
+                                    label="Email"
+                                    type="email"
+                                    required
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button fullWidth onClick={handlePasswordReset}>Reset Password</Button>
+                            </Grid>
                         </Grid>
                     </form>
                     <Grid container justify="center" className={styles.options}>
