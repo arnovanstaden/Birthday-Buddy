@@ -28,12 +28,13 @@ export default function ResetPassword() {
     const { resetPassword } = useContext(UserContext);
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const emailRef = useRef();
+    const formRef = useRef();
 
     // Handlers
     const handlePasswordReset = (e) => {
         showLoader("Sending Password Reset Email")
 
-        if (!validateForm(e)) {
+        if (!validateForm(e, formRef.current)) {
             hideLoader()
             return enqueueSnackbar("Please complete all the relevant fields", {
                 variant: 'error',
@@ -68,12 +69,12 @@ export default function ResetPassword() {
             fullscreen
         >
             <Container maxWidth="xs">
-                <div className={styles.auth}>
+                <div className={styles.auth} >
                     <img src={Logo} alt="" />
                     <div className="heading">
                         <h1>Reset Password</h1>
                     </div>
-                    <form name="reset-password-form" id="reset-password-form">
+                    <form name="reset-password-form" ref={formRef}>
                         <Grid container spacing={2}>
                             <TextField
                                 variant="outlined"

@@ -8,16 +8,20 @@
 
     form {
         width: 100%;
+
+        button {
+            margin-top: 1rem;
+        }
     }
 
     img {
-        width: 10rem;
+        width: 6rem;
         height: auto;
         margin-bottom: 1.5rem;
     }
 
     .options {
-        margin-top: 0.75rem;
+        margin-top: 1.25rem;
 
         a {
             font-size: 0.9rem;
