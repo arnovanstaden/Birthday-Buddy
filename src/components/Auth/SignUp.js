@@ -92,9 +92,9 @@ export default function SignUp() {
             <Container maxWidth="xs">
                 <div className={styles.auth}>
                     <img src={Logo} alt="" />
-                    <div className="heading">
-
+                    <div className={styles.heading}>
                         <h1>Sign Up</h1>
+                        <h2>Welcome</h2>
                     </div>
                     <form name="signup-form" ref={formRef}>
                         <Grid container>

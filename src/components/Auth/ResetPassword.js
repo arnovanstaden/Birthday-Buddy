@@ -71,8 +71,9 @@ export default function ResetPassword() {
             <Container maxWidth="xs">
                 <div className={styles.auth} >
                     <img src={Logo} alt="" />
-                    <div className="heading">
+                    <div className={styles.heading}>
                         <h1>Reset Password</h1>
+                        <h2>Oops...</h2>
                     </div>
                     <form name="reset-password-form" ref={formRef}>
                         <Grid container>

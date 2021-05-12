@@ -19,7 +19,7 @@ import Grid from "@material-ui/core/Grid";
 
 // Styles, Media
 import styles from "./auth.module.scss";
-import Logo from "../../assets/images/logos/logo-shadow.svg";
+import Logo from "../../assets/images/logos/logo.svg";
 
 export default function SignIn() {
 
@@ -83,8 +83,9 @@ export default function SignIn() {
             <Container maxWidth="xs">
                 <div className={styles.auth}>
                     <img src={Logo} alt="" />
-                    <div className="heading">
+                    <div className={styles.heading}>
                         <h1>Sign In</h1>
+                        <h2>Welcome</h2>
                     </div>
                     <form name="signin-form" ref={formRef}>
                         <Grid container required>
