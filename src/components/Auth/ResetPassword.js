@@ -10,10 +10,10 @@ import { LoaderContext } from "../../context/LoaderContext";
 // Components
 import Page from "../UI/Page/Page"
 import Button from "../UI/Library/Button/Button";
-import Container from "@material-ui/core/Container";
+import Input from "../UI/Library/Input/Input";
 
 // MUI
-import TextField from "@material-ui/core/TextField";
+import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 
 // Styles, Media
@@ -76,15 +76,12 @@ export default function ResetPassword() {
                     </div>
                     <form name="reset-password-form" ref={formRef}>
                         <Grid container spacing={2}>
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                type="email"
-                                label="Email"
+                            <Input
                                 inputRef={emailRef}
-                                center
-                                fullWidth />
+                                label="Email"
+                                type="email"
+                                required
+                            />
                             <Button fullWidth onClick={handlePasswordReset}>Reset Password</Button>
                         </Grid>
                     </form>

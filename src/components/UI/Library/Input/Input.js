@@ -1,6 +1,6 @@
 import styles from "./input.module.scss";
 
-const Input = ({ label, type, inputRef, autoFocus, placeholder }) => {
+const Input = ({ label, type, inputRef, autoFocus, placeholder, required }) => {
     return (
         <div className={styles.group}>
             <label htmlFor={label}>{label}</label>
@@ -10,6 +10,7 @@ const Input = ({ label, type, inputRef, autoFocus, placeholder }) => {
                 ref={inputRef}
                 autoFocus={autoFocus}
                 placeholder={placeholder}
+                required={required}
             />
         </div>
     )

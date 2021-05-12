@@ -15,7 +15,6 @@ import Input from "../UI/Library/Input/Input";
 
 // MUI
 import Container from "@material-ui/core/Container";
-import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 
 // Styles, Media
@@ -94,11 +93,13 @@ export default function SignIn() {
                                 inputRef={emailRef}
                                 label="Email"
                                 type="email"
+                                required
                             />
                             <Input
                                 inputRef={passwordRef}
                                 label="Password"
                                 type="password"
+                                required
                             />
                             <Button fullWidth onClick={handleAuth}>Sign In</Button>
                         </Grid>
