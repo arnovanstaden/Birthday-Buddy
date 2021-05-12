@@ -29,12 +29,15 @@ $green-gradient: linear-gradient(45deg, rgba(#29C13E, 1) 0%, rgba(#1fa130, 1) 10
     border: none;
     outline: none;
 
-    // -webkit-autofill,
-    // -webkit-autofill:hover,
-    // -webkit-autofill:focus,
-    // -webkit-autofill:active {
-    //     -webkit-box-shadow: 0 0 0 0 white inset !important;
-    // }
+    // Remove Autofill Colours
+    &:-webkit-autofill {
+
+        &,
+        &:hover,
+        &:focus {
+            transition: background-color 5000s ease-in-out 0s;
+        }
+    }
 
     :focus {
         outline: none;

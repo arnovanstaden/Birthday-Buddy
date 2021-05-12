@@ -87,7 +87,7 @@ export default function SignIn() {
                         <h1>Sign In</h1>
                     </div>
                     <form name="signin-form" ref={formRef}>
-                        <Grid container spacing={2} required>
+                        <Grid container required>
                             <Input
                                 autoFocus
                                 inputRef={emailRef}

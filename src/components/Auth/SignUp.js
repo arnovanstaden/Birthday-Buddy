@@ -97,7 +97,7 @@ export default function SignUp() {
                         <h1>Sign Up</h1>
                     </div>
                     <form name="signup-form" ref={formRef}>
-                        <Grid container spacing={2}>
+                        <Grid container>
                             <Input
                                 required
                                 type="text"

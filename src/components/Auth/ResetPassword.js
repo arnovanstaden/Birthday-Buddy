@@ -75,7 +75,7 @@ export default function ResetPassword() {
                         <h1>Reset Password</h1>
                     </div>
                     <form name="reset-password-form" ref={formRef}>
-                        <Grid container spacing={2}>
+                        <Grid container>
                             <Input
                                 inputRef={emailRef}
                                 label="Email"
