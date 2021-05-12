@@ -1,0 +1,26 @@
+@import "../../styles/variables.scss";
+
+.auth {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    form {
+        width: 100%;
+    }
+
+    img {
+        width: 10rem;
+        height: auto;
+        margin-bottom: 1.5rem;
+    }
+
+    .options {
+        margin-top: 0.75rem;
+
+        a {
+            font-size: 0.9rem;
+        }
+    }
+}

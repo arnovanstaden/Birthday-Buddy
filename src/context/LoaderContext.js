@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 export const LoaderProvider = ({ children }) => {
 
     const classes = useStyles();
@@ -34,9 +35,7 @@ export const LoaderProvider = ({ children }) => {
     };
 
     return (
-        <LoaderContext.Provider
-            value={{ showLoader, hideLoader }
-            }>
+        <LoaderContext.Provider value={{ showLoader, hideLoader }}>
             <Backdrop className={classes.backdrop} open={show}>
                 <Loader text={text} />
             </Backdrop>

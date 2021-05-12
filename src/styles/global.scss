@@ -62,13 +62,13 @@ textarea {
     position: fixed;
     bottom: 1rem;
     right: 1rem;
-    background: $blue-gradient;
+    background: $green-gradient;
     color: $light-grey;
 }
 
 .button {
     padding: 0.5rem 2rem;
-    background: $blue;
+    background: $green;
     border: none;
     color: $white;
     border-radius: 0.25rem;
@@ -78,7 +78,7 @@ textarea {
     -o-border-radius: 0.25rem;
     font-weight: 500;
     cursor: pointer;
-    border: $blue 2px solid;
+    border: $green 2px solid;
     transition: 0.2s ease-in-out;
     -webkit-transition: 0.2s ease-in-out;
     -moz-transition: 0.2s ease-in-out;
@@ -92,11 +92,11 @@ textarea {
 
     &-alt {
         background: transparent;
-        border: $blue 2px solid;
+        border: $green 2px solid;
         color: $grey;
 
         &:hover {
-            background-color: $blue;
+            background-color: $green;
             color: $white;
         }
     }
@@ -125,7 +125,7 @@ textarea {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: $blue;
+    background: $green;
     border-radius: 0.25rem;
     transition: 0.3s ease-in-out;
 }

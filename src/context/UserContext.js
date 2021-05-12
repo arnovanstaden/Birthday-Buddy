@@ -5,7 +5,6 @@ import { createDbUser } from "../utils/user";
 export const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
-    // Config
 
     // State
     const [currentUser, setCurrentUser] = useState(null);

@@ -1,0 +1,15 @@
+@import "../../../styles/variables.scss";
+
+.page {
+    width: 100%;
+
+    &.center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &.fullscreen {
+        min-height: 100vh;
+    }
+}

@@ -3,25 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.12.0",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^12.8.3",
-    "@types/jest": "^26.0.23",
-    "@types/node": "^12.20.12",
-    "@types/react": "^17.0.5",
-    "@types/react-dom": "^17.0.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.2.4",
-    "web-vitals": "^1.1.2",
+    "@material-ui/core": "^4.11.4",
     "classnames": "^2.3.1",
-    "firebase": "^8.4.1",
+    "firebase": "^8.6.0",
     "node-sass": "^5.0.0",
     "notistack": "^1.0.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-reveal": "^1.2.2",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "sass": "^1.32.8"
+    "react-scripts": "4.0.3",
+    "sass": "^1.32.8",
+    "typeface-rubik": "^1.1.13",
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.1.7"
   }
 }
