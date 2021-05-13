@@ -7,7 +7,7 @@ const Loader = ({ text }) => {
 
     return (
         <div className={styles.loader}>
-            <CircularProgress color="inherit" />
+            <CircularProgress className={styles.circle} />
             <p>{text}...</p>
         </div>
     )

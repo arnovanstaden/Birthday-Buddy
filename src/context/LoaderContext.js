@@ -10,9 +10,7 @@ export const LoaderContext = createContext(null);
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
-        zIndex: theme.zIndex.drawer + 1,
-        color: '#307dfe',
-        backgroundColor: "#f4f4f4"
+        zIndex: theme.zIndex.drawer + 1
     },
 }));
 
@@ -36,7 +34,7 @@ export const LoaderProvider = ({ children }) => {
 
     return (
         <LoaderContext.Provider value={{ showLoader, hideLoader }}>
-            <Backdrop className={classes.backdrop} open={show}>
+            <Backdrop className={`${classes.backdrop} loader`} open={show}>
                 <Loader text={text} />
             </Backdrop>
             { children}

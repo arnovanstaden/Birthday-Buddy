@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 // Context
 import { UserContext } from "../../context/UserContext"
@@ -18,7 +18,15 @@ import Grid from "@material-ui/core/Grid";
 import styles from "./dashboard.module.scss";
 
 const Dashboard = () => {
+    // Config
     const { signOut } = useContext(UserContext);
+
+    const [showAddBirthday, setShowAddBirthday] = useState(false);
+
+    // handler
+    const toggleAddBirthday = () => {
+        setShowAddBirthday(prev => !prev)
+    }
 
     return (
         <Page
@@ -53,17 +61,16 @@ const Dashboard = () => {
                             <Card />
                         </Grid>
                     </Grid>
-
                 </section>
 
                 <div className={styles.add}>
-                    <Button>
+                    <Button onClick={toggleAddBirthday}>
                         + Add a Birthday
                     </Button>
                 </div>
 
             </Container>
-            {/* <AddBirthday /> */}
+            {showAddBirthday ? <AddBirthday toggle={toggleAddBirthday} /> : null}
         </Page>
     )
 }
