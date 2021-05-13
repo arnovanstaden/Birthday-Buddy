@@ -4,11 +4,12 @@
     @include neumorph(0.5rem, $white);
     background-color: $white;
     border-radius: 1rem;
-    padding: 1rem 1.5rem;
+    padding: 1.5rem;
     display: flex;
     align-items: center;
     width: 100%;
     box-sizing: border-box;
+    border: 3px solid transparent;
 
     p {
         color: $medium-grey;
@@ -62,6 +63,36 @@
                     &:first-child {
                         color: $green;
                         font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+
+    &.today {
+        border-color: $green;
+
+        .days {
+            img {
+                width: 2rem;
+            }
+        }
+
+        .content .text .bottom {
+            display: flex;
+            align-items: center;
+
+            p {
+                &:first-child {
+                    font-size: 1rem;
+                    font-weight: 600;
+                    margin: 0.1rem;
+                    color: $green;
+
+                    &::after {
+                        content: "•";
+                        margin: 0 0.25rem;
+                        color: $medium-grey;
                     }
                 }
             }

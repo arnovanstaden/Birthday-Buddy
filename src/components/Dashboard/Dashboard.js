@@ -27,8 +27,8 @@ const Dashboard = () => {
             <Container>
                 <div className={styles.today}>
                     <h1>Today's Birthdays</h1>
-                    <Grid container spacing={2} className={styles.grid}>
-                        <Grid item xs={12} sm={6}>
+                    <Grid container spacing={3} className={styles.grid}>
+                        <Grid item xs={12} md={6}>
                             <Card today />
                         </Grid>
                     </Grid>
@@ -41,7 +41,10 @@ const Dashboard = () => {
                         type="text"
                         placeholder="Search a Person’s Name"
                     />
-                    <Grid container spacing={2} className={styles.grid}>
+                    <Grid container spacing={3} className={styles.grid}>
+                        <Grid item xs={12} sm={6}>
+                            <Card />
+                        </Grid>
                         <Grid item xs={12} sm={6}>
                             <Card />
                         </Grid>
