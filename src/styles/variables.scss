@@ -48,9 +48,8 @@ $green-gradient: linear-gradient(45deg, rgba(#29C13E, 1) 0%, rgba(#1fa130, 1) 10
     }
 }
 
-@mixin neumorph ($distance) {
-    background-color: $light-grey;
-    background: $light-grey;
-    box-shadow: 20px 20px 60px #cfcfcf,
-        -20px -20px 60px #ffffff;
+@mixin neumorph ($distance, $color) {
+    // background-color: $color;
+    // background: $color;
+    // box-shadow: 20px 20px 60px #cfcfcf, -20px -20px 60px #ffffff !important;
 }

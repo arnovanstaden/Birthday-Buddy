@@ -1,14 +1,64 @@
-import Page from "../UI/Page/Page";
 import { useContext } from "react";
+
+// Context
 import { UserContext } from "../../context/UserContext"
+
+// Components
+import Page from "../UI/Page/Page";
+import Input from "../UI/Library/Input/Input";
+import Button from "../UI/Library/Button/Button";
+import Card from "../Content/Card/Card";
+
+// MUI
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+
+// Styles
+import styles from "./dashboard.module.scss";
 
 const Dashboard = () => {
     const { signOut } = useContext(UserContext);
 
     return (
-        <Page>
-            <h1>Dashboard</h1>
-            <button onClick={signOut}>Logout</button>
+        <Page
+            className={styles.dashboard}
+            fullWidth
+        >
+            <Container>
+                <div className={styles.today}>
+                    <h1>Today's Birthdays</h1>
+                    <Grid container spacing={2} className={styles.grid}>
+                        <Grid item xs={12} sm={6}>
+                            <Card today />
+                        </Grid>
+                    </Grid>
+                </div>
+
+
+                <div className={styles.upcoming}>
+                    <h2>Upcoming Birthdays</h2>
+                    <Input
+                        type="text"
+                        placeholder="Search a Person’s Name"
+                    />
+                    <Grid container spacing={2} className={styles.grid}>
+                        <Grid item xs={12} sm={6}>
+                            <Card />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Card />
+                        </Grid>
+                    </Grid>
+
+                </div>
+
+                <div className={styles.add}>
+                    <Button>
+                        + Add a Birthday
+                    </Button>
+                </div>
+
+            </Container>
         </Page>
     )
 }

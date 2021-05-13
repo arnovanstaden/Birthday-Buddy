@@ -10,10 +10,11 @@
     border-color: transparent;
     outline: none;
     cursor: pointer;
-    font-size: 1.05rem;
+    font-size: 1rem;
     letter-spacing: 0.25px;
     font-weight: 500;
     transition: 0.3s ease-in-out;
+    @include neumorph(5rem, $green);
 
     &:hover {
         background: transparent;

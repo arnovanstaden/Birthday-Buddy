@@ -6,7 +6,7 @@ import SignUp from "../Auth/SignUp";
 import ResetPassword from "../Auth/ResetPassword";
 import Dashboard from "../Dashboard/Dashboard";
 
-const Router = ({ children }: { children: React.ReactNode }) => {
+const Router = ({ children }) => {
     return (
         <BrowserRouter>
             <Switch>

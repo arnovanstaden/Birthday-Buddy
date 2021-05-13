@@ -1,14 +1,15 @@
 import ClassNames from "classnames";
 
 // Components
-import withAuth from "../../HOC/withAuth"
+import withAuth from "../../HOC/withAuth";
+import Nav from "../Nav/Nav";
 
 // Styles
 import styles from "./page.module.scss";
 
 
 
-const Page = ({ children, className, title, center, fullscreen }) => {
+const Page = ({ children, className, center, fullscreen, backButton }) => {
 
     const classes = ClassNames(
         className,
@@ -18,6 +19,7 @@ const Page = ({ children, className, title, center, fullscreen }) => {
     )
     return (
         <main className={classes}>
+            <Nav backButton={backButton} />
             {children}
         </main>
 
