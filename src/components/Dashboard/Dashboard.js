@@ -7,9 +7,11 @@ import { UserContext } from "../../context/UserContext"
 import Page from "../UI/Page/Page";
 import Input from "../UI/Library/Input/Input";
 import Button from "../UI/Library/Button/Button";
+import Card from "../Content/Card/Card";
 
 // MUI
 import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
 
 // Styles
 import styles from "./dashboard.module.scss";
@@ -25,6 +27,11 @@ const Dashboard = () => {
             <Container>
                 <div className={styles.today}>
                     <h1>Today's Birthdays</h1>
+                    <Grid container spacing={2} className={styles.grid}>
+                        <Grid item xs={12} sm={6}>
+                            <Card today />
+                        </Grid>
+                    </Grid>
                 </div>
 
 
@@ -34,6 +41,15 @@ const Dashboard = () => {
                         type="text"
                         placeholder="Search a Person’s Name"
                     />
+                    <Grid container spacing={2} className={styles.grid}>
+                        <Grid item xs={12} sm={6}>
+                            <Card />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Card />
+                        </Grid>
+                    </Grid>
+
                 </div>
 
                 <div className={styles.add}>

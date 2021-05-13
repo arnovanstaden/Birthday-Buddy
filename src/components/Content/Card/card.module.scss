@@ -1,0 +1,70 @@
+@import "../../../styles/variables.scss";
+
+.card {
+    @include neumorph(0.5rem, $white);
+    background-color: $white;
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+
+    p {
+        color: $medium-grey;
+        font-size: 0.8rem;
+        margin: 0;
+    }
+
+    .days {
+        text-align: center;
+
+        h1 {
+            color: $green;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+    }
+
+    .divider {
+        height: 2.5rem;
+        background-color: $medium-grey;
+        width: 2px;
+        margin: 0 1rem;
+        border-radius: 0.1rem;
+    }
+
+    .content {
+        display: flex;
+        align-items: center;
+
+        .image {
+            img {
+                border-radius: 50%;
+                width: 3rem;
+            }
+        }
+
+        .text {
+            padding-left: 1rem;
+
+            h1 {
+                margin: 0;
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+
+            .bottom {
+                p {
+                    margin: 0.05rem 0;
+
+                    &:first-child {
+                        color: $green;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+}
