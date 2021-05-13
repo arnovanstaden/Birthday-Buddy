@@ -6,6 +6,7 @@ import AppWrap from "./AppWrap";
 
 // Styles, Fonts, Icons
 import "../../styles/global.scss";
+import "../../assets/icons/style.css";
 import "typeface-rubik";
 
 function App() {

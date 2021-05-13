@@ -16,7 +16,7 @@
 
     input {
         @include reset-input;
-        @include neumorph(0.1rem);
+        @include neumorph(0.1rem, $light-grey);
         width: 100%;
         padding: 1rem 1rem;
         box-sizing: border-box;
