@@ -42,6 +42,7 @@ $green-gradient: linear-gradient(45deg, rgba(#29C13E, 1) 0%, rgba(#1fa130, 1) 10
 @mixin reset-input {
     border: none;
     outline: none;
+    resize: none;
 
     // Remove Autofill Colours
     &:-webkit-autofill {
@@ -59,6 +60,16 @@ $green-gradient: linear-gradient(45deg, rgba(#29C13E, 1) 0%, rgba(#1fa130, 1) 10
 
     :active {
         outline: none;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    &[type=number] {
+        -moz-appearance: textfield;
     }
 }
 
