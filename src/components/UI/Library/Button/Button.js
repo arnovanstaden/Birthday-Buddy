@@ -2,27 +2,25 @@ import ClassNames from "classnames"
 
 import styles from "./button.module.scss";
 
-interface IProps {
-    children: React.ReactNode;
-    outline?: boolean;
-    fullWidth?: boolean;
-    onClick?: any
-}
-
 const Button = ({
     children,
-    outline,
+    hollow,
     fullWidth,
-    onClick
-}: IProps) => {
+    onClick,
+    className
+}) => {
 
     const classes = ClassNames(
+        className,
         styles.button,
-        outline ? styles.outline : null,
+        hollow ? styles.hollow : null,
         fullWidth ? styles.fullWidth : null
     )
     return (
-        <button className={classes} onClick={onClick}>
+        <button
+            className={classes}
+            onClick={onClick}
+        >
             {children}
         </button>
     )

@@ -28,7 +28,7 @@ const Dashboard = () => {
                 <div className={styles.today}>
                     <h1>Today's Birthdays</h1>
                     <Grid container spacing={3} className={styles.grid}>
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} sm={6}>
                             <Card today />
                         </Grid>
                     </Grid>

@@ -1,5 +1,8 @@
 import ClassNames from "classnames";
 
+// Components
+import Button from "../../UI/Library/Button/Button"
+
 // Styles & Images
 import styles from "./card.module.scss";
 import pic from "../../../assets/images/test/profile.jpg";
@@ -13,16 +16,16 @@ const Card = ({ today }) => {
 
     return (
         <article className={classes}>
-            <div className={styles.days}>
-                {today
-                    ? <img src={gift} alt="Gift Icon" />
-                    : <>
+            {!today
+                ? <>
+                    <div className={styles.days}>
                         <h1>7</h1>
                         <p>days</p>
-                    </>
-                }
-            </div>
-            <div className={styles.divider} />
+                    </div>
+                    <div className={styles.divider} />
+                </>
+                : null
+            }
             <div className={styles.content}>
                 <div className={styles.image}>
                     <img src={pic} alt="Profile" />
@@ -37,6 +40,19 @@ const Card = ({ today }) => {
 
                         <p>Turns 49</p>
                     </div>
+                    {today ?
+                        <div className={styles.options}>
+                            <Button className={styles.button}>
+                                <i className="icon-paper-plane"></i>
+                                Send Message
+                            </Button>
+                            <Button hollow className={styles.button}>
+                                <i className="icon-notifications"></i>
+                                Remind Me
+                            </Button>
+                        </div>
+                        : null
+                    }
                 </div>
             </div>
         </article >

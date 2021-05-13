@@ -13,6 +13,20 @@ $green-gradient: linear-gradient(45deg, rgba(#29C13E, 1) 0%, rgba(#1fa130, 1) 10
     list-style: none;
 }
 
+@mixin reset-button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    :focus {
+        outline: none;
+    }
+
+    :active {
+        outline: none;
+    }
+}
+
 @mixin box-shadow {
     -webkit-box-shadow: 3px 3px 25px -15px rgba($green, 0.3);
     -moz-box-shadow: 3px 3px 25px -15px rgba($green, 0.3);
@@ -51,5 +65,5 @@ $green-gradient: linear-gradient(45deg, rgba(#29C13E, 1) 0%, rgba(#1fa130, 1) 10
 @mixin neumorph ($distance, $color) {
     // background-color: $color;
     // background: $color;
-    // box-shadow: 20px 20px 60px #cfcfcf, -20px -20px 60px #ffffff !important;
+    // box-shadow: $distance $distance 50px $color, -$distance -$distance 50px $color !important;
 }

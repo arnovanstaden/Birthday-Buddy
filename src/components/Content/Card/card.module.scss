@@ -1,7 +1,7 @@
 @import "../../../styles/variables.scss";
 
 .card {
-    @include neumorph(0.5rem, $white);
+    // @include neumorph(0.5rem, $white);
     background-color: $white;
     border-radius: 1rem;
     padding: 1.5rem;
@@ -33,7 +33,7 @@
         background-color: $medium-grey;
         width: 2px;
         margin: 0 1rem;
-        border-radius: 0.1rem;
+        border-radius: 0.25rem;
     }
 
     .content {
@@ -52,7 +52,7 @@
 
             h1 {
                 margin: 0;
-                font-size: 1.1rem;
+                font-size: 1rem;
                 font-weight: 600;
             }
 
@@ -71,28 +71,67 @@
 
     &.today {
         border-color: $green;
+        align-items: center;
+        flex-direction: column;
+        padding: 2rem 1rem;
 
-        .days {
-            img {
-                width: 2rem;
-            }
-        }
-
-        .content .text .bottom {
-            display: flex;
+        .content {
+            flex-direction: column;
             align-items: center;
+            text-align: center;
 
-            p {
-                &:first-child {
-                    font-size: 1rem;
-                    font-weight: 600;
-                    margin: 0.1rem;
-                    color: $green;
+            .image {
+                padding-bottom: 1rem;
 
-                    &::after {
-                        content: "•";
-                        margin: 0 0.25rem;
-                        color: $medium-grey;
+                img {
+                    border-radius: 50%;
+                    width: 5rem;
+                }
+            }
+
+            .text {
+                padding: 0;
+
+                .bottom {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    p {
+                        &:first-child {
+                            font-size: 1rem;
+                            font-weight: 600;
+                            margin: 0.1rem;
+                            color: $green;
+
+                            &::after {
+                                content: "•";
+                                margin: 0 0.25rem;
+                                color: $medium-grey;
+                            }
+                        }
+                    }
+                }
+
+                .options {
+                    margin-top: 0.75rem;
+                    display: flex;
+
+                    .button {
+                        font-size: 0.8rem;
+                        display: flex;
+                        align-items: center;
+                        padding: 0.5rem 1rem;
+
+
+                        i {
+                            margin-right: 0.25rem;
+                            font-size: 0.9rem;
+                        }
+
+                        &:last-child {
+                            margin-left: 0.75rem;
+                        }
                     }
                 }
             }

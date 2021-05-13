@@ -1,10 +1,10 @@
 import styles from "./button.module.scss";
 
-const IconButton = () => {
+const IconButton = ({ icon }) => {
     return (
-        <div>
-
-        </div>
+        <button className={styles.button}>
+            <i className={`icon-${icon}`}></i>
+        </button>
     )
 }
 
