@@ -14,7 +14,7 @@ const Nav = ({ backButton }) => {
                 <nav className={styles.nav}>
                     <div className={styles.left}>
                         {backButton
-                            ? <Link>
+                            ? <Link to="/">
                                 <button>
                                     <i className="icon-carrot-left"></i>
                                 </button>
@@ -24,6 +24,25 @@ const Nav = ({ backButton }) => {
                     <div className={styles.right}>
                         |||
                     </div>
+                    {/* <div className={styles.menu}>
+                        <ul>
+                            <li>
+                                <Link to="/">
+                                    Account Settings
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/">
+                                    Notifications
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/">
+                                    Logout
+                                </Link>
+                            </li>
+                        </ul>
+                    </div> */}
                 </nav>
             </Container >
         </header>
