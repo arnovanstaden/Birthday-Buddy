@@ -14,7 +14,8 @@
         z-index: 1
     }
 
-    input {
+    input,
+    textarea {
         @include reset-input;
         // @include neumorph(0.1rem, $light-grey);
         width: 100%;

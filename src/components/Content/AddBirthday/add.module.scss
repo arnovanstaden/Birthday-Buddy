@@ -1,0 +1,50 @@
+@import "../../../styles/variables.scss";
+
+.add {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .overlay {
+        position: absolute;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: $grey, $alpha: 0.5);
+    }
+
+    .content {
+        padding: 2rem 1rem;
+        border-radius: 3rem 3rem 0 0;
+        background-color: $light-grey;
+        width: 100%;
+        z-index: 1;
+        position: absolute;
+        bottom: 0;
+        box-sizing: border-box;
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+
+            h1 {
+                font-weight: 600;
+            }
+
+            img {
+                width: 4rem;
+                cursor: pointer;
+            }
+        }
+
+
+
+        .button {
+            display: flex;
+            justify-content: center;
+            padding-top: 1rem;
+        }
+    }
+}

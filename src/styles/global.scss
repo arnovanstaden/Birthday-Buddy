@@ -21,89 +21,6 @@ a {
     transition: 0.3s ease-in-out;
 }
 
-button,
-input,
-textarea {
-    font-family: $main-font;
-}
-
-.heading {
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
-
-    &.center {
-        text-align: center;
-    }
-
-    h1 {
-        font-size: 1.75rem;
-        font-weight: 600;
-        margin: 0;
-    }
-
-    h2 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin: 0;
-    }
-}
-
-// Buttons
-
-.fab {
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    background: $green-gradient;
-    color: $light-grey;
-}
-
-.button {
-    padding: 0.5rem 2rem;
-    background: $green;
-    border: none;
-    color: $white;
-    border-radius: 0.25rem;
-    -webkit-border-radius: 0.25rem;
-    -moz-border-radius: 0.25rem;
-    -ms-border-radius: 0.25rem;
-    -o-border-radius: 0.25rem;
-    font-weight: 500;
-    cursor: pointer;
-    border: $green 2px solid;
-    transition: 0.2s ease-in-out;
-    -webkit-transition: 0.2s ease-in-out;
-    -moz-transition: 0.2s ease-in-out;
-    -ms-transition: 0.2s ease-in-out;
-    -o-transition: 0.2s ease-in-out;
-
-    &:hover {
-        background: transparent;
-        color: $grey;
-    }
-
-    &-alt {
-        background: transparent;
-        border: $green 2px solid;
-        color: $grey;
-
-        &:hover {
-            background-color: $green;
-            color: $white;
-        }
-    }
-}
-
-
-// Divider
-
-.divider {
-    height: 0.5px;
-    width: 100%;
-    background-color: $medium-grey;
-    margin: 1rem auto;
-}
-
 
 /* width */
 ::-webkit-scrollbar {
@@ -125,4 +42,9 @@ textarea {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: $grey;
+}
+
+// Loader
+.loader {
+    background-color: rgba($color: $grey, $alpha: 0.75) !important;
 }

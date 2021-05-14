@@ -10,22 +10,16 @@ import Router from "./Router";
 import { StylesProvider } from '@material-ui/core/styles';
 import CssBaseline from "@material-ui/core/CssBaseline"
 
-// Theme
-// import { theme } from "../../styles/Theme/theme";
-
-
-const AppWrap = ({ children }: { children: React.ReactNode }) => {
+const AppWrap = ({ children }) => {
     return (
         <UserProvider>
             <LoaderProvider>
                 <NotificationsProvider>
                     <StylesProvider injectFirst>
-                        {/* <ThemeProvider theme={theme} > */}
                         <Router>
                             <CssBaseline />
                             {children}
                         </Router>
-                        {/* </ThemeProvider> */}
                     </StylesProvider>
                 </NotificationsProvider>
             </LoaderProvider>
