@@ -35,7 +35,7 @@ const Card = ({ today }) => {
                     <div className={styles.bottom}>
                         {today
                             ? <p>Today</p>
-                            : <p>Wednesday, 19/05 </p>
+                            : <p>Wednesday, 19/05</p>
                         }
 
                         <p>Turns 49</p>

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 // Components
 import Page from '../UI/Page/Page';
 import Input from "../UI/Library/Input/Input";
+import Pic from "../../assets/images/test/profile.jpg";
 
 // MUI
 import Container from "@material-ui/core/Container";
@@ -42,9 +43,10 @@ const Profile = () => {
         >
             <Container>
                 <section className={styles.info}>
+                    <img src={Pic} alt="Profile" />
                     <h1>Dwight Schrute</h1>
-                    <p>Today</p>
                     <p>Wednesday, 19/05 </p>
+                    <p>Turns 45 </p>
                 </section>
             </Container>
 
