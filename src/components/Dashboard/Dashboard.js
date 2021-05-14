@@ -9,6 +9,7 @@ import Input from "../UI/Library/Input/Input";
 import Button from "../UI/Library/Button/Button";
 import Card from "../Content/Card/Card";
 import AddBirthday from "../Content/AddBirthday/AddBirthday";
+import Nav from "../UI/Nav/Nav";
 
 // MUI
 import Container from "@material-ui/core/Container";
@@ -33,6 +34,7 @@ const Dashboard = () => {
             className={styles.dashboard}
             fullWidth
         >
+            <Nav />
             <Container>
                 <section className={styles.today}>
                     <h1>Today's Birthdays</h1>
