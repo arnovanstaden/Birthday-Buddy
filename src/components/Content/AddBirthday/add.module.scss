@@ -33,9 +33,16 @@
                 font-weight: 600;
             }
 
-            img {
-                width: 4rem;
-                cursor: pointer;
+            .image {
+
+                img {
+                    width: 4rem;
+                    cursor: pointer;
+                }
+
+                input {
+                    display: none;
+                }
             }
         }
 

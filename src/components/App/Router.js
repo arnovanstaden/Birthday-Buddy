@@ -5,6 +5,7 @@ import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
 import ResetPassword from "../Auth/ResetPassword";
 import Dashboard from "../Dashboard/Dashboard";
+import Profile from "../Profile/Profile";
 
 const Router = ({ children }) => {
     return (
@@ -13,6 +14,9 @@ const Router = ({ children }) => {
                 <Route exact path="/">
                     {/* <Nav /> */}
                     <Dashboard />
+                </Route>
+                <Route path="/birthday/:id">
+                    <Profile />
                 </Route>
 
                 {/* Auth */}

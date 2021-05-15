@@ -1,5 +1,4 @@
 export const validateForm = (e, form) => {
-    console.log(form)
     e.preventDefault()
 
     // Validate
@@ -8,4 +7,12 @@ export const validateForm = (e, form) => {
     }
 
     return true
+}
+
+export const cardFormatBirthday = (date) => {
+
+}
+
+export const cardFormatAge = (date) => {
+
 }

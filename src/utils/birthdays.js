@@ -1,18 +1,19 @@
 import { db } from "../config/firebase";
 import { auth } from "../config/firebase";
-import firebase from "firebase/app";
-
+import { uploadProfilePicture } from "./storage";
 
 // Firestore Refs
 const userRef = db.collection('users');
-const birthdaysRef = (uid) => userRef.doc(uid).collection("birthdays");
-
+const birthdaysCollectionRef = (uid) => userRef.doc(uid).collection("birthdays");
 
 // CREATE
 export const addBirthday = async (data) => {
     const uid = await auth.currentUser.uid;
+    data.uid = uid;
+    const profilePicture = data.profilePicture
+    delete data.profilePicture;
 
-    const result = await birthdaysRef(uid).add(data)
+    const result = await birthdaysCollectionRef(uid).add(data)
         .then((ref) => {
             return {
                 id: ref.id,
@@ -23,21 +24,25 @@ export const addBirthday = async (data) => {
             console.log(err);
             throw err.response.data;
         })
+
+    // Upload Profile Picture
+    if (profilePicture) {
+        const profilePictureUrl = await uploadProfilePicture(result.id, profilePicture)
+        await birthdaysCollectionRef(uid).doc(result.id).update({
+            profilePictureUrl: profilePictureUrl
+        })
+    }
+
     return result
 }
 
 export const getAllBirthdays = async () => {
-    const uid = await auth.currentUser.uid
-    const result = await birthdaysRef(uid).get()
-        .then((docs) => {
-            if (!docs) {
-                return undefined
-            }
-            return {
-                ...docs.data(),
-            }
-        });
-
+    const uid = await auth.currentUser.uid;
+    const querySnapshot = await db.collectionGroup('birthdays').where('uid', '==', uid).get();
+    const result = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    }));
     return result
 }
 
