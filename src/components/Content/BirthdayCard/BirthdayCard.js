@@ -1,7 +1,6 @@
 import ClassNames from "classnames";
 import { Link } from "react-router-dom";
 import { getBirthdayDaysAway, getCardFormatAge, getCardFormatBirthday } from "../../../utils/general"
-import { parse, isValid } from 'date-fns'
 
 
 // Components

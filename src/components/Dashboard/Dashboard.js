@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { useSnackbar } from 'notistack';
 import { getAllBirthdays } from "../../utils/birthdays";
-import { v4 as uuid } from "uuid"
 
 // Context
 import { UserContext } from "../../context/UserContext"
@@ -11,7 +10,8 @@ import { LoaderContext } from "../../context/LoaderContext";
 import Page from "../UI/Page/Page";
 import Input from "../UI/Library/Input/Input";
 import Button from "../UI/Library/Button/Button";
-import BirthdayCard from "../Content/BirthdayCard/BirthdayCard";
+import UpcomingBirthdaysList from "../Content/UpcomingBirthdaysList/UpcomingBirthdaysList";
+import TodayBirthdaysList from "../Content/TodayBirthdaysList/TodayBirthdaysList";
 import AddBirthday from "../Content/AddBirthday/AddBirthday";
 import Nav from "../UI/Nav/Nav";
 
@@ -50,15 +50,7 @@ const Dashboard = () => {
 
     // Handlers
     const handleSearch = (e) => {
-        // const searchTerm = e.target.value.toLowerCase();
-        // const matches = birthdays.filter(birthday => birthday.name.toLowerCase().includes(searchTerm));
 
-        // if (matches.length > 0) {
-        //     console.log(matches)
-        //     setSearchFilter(matches)
-        // } else {
-        //     setSearchFilter([])
-        // }
     }
 
     const toggleAddBirthday = () => {
@@ -69,21 +61,7 @@ const Dashboard = () => {
         setBirthdays(prev => [...prev, birthday])
     }
 
-    const BirthdaysList = () => {
 
-        return (
-            <Grid container spacing={3} className={styles.grid}>
-                {birthdays ?
-                    birthdays.map(birthday => (
-                        <Grid item xs={12} sm={6} key={uuid()}>
-                            <BirthdayCard birthday={birthday} />
-                        </Grid>
-                    ))
-                    : <p>No Birthdays Yet :</p>}
-                {/* FIX THIS ^ */}
-            </Grid>
-        )
-    }
 
     return (
         <Page
@@ -94,11 +72,7 @@ const Dashboard = () => {
             <Container>
                 <section className={styles.today}>
                     <h1>Today's Birthdays</h1>
-                    <Grid container spacing={3} className={styles.grid}>
-                        <Grid item xs={12} sm={6}>
-                            {/* <Card today /> */}
-                        </Grid>
-                    </Grid>
+                    <TodayBirthdaysList birthdays={birthdays} />
                 </section>
 
 
@@ -109,7 +83,7 @@ const Dashboard = () => {
                         placeholder="Search a Person’s Name"
                         onChange={handleSearch}
                     />
-                    <BirthdaysList />
+                    <UpcomingBirthdaysList birthdays={birthdays} />
                 </section>
 
                 <div className={styles.add}>

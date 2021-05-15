@@ -1,4 +1,4 @@
-import { differenceInYears, getMonth, getDate, getYear, isPast, addYears, differenceInCalendarDays, format } from 'date-fns'
+import { differenceInYears, getMonth, getDate, getYear, isPast, addYears, differenceInCalendarDays, format, isToday } from 'date-fns'
 
 export const validateForm = (e, form) => {
     e.preventDefault()
@@ -14,12 +14,23 @@ export const validateForm = (e, form) => {
 const getNextBirthday = (date) => {
     let nextBirthday;
     const birthdayThisYear = new Date(getYear(new Date()), getMonth(date), getDate(date));
-    if (isPast(birthdayThisYear)) {
+    if (isPast(birthdayThisYear) && !isToday(birthdayThisYear)) {
         nextBirthday = addYears(birthdayThisYear, 1)
     } else {
         nextBirthday = birthdayThisYear
     }
     return nextBirthday
+}
+
+export const isBirthdayToday = (date) => {
+    const birthdayDate = getDate(getNextBirthday(date));
+    const birthdayMonth = getMonth(getNextBirthday(date));
+    const todayDate = getDate(new Date());
+    const todayMonth = getMonth(new Date());
+    if (birthdayDate === todayDate && birthdayMonth === todayMonth) {
+        return true
+    }
+    return false
 }
 
 
@@ -29,6 +40,9 @@ export const getCardFormatBirthday = (date) => {
 
 export const getCardFormatAge = (date) => {
     const age = differenceInYears(new Date(), date);
+    if (isBirthdayToday(date)) {
+        return age
+    }
     return age + 1
 }
 
