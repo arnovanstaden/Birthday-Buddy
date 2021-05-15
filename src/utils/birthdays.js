@@ -53,21 +53,22 @@ export const getAllBirthdays = async () => {
 
 // READ
 
-export const getBirthday = async (deck_id) => {
-    // const uid = await auth.currentUser.uid;
+export const getBirthday = async (birthday_id) => {
+    const uid = await auth.currentUser.uid;
 
-    // const result = await decksRef(uid).doc(deck_id).get()
-    //     .then((doc) => {
-    //         if (!doc) {
-    //             return undefined
-    //         }
-    //         return {
-    //             id: doc.id,
-    //             ...doc.data(),
-    //         }
-    //     });
+    const result = await birthdaysCollectionRef(uid).doc(birthday_id).get()
+        .then((doc) => {
+            if (!doc) {
+                return undefined
+            }
+            return {
+                id: doc.id,
+                ...doc.data(),
+            }
+        });
+    console.log(result)
 
-    // return result
+    return result
 }
 
 // UPDATE
@@ -84,19 +85,19 @@ export const saveDeck = async (data) => {
 
 // DELETE
 
-export const deleteDeck = async (deck_id) => {
-    // const uid = await auth.currentUser.uid;
+export const deleteBirthday = async (birthday_id) => {
+    const uid = await auth.currentUser.uid;
 
-    // const result = await await decksRef(uid).doc(deck_id).delete()
-    //     .then(() => {
-    //         return {
-    //             message: "Deck Deleted Successfully"
-    //         }
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //         throw err.response.data;
-    //     })
+    const result = await await birthdaysCollectionRef(uid).doc(birthday_id).delete()
+        .then(() => {
+            return {
+                message: "Birthday Deleted"
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            throw err.response.data;
+        })
 
-    // return result
+    return result
 }

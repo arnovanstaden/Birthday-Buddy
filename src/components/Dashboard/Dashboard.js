@@ -1,9 +1,7 @@
 import { useContext, useState, useEffect } from "react";
-import { useSnackbar } from 'notistack';
 import { getAllBirthdays } from "../../utils/birthdays";
 
 // Context
-import { UserContext } from "../../context/UserContext"
 import { LoaderContext } from "../../context/LoaderContext";
 
 // Components
@@ -24,9 +22,8 @@ import styles from "./dashboard.module.scss";
 
 const Dashboard = () => {
     // Config
-    const { signOut } = useContext(UserContext);
-    const { enqueueSnackbar } = useSnackbar();
     const { showLoader, hideLoader } = useContext(LoaderContext);
+
     // State
     const [showAddBirthday, setShowAddBirthday] = useState(false);
     const [birthdays, setBirthdays] = useState(undefined);
