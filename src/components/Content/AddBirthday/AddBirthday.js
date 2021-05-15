@@ -1,7 +1,8 @@
 import { useContext, useRef } from "react";
 import { useSnackbar } from 'notistack';
 import { addBirthday } from "../../../utils/birthdays";
-import { validateForm } from "../../../utils/general"
+import { validateForm } from "../../../utils/general";
+
 
 // Components
 import Input from "../../UI/Library/Input/Input";
@@ -25,19 +26,26 @@ const AddBirthday = ({ toggle }) => {
     const { enqueueSnackbar } = useSnackbar();
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const formRef = useRef();
+    const profilePictureRef = useRef()
+    const monthRef = useRef();
 
     // Handlers
-    const handleAddBirthday = (e) => {
+    const handleAddBirthday = async (e) => {
 
         if (!validateForm(e, formRef.current)) {
             return enqueueSnackbar("Please complete all the relevant fields", {
                 variant: 'error',
             });
         }
-        showLoader("Saving Birthday")
+        // showLoader("Saving Birthday")
+
+        // Build Data
         const data = {}
         const formData = new FormData(formRef.current);
         formData.forEach((value, key) => data[key] = value);
+        const profilePicture = profilePictureRef.current.files[0];
+        data.profilePicture = profilePicture ? profilePicture : null
+
         addBirthday(data)
             .then(result => {
                 hideLoader();
@@ -54,6 +62,10 @@ const AddBirthday = ({ toggle }) => {
             })
     }
 
+    const handlePictureUpload = () => {
+        profilePictureRef.current.click()
+    }
+
     return (
         <section className={styles.add}>
             <div className={styles.overlay} onClick={toggle}></div>
@@ -61,7 +73,10 @@ const AddBirthday = ({ toggle }) => {
                 <Container>
                     <div className={styles.top}>
                         <h1>Add a Birthday</h1>
-                        <img src={profile} alt="" />
+                        <div className={styles.image}>
+                            <img src={profile} alt="Profile" onClick={handlePictureUpload} />
+                            <input ref={profilePictureRef} type="file" accept="image/x-png,image/jpeg,image/jpg" />
+                        </div>
                     </div>
                     <form ref={formRef}>
                         <Grid container spacing={3}>
@@ -72,17 +87,11 @@ const AddBirthday = ({ toggle }) => {
                                     required
                                 />
                             </Grid>
-                            <Grid item xs={8} md={4}>
+                            <Grid item xs={12} md={6}>
                                 <Input
                                     label="Birthday"
                                     type="date"
                                     required
-                                />
-                            </Grid>
-                            <Grid item xs={4} md={2}>
-                                <Input
-                                    label="Year"
-                                    type="number"
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -92,17 +101,18 @@ const AddBirthday = ({ toggle }) => {
                                     textArea={4}
                                 />
                             </Grid>
+                            <Grid item xs={12}>
+                                <Button
+                                    onClick={handleAddBirthday}
+                                    fullWidth
+                                >
+                                    Save Birthday
+                                </Button>
+                            </Grid>
                         </Grid>
                     </form>
                 </Container>
-                <div className={styles.button}>
-                    <Button
-                        onClick={handleAddBirthday}
-                        fullWidth
-                    >
-                        Save Birthday
-                    </Button>
-                </div>
+
             </div>
         </section>
     )

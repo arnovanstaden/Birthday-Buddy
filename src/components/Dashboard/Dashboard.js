@@ -1,7 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
+import { useSnackbar } from 'notistack';
+import { getAllBirthdays } from "../../utils/birthdays";
+import { v4 as uuid } from "uuid"
 
 // Context
 import { UserContext } from "../../context/UserContext"
+import { LoaderContext } from "../../context/LoaderContext";
 
 // Components
 import Page from "../UI/Page/Page";
@@ -21,12 +25,33 @@ import styles from "./dashboard.module.scss";
 const Dashboard = () => {
     // Config
     const { signOut } = useContext(UserContext);
-
+    const { enqueueSnackbar } = useSnackbar();
+    const { showLoader, hideLoader } = useContext(LoaderContext);
+    // State
     const [showAddBirthday, setShowAddBirthday] = useState(false);
+    const [birthdays, setBirthdays] = useState(undefined);
+
+    // // Hooks
+    useEffect(() => {
+        if (!birthdays) {
+            showLoader("Fetching Birthdays");
+            getAllBirthdays()
+                .then(result => {
+                    setBirthdays(result);
+                    hideLoader()
+                })
+        } else {
+            hideLoader()
+        }
+    }, [birthdays]);
 
     // handler
     const toggleAddBirthday = () => {
         setShowAddBirthday(prev => !prev)
+    }
+
+    const addBirthdayUI = (birthday) => {
+        setBirthdays(prev => [...prev, birthday])
     }
 
     return (
@@ -40,7 +65,7 @@ const Dashboard = () => {
                     <h1>Today's Birthdays</h1>
                     <Grid container spacing={3} className={styles.grid}>
                         <Grid item xs={12} sm={6}>
-                            <Card today />
+                            {/* <Card today /> */}
                         </Grid>
                     </Grid>
                 </section>
@@ -53,15 +78,14 @@ const Dashboard = () => {
                         placeholder="Search a Person’s Name"
                     />
                     <Grid container spacing={3} className={styles.grid}>
-                        <Grid item xs={12} sm={6}>
-                            <Card />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <Card />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <Card />
-                        </Grid>
+                        {birthdays ?
+                            birthdays.map(birthday => (
+                                <Grid item xs={12} sm={6} key={uuid()}>
+                                    <Card birthday={birthday} />
+                                </Grid>
+                            ))
+                            : <p>No Birthdays Yet :</p>}
+                        {/* FIX THIS ^ */}
                     </Grid>
                 </section>
 

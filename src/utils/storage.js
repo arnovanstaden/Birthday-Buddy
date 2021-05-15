@@ -1,0 +1,20 @@
+import { storage } from "../config/firebase";
+import { uploadBytes } from "firebase/storage";
+
+// Config
+
+export const uploadProfilePicture = async (id, file) => {
+    const oldName = file.name;
+    const newName = `${id}.${oldName.substring(oldName.indexOf(".") + 1, oldName.length)}`
+    const storageRef = storage.ref(`images/profiles/${newName}`);
+    const url = await storageRef.put(file).then((snapshot) => {
+        const result = snapshot.ref.getDownloadURL().then(downloadUrl => {
+            return downloadUrl
+        })
+        return result
+    });
+    return url
+}
+
+
+

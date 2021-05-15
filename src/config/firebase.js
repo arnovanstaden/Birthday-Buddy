@@ -35,8 +35,7 @@ export const auth = firebase.auth();
 export const db = firebase.firestore();
 
 //  Storage
-const storage = firebase.storage();
-export const storageRef = storage.ref();
+export const storage = firebase.storage();
 
 // Analytics
 export const analytics = firebase.analytics();

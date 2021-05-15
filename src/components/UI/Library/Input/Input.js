@@ -6,7 +6,7 @@ const Input = ({ label, type, inputRef, autoFocus, placeholder, required, textAr
             <label htmlFor={label}>{label}</label>
             {!textArea
                 ? <input
-                    name={label}
+                    name={label && label.toLowerCase()}
                     type={type}
                     ref={inputRef}
                     autoFocus={autoFocus}
@@ -14,7 +14,7 @@ const Input = ({ label, type, inputRef, autoFocus, placeholder, required, textAr
                     required={required}
                 />
                 : <textarea
-                    name={label}
+                    name={label && label.toLowerCase()}
                     ref={inputRef}
                     placeholder={placeholder}
                     required={required}
