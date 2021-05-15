@@ -1,6 +1,6 @@
 import styles from "./input.module.scss";
 
-const Input = ({ label, type, inputRef, autoFocus, placeholder, required, textArea }) => {
+const Input = ({ label, type, inputRef, autoFocus, placeholder, required, textArea, onChange }) => {
     return (
         <div className={styles.group}>
             <label htmlFor={label}>{label}</label>
@@ -12,6 +12,7 @@ const Input = ({ label, type, inputRef, autoFocus, placeholder, required, textAr
                     autoFocus={autoFocus}
                     placeholder={placeholder}
                     required={required}
+                    onChange={onChange ? onChange : null}
                 />
                 : <textarea
                     name={label && label.toLowerCase()}

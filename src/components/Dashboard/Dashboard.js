@@ -31,7 +31,8 @@ const Dashboard = () => {
     const [showAddBirthday, setShowAddBirthday] = useState(false);
     const [birthdays, setBirthdays] = useState(undefined);
 
-    // // Hooks
+
+    // Hooks
     useEffect(() => {
         if (!birthdays) {
             showLoader("Fetching Birthdays");
@@ -45,7 +46,12 @@ const Dashboard = () => {
         }
     }, [birthdays]);
 
-    // handler
+
+    // Handlers
+    const handleSearch = () => {
+        console.log("searching")
+    }
+
     const toggleAddBirthday = () => {
         setShowAddBirthday(prev => !prev)
     }
@@ -53,6 +59,8 @@ const Dashboard = () => {
     const addBirthdayUI = (birthday) => {
         setBirthdays(prev => [...prev, birthday])
     }
+
+
 
     return (
         <Page
@@ -76,6 +84,7 @@ const Dashboard = () => {
                     <Input
                         type="text"
                         placeholder="Search a Person’s Name"
+                        onChange={handleSearch}
                     />
                     <Grid container spacing={3} className={styles.grid}>
                         {birthdays ?
@@ -96,7 +105,7 @@ const Dashboard = () => {
                 </div>
 
             </Container>
-            {showAddBirthday ? <AddBirthday toggle={toggleAddBirthday} /> : null}
+            {showAddBirthday ? <AddBirthday toggle={toggleAddBirthday} addBirthdayUI={addBirthdayUI} /> : null}
         </Page>
     )
 }

@@ -20,7 +20,7 @@ import styles from "./add.module.scss"
 import profile from "../../../assets/icons/custom/profile.svg";
 
 
-const AddBirthday = ({ toggle }) => {
+const AddBirthday = ({ toggle, addBirthdayUI }) => {
 
     // Config
     const { enqueueSnackbar } = useSnackbar();
@@ -37,7 +37,7 @@ const AddBirthday = ({ toggle }) => {
                 variant: 'error',
             });
         }
-        // showLoader("Saving Birthday")
+        showLoader("Saving Birthday")
 
         // Build Data
         const data = {}
@@ -50,6 +50,7 @@ const AddBirthday = ({ toggle }) => {
             .then(result => {
                 hideLoader();
                 toggle();
+                addBirthdayUI(result.birthday)
                 enqueueSnackbar(result.message, {
                     variant: 'success',
                 });

@@ -16,8 +16,8 @@ export const addBirthday = async (data) => {
     const result = await birthdaysCollectionRef(uid).add(data)
         .then((ref) => {
             return {
+                ...data,
                 id: ref.id,
-                message: "Birthday Saved Successfully"
             }
         })
         .catch(err => {
@@ -31,9 +31,14 @@ export const addBirthday = async (data) => {
         await birthdaysCollectionRef(uid).doc(result.id).update({
             profilePictureUrl: profilePictureUrl
         })
+        result.profilePictureUrl = profilePictureUrl;
     }
 
-    return result
+    console.log(result)
+    return {
+        birthday: result,
+        message: "Birthday Saved Successfully"
+    }
 }
 
 export const getAllBirthdays = async () => {
