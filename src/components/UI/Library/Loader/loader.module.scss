@@ -1,0 +1,15 @@
+@import "../../../../styles/variables.scss";
+
+.loader {
+
+    padding: 0.5rem;
+
+    .root {
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+    }
+
+    .circle {
+        color: $green;
+    }
+}

@@ -1,10 +1,12 @@
 import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from "react";
+import { getFamousBirthdays, getTodayInHistory } from "../../utils/profile"
 
 // Components
 import Page from '../UI/Page/Page';
 import Input from "../UI/Library/Input/Input";
 import ContentCard from "../Content/ContentCard/ContentCard";
+import Loader from "../UI/Library/Loader/Loader";
 
 // MUI
 import Container from "@material-ui/core/Container";
@@ -24,8 +26,29 @@ const Profile = () => {
     const history = useHistory()
 
     // State
-    // const [birthdays, setBirthdays] = useState
-    // // Hooks
+    // const [birthdays, setBirthdays] = useState()
+    const [famousBirthdays, setFamousBirthdays] = useState()
+    const [todayInHistory, setTodayInHistory] = useState()
+
+    // Hooks
+    useEffect(() => {
+        if (!famousBirthdays) {
+            getFamousBirthdays(new Date()) //Fix THis
+                .then(result => {
+                    setFamousBirthdays(result);
+                })
+        }
+    }, [famousBirthdays]);
+
+    useEffect(() => {
+        if (!todayInHistory) {
+            getTodayInHistory(new Date()) //Fix THis
+                .then(result => {
+                    setTodayInHistory(result);
+                })
+        }
+    }, [todayInHistory]);
+
     // useEffect(() => {
     //     if (!deck) {
     //         showLoader("Fetching Deck");
@@ -78,13 +101,25 @@ const Profile = () => {
                         <Grid item xs={12} md={6}>
                             <ContentCard className={styles.card} image={Logo}>
                                 <h3>Famous Birthdays</h3>
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo alias ex autem sapiente vero</p>
+                                {famousBirthdays ?
+                                    <p>
+                                        {famousBirthdays}
+                                    </p>
+                                    :
+                                    <Loader />
+                                }
                             </ContentCard>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <ContentCard className={styles.card} image={HistoryIcon}>
-                                <h3>Today in History</h3>
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo alias ex autem sapiente vero.</p>
+                                <h3>This Day in History</h3>
+                                {todayInHistory ?
+                                    <p>
+                                        {todayInHistory}
+                                    </p>
+                                    :
+                                    <Loader />
+                                }
                             </ContentCard>
                         </Grid>
                     </Grid>
