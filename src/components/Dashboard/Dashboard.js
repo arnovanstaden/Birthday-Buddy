@@ -11,7 +11,7 @@ import { LoaderContext } from "../../context/LoaderContext";
 import Page from "../UI/Page/Page";
 import Input from "../UI/Library/Input/Input";
 import Button from "../UI/Library/Button/Button";
-import Card from "../Content/Card/Card";
+import BirthdayCard from "../Content/BirthdayCard/BirthdayCard";
 import AddBirthday from "../Content/AddBirthday/AddBirthday";
 import Nav from "../UI/Nav/Nav";
 
@@ -81,7 +81,7 @@ const Dashboard = () => {
                         {birthdays ?
                             birthdays.map(birthday => (
                                 <Grid item xs={12} sm={6} key={uuid()}>
-                                    <Card birthday={birthday} />
+                                    <BirthdayCard birthday={birthday} />
                                 </Grid>
                             ))
                             : <p>No Birthdays Yet :</p>}

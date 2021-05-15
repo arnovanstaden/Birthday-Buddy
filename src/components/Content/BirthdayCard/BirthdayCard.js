@@ -3,12 +3,13 @@ import { Link } from "react-router-dom"
 
 // Components
 import Button from "../../UI/Library/Button/Button"
+import Card from "../../UI/Library/Card/Card"
 
 // Styles & Images
 import styles from "./card.module.scss";
-import pic from "../../../assets/images/test/profile.jpg";
+import EmptyProfileImg from "../../../assets/images/other/emptyProfile.png";
 
-const Card = ({ birthday, today }) => {
+const BirthdayCard = ({ birthday, today }) => {
     // Config
     // const dateObj = new Date()
 
@@ -19,7 +20,7 @@ const Card = ({ birthday, today }) => {
 
     return (
         <Link to={`/birthday/${birthday.id}`}>
-            <article className={classes}>
+            <Card className={classes}>
                 {!today
                     ? <>
                         <div className={styles.days}>
@@ -32,7 +33,7 @@ const Card = ({ birthday, today }) => {
                 }
                 <div className={styles.content}>
                     <div className={styles.image}>
-                        <img src={pic} alt="Profile" />
+                        <img src={birthday.profilePictureUrl ? birthday.profilePictureUrl : EmptyProfileImg} alt="Profile" />
                     </div>
                     <div className={styles.text}>
                         <h1>{birthday.name}</h1>
@@ -59,9 +60,9 @@ const Card = ({ birthday, today }) => {
                         }
                     </div>
                 </div>
-            </article >
+            </Card >
         </Link>
     )
 }
 
-export default Card
+export default BirthdayCard
