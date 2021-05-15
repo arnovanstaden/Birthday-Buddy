@@ -50,3 +50,8 @@ export const getBirthdayDaysAway = (date) => {
     const daysAway = differenceInCalendarDays(getNextBirthday(date), new Date());
     return daysAway
 }
+
+export const sortBirthdays = (birthdays) => {
+    const sorted = birthdays.sort((a, b) => new Date(b.date) - new Date(a.date))
+    return sorted
+}

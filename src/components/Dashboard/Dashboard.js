@@ -10,8 +10,8 @@ import { LoaderContext } from "../../context/LoaderContext";
 import Page from "../UI/Page/Page";
 import Input from "../UI/Library/Input/Input";
 import Button from "../UI/Library/Button/Button";
-import UpcomingBirthdaysList from "../Content/UpcomingBirthdaysList/UpcomingBirthdaysList";
-import TodayBirthdaysList from "../Content/TodayBirthdaysList/TodayBirthdaysList";
+import UpcomingBirthdaysList from "../Content/BirthdayLists/UpcomingBirthdaysList";
+import TodayBirthdaysList from "../Content/BirthdayLists/TodayBirthdaysList";
 import AddBirthday from "../Content/AddBirthday/AddBirthday";
 import Nav from "../UI/Nav/Nav";
 

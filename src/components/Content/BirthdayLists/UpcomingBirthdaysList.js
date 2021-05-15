@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { isBirthdayToday } from "../../../utils/general"
+import { isBirthdayToday, sortBirthdays } from "../../../utils/general"
 
 // Components
 import BirthdayCard from "../BirthdayCard/BirthdayCard";
@@ -12,7 +12,8 @@ import styles from "./list.module.scss"
 
 const UpcomingBirthdaysList = ({ birthdays }) => {
 
-    const upcomingBirthdays = birthdays && birthdays.filter(birthday => !isBirthdayToday(new Date(birthday.date)));
+    let upcomingBirthdays = birthdays && birthdays.filter(birthday => !isBirthdayToday(new Date(birthday.date)));
+    upcomingBirthdays = upcomingBirthdays && sortBirthdays(upcomingBirthdays)
 
     return (
         <Grid container spacing={3} className={styles.grid}>

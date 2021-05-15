@@ -12,7 +12,6 @@ import styles from "./list.module.scss"
 const TodayBirthdaysList = ({ birthdays }) => {
 
     const todayBirthdays = birthdays && birthdays.filter(birthday => isBirthdayToday(new Date(birthday.date)));
-    console.log(todayBirthdays)
 
     return (
         <Grid container spacing={3} className={styles.grid}>
