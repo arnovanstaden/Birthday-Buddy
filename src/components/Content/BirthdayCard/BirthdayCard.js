@@ -35,7 +35,7 @@ const BirthdayCard = ({ birthday, today }) => {
                 }
                 <div className={styles.content}>
                     <div className={styles.image}>
-                        <img src={birthday.profilePictureUrl ? birthday.profilePictureUrl : EmptyProfileImg} alt="Profile" />
+                        <img src={birthday.profilePictureUrl || EmptyProfileImg} alt="Profile" />
                     </div>
                     <div className={styles.text}>
                         <h1>{birthday.name}</h1>

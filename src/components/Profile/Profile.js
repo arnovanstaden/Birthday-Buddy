@@ -12,6 +12,7 @@ import Page from '../UI/Page/Page';
 import Input from "../UI/Library/Input/Input";
 import ContentCard from "../Content/ContentCard/ContentCard";
 import Loader from "../UI/Library/Loader/Loader";
+import ManageBirthday from "../Content/ManageBirthday/ManageBirthday";
 
 // MUI
 import Container from "@material-ui/core/Container";
@@ -37,6 +38,7 @@ const Profile = () => {
     const [famousBirthdays, setFamousBirthdays] = useState()
     const [todayInHistory, setTodayInHistory] = useState()
     const [anchorEl, setAnchorEl] = useState(null);
+    const [showEditBirthday, setShowEditBirthday] = useState(false);
 
     // Hooks
     useEffect(() => {
@@ -80,6 +82,11 @@ const Profile = () => {
         setAnchorEl(null);
     };
 
+    const toggleEditBirthday = () => {
+        handleNavClose()
+        setShowEditBirthday(prev => !prev);
+    }
+
     const handleDelete = () => {
         handleNavClose();
         showLoader("Deleting Birthday");
@@ -91,9 +98,12 @@ const Profile = () => {
             })
     }
 
+    const handleEdit = (newBirthday) => {
+        setBirthday(newBirthday);
+    }
 
     if (birthday) {
-        const birthDate = new Date(birthday.date)
+        const birthDate = new Date(birthday.date);
 
         return (
             <Page
@@ -111,7 +121,7 @@ const Profile = () => {
                             open={Boolean(anchorEl)}
                             onClose={handleNavClose}
                         >
-                            <MenuItem onClick={handleNavClose}>Edit Birthday</MenuItem>
+                            <MenuItem onClick={toggleEditBirthday}>Edit Birthday</MenuItem>
                             <MenuItem onClick={handleDelete}>Delete Birthday</MenuItem>
                         </Menu>
                     </nav>
@@ -119,7 +129,7 @@ const Profile = () => {
 
                 <Container>
                     <section className={styles.info}>
-                        <img src={birthday.profilePictureUrl ? birthday.profilePictureUrl : EmptyProfileImg} alt="Profile" />
+                        <img src={birthday.profilePictureUrl || EmptyProfileImg} alt="Profile" />
                         <h1>{birthday.name}</h1>
                         <p><span>Birthday:</span> {birthday.date} </p>
                         <p><span>Age:</span> {getCardFormatAge(birthDate) - 1} </p>
@@ -132,6 +142,7 @@ const Profile = () => {
                             label="Notes"
                             type="text"
                             textArea={4}
+                            defaultValue={birthday.notes || null}
                         />
                         <h2>On this Day</h2>
                         <Grid container spacing={3} className={styles.grid}>
@@ -162,6 +173,7 @@ const Profile = () => {
                         </Grid>
                     </Container>
                 </section>
+                {showEditBirthday ? <ManageBirthday toggle={toggleEditBirthday} editBirthdayState={handleEdit} birthday={birthday} /> : null}
             </Page>
         )
     }

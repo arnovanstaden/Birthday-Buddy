@@ -10,7 +10,7 @@ import Input from "../UI/Library/Input/Input";
 import Button from "../UI/Library/Button/Button";
 import UpcomingBirthdaysList from "../Content/BirthdayLists/UpcomingBirthdaysList";
 import TodayBirthdaysList from "../Content/BirthdayLists/TodayBirthdaysList";
-import AddBirthday from "../Content/AddBirthday/AddBirthday";
+import ManageBirthday from "../Content/ManageBirthday/ManageBirthday";
 import Nav from "../UI/Nav/Nav";
 
 // MUI
@@ -97,7 +97,7 @@ const Dashboard = () => {
                 </div>
 
             </Container>
-            {showAddBirthday ? <AddBirthday toggle={toggleAddBirthday} addBirthdayUI={addBirthdayUI} /> : null}
+            {showAddBirthday ? <ManageBirthday toggle={toggleAddBirthday} addBirthdayUI={addBirthdayUI} /> : null}
         </Page>
     )
 }

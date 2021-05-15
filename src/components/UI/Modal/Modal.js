@@ -14,14 +14,14 @@ const Modal = ({ status, content, children }) => {
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
                 className={styles.modal}
-                open={status ? true : false}
+                open={status || false}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
                     timeout: 500,
                 }}
             >
-                <Fade in={status ? true : false}>
+                <Fade in={status || false}>
                     <div className={styles.content}>
                         <h2>{content.heading}</h2>
                         <p>{content.text}</p>

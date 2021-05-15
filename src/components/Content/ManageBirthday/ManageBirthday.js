@@ -1,8 +1,7 @@
 import { useContext, useRef } from "react";
 import { useSnackbar } from 'notistack';
-import { addBirthday } from "../../../utils/birthdays";
+import { addBirthday, editBirthday } from "../../../utils/birthdays";
 import { validateForm } from "../../../utils/general";
-
 
 // Components
 import Input from "../../UI/Library/Input/Input";
@@ -16,11 +15,11 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 
 // Styles & Images
-import styles from "./add.module.scss"
+import styles from "./manage.module.scss"
 import profile from "../../../assets/icons/custom/profile.svg";
 
 
-const AddBirthday = ({ toggle, addBirthdayUI }) => {
+const AddBirthday = ({ toggle, addBirthdayUI, editBirthdayState, birthday }) => {
 
     // Config
     const { enqueueSnackbar } = useSnackbar();
@@ -44,7 +43,7 @@ const AddBirthday = ({ toggle, addBirthdayUI }) => {
         const formData = new FormData(formRef.current);
         formData.forEach((value, key) => data[key] = value);
         const profilePicture = profilePictureRef.current.files[0];
-        data.profilePicture = profilePicture ? profilePicture : null
+        data.profilePicture = profilePicture || null
 
         addBirthday(data)
             .then(result => {
@@ -63,9 +62,51 @@ const AddBirthday = ({ toggle, addBirthdayUI }) => {
             })
     }
 
+    const handleEditBirthday = async (e) => {
+        if (!validateForm(e, formRef.current)) {
+            return enqueueSnackbar("Please complete all the relevant fields", {
+                variant: 'error',
+            });
+        }
+        showLoader("Saving Birthday")
+
+        // Build Data
+        const data = {
+            id: birthday.id
+        }
+        const formData = new FormData(formRef.current);
+        formData.forEach((value, key) => data[key] = value);
+        const profilePicture = profilePictureRef.current.files[0];
+
+        if (profilePicture) {
+            data.profilePicture = profilePicture;
+        } else if (birthday.profilePictureUrl) {
+            data.profilePictureUrl = birthday.profilePictureUrl
+        } else {
+            data.profilePicture = null
+        }
+
+        editBirthday(data)
+            .then(result => {
+                hideLoader();
+                toggle();
+                editBirthdayState(result.data);
+                enqueueSnackbar(result.message, {
+                    variant: 'success',
+                });
+            })
+            .catch(err => {
+                hideLoader()
+                return enqueueSnackbar(err.message, {
+                    variant: 'error',
+                });
+            })
+    }
+
     const handlePictureUpload = () => {
         profilePictureRef.current.click()
     }
+
 
     return (
         <section className={styles.add}>
@@ -73,9 +114,9 @@ const AddBirthday = ({ toggle, addBirthdayUI }) => {
             <div className={styles.content}>
                 <Container>
                     <div className={styles.top}>
-                        <h1>Add a Birthday</h1>
+                        <h1>{!birthday ? "Add a" : "Edit"} Birthday</h1>
                         <div className={styles.image}>
-                            <img src={profile} alt="Profile" onClick={handlePictureUpload} />
+                            <img src={birthday.profilePictureUrl ? birthday.profilePictureUrl : profile} alt="Profile" onClick={handlePictureUpload} />
                             <input ref={profilePictureRef} type="file" accept="image/x-png,image/jpeg,image/jpg" />
                         </div>
                     </div>
@@ -86,6 +127,7 @@ const AddBirthday = ({ toggle, addBirthdayUI }) => {
                                     label="Name"
                                     type="text"
                                     required
+                                    defaultValue={birthday && birthday.name}
                                 />
                             </Grid>
                             <Grid item xs={12} md={6}>
@@ -93,6 +135,7 @@ const AddBirthday = ({ toggle, addBirthdayUI }) => {
                                     label="Date"
                                     type="date"
                                     required
+                                    defaultValue={birthday && birthday.date}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -100,11 +143,12 @@ const AddBirthday = ({ toggle, addBirthdayUI }) => {
                                     label="Notes"
                                     type="text"
                                     textArea={4}
+                                    defaultValue={birthday && birthday.notes}
                                 />
                             </Grid>
                             <Grid item xs={12}>
                                 <Button
-                                    onClick={handleAddBirthday}
+                                    onClick={birthday ? handleEditBirthday : handleAddBirthday}
                                     fullWidth
                                 >
                                     Save Birthday

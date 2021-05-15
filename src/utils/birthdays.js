@@ -34,7 +34,6 @@ export const addBirthday = async (data) => {
         result.profilePictureUrl = profilePictureUrl;
     }
 
-    console.log(result)
     return {
         birthday: result,
         message: "Birthday Saved Successfully"
@@ -66,20 +65,31 @@ export const getBirthday = async (birthday_id) => {
                 ...doc.data(),
             }
         });
-    console.log(result)
 
     return result
 }
 
 // UPDATE
-export const saveDeck = async (data) => {
-    // const uid = await auth.currentUser.uid;
-    // data.uid = uid;
-    // await decksRef(uid).doc(data.id).update(data)
-    // return {
-    //     id: data.id,
-    //     message: "Deck Updated Successfully"
-    // }
+export const editBirthday = async (data) => {
+    const uid = await auth.currentUser.uid;
+    const profilePicture = data.profilePicture
+    delete data.profilePicture;
+
+    await birthdaysCollectionRef(uid).doc(data.id).update(data);
+
+
+    // Upload Profile Picture
+    if (profilePicture) {
+        const profilePictureUrl = await uploadProfilePicture(data.id, profilePicture)
+        await birthdaysCollectionRef(uid).doc(data.id).update({
+            profilePictureUrl: profilePictureUrl
+        })
+        data.profilePictureUrl = profilePictureUrl;
+    }
+    return {
+        data,
+        message: "Birthday Updated"
+    }
 }
 
 
