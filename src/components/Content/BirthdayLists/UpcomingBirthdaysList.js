@@ -14,7 +14,7 @@ import styles from "./list.module.scss";
 import Logo from "../../../assets/images/logos/logo.svg";
 
 const UpcomingBirthdaysList = ({ birthdays }) => {
-
+    console.log(birthdays)
     let upcomingBirthdays = birthdays && birthdays.filter(birthday => !isBirthdayToday(new Date(birthday.date)));
     upcomingBirthdays = upcomingBirthdays && sortBirthdays(upcomingBirthdays)
 

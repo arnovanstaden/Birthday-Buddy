@@ -8,7 +8,7 @@ export const getFamousBirthdays = async (birthday) => {
     }).then(response => {
         console.log(response.data)
     }).catch(err => console.log(err))
-    return "blah blah"
+    return "Chuck Norris, John Cena & Rick Astley"
 }
 
 export const getTodayInHistory = async (birthday) => {

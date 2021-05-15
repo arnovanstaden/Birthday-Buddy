@@ -30,8 +30,7 @@ const Dashboard = () => {
     // State
     const [showAddBirthday, setShowAddBirthday] = useState(false);
     const [birthdays, setBirthdays] = useState(undefined);
-    const [searchFilter, setSearchFilter] = useState([])
-
+    const [searchResults, setSearchResults] = useState([])
 
     // Hooks
     useEffect(() => {
@@ -50,7 +49,16 @@ const Dashboard = () => {
 
     // Handlers
     const handleSearch = (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const matches = birthdays.filter(birthday => birthday.name.toLowerCase().includes(searchTerm));
+        console.log(matches)
 
+        if (matches.length > 0) {
+            console.log("here")
+            setSearchResults(matches)
+        } else {
+            setSearchResults([])
+        }
     }
 
     const toggleAddBirthday = () => {
@@ -61,7 +69,7 @@ const Dashboard = () => {
         setBirthdays(prev => [...prev, birthday])
     }
 
-
+    console.log(searchResults.length)
 
     return (
         <Page
@@ -82,7 +90,7 @@ const Dashboard = () => {
                         placeholder="Search a Person’s Name"
                         onChange={handleSearch}
                     />
-                    <UpcomingBirthdaysList birthdays={birthdays} />
+                    <UpcomingBirthdaysList birthdays={searchResults.length > 0 ? searchResults : birthdays} />
                 </section>
 
                 <div className={styles.add}>
