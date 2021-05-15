@@ -1,5 +1,8 @@
 import ClassNames from "classnames";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { getBirthdayDaysAway, getCardFormatAge, getCardFormatBirthday } from "../../../utils/general"
+import { parse, isValid } from 'date-fns'
+
 
 // Components
 import Button from "../../UI/Library/Button/Button"
@@ -11,7 +14,7 @@ import EmptyProfileImg from "../../../assets/images/other/emptyProfile.png";
 
 const BirthdayCard = ({ birthday, today }) => {
     // Config
-    // const dateObj = new Date()
+    const birthDate = new Date(birthday.date);
 
     const classes = ClassNames(
         styles.card,
@@ -24,7 +27,7 @@ const BirthdayCard = ({ birthday, today }) => {
                 {!today
                     ? <>
                         <div className={styles.days}>
-                            <h1>7</h1>
+                            <h1>{getBirthdayDaysAway(birthDate)}</h1>
                             <p>days</p>
                         </div>
                         <div className={styles.divider} />
@@ -40,10 +43,10 @@ const BirthdayCard = ({ birthday, today }) => {
                         <div className={styles.bottom}>
                             {today
                                 ? <p>Today</p>
-                                : <p>Wednesday, 19/05</p>
+                                : <p>{getCardFormatBirthday(birthDate)}</p>
                             }
 
-                            <p>Turns 49</p>
+                            <p>Turns {getCardFormatAge(birthDate)}</p>
                         </div>
                         {today ?
                             <div className={styles.options}>

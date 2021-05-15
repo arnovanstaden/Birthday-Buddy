@@ -30,6 +30,7 @@ const Dashboard = () => {
     // State
     const [showAddBirthday, setShowAddBirthday] = useState(false);
     const [birthdays, setBirthdays] = useState(undefined);
+    const [searchFilter, setSearchFilter] = useState([])
 
 
     // Hooks
@@ -48,8 +49,16 @@ const Dashboard = () => {
 
 
     // Handlers
-    const handleSearch = () => {
-        console.log("searching")
+    const handleSearch = (e) => {
+        // const searchTerm = e.target.value.toLowerCase();
+        // const matches = birthdays.filter(birthday => birthday.name.toLowerCase().includes(searchTerm));
+
+        // if (matches.length > 0) {
+        //     console.log(matches)
+        //     setSearchFilter(matches)
+        // } else {
+        //     setSearchFilter([])
+        // }
     }
 
     const toggleAddBirthday = () => {
@@ -60,7 +69,21 @@ const Dashboard = () => {
         setBirthdays(prev => [...prev, birthday])
     }
 
+    const BirthdaysList = () => {
 
+        return (
+            <Grid container spacing={3} className={styles.grid}>
+                {birthdays ?
+                    birthdays.map(birthday => (
+                        <Grid item xs={12} sm={6} key={uuid()}>
+                            <BirthdayCard birthday={birthday} />
+                        </Grid>
+                    ))
+                    : <p>No Birthdays Yet :</p>}
+                {/* FIX THIS ^ */}
+            </Grid>
+        )
+    }
 
     return (
         <Page
@@ -86,16 +109,7 @@ const Dashboard = () => {
                         placeholder="Search a Person’s Name"
                         onChange={handleSearch}
                     />
-                    <Grid container spacing={3} className={styles.grid}>
-                        {birthdays ?
-                            birthdays.map(birthday => (
-                                <Grid item xs={12} sm={6} key={uuid()}>
-                                    <BirthdayCard birthday={birthday} />
-                                </Grid>
-                            ))
-                            : <p>No Birthdays Yet :</p>}
-                        {/* FIX THIS ^ */}
-                    </Grid>
+                    <BirthdaysList />
                 </section>
 
                 <div className={styles.add}>

@@ -90,7 +90,7 @@ const AddBirthday = ({ toggle, addBirthdayUI }) => {
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <Input
-                                    label="Birthday"
+                                    label="Date"
                                     type="date"
                                     required
                                 />
