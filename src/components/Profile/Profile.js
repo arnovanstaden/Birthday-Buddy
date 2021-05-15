@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
-
+import { useParams, useHistory } from 'react-router-dom';
+import { useEffect, useState } from "react";
 
 // Components
 import Page from '../UI/Page/Page';
@@ -19,8 +19,11 @@ import HistoryIcon from "../../assets/icons/custom/history.svg";
 const Profile = () => {
     // Config
     const { id } = useParams();
+    const history = useHistory()
 
-    // Hooks
+    // State
+    // const [birthdays, setBirthdays] = useState
+    // // Hooks
     // useEffect(() => {
     //     if (!deck) {
     //         showLoader("Fetching Deck");
@@ -46,8 +49,8 @@ const Profile = () => {
         >
             <Container>
                 <nav className={styles.nav}>
-                    <i className="icon-carrot-left"></i>
-                    <button>|||</button>
+                    <i className="icon-carrot-left" onClick={() => history.goBack()}></i>
+                    <i className="icon-dots"></i>
                 </nav>
             </Container>
 
