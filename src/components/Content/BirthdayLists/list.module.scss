@@ -1,3 +1,24 @@
+@import "../../../styles/variables.scss";
+
+
 .grid {
     padding-top: 1rem;
+
+    .noBirthday {
+        background-color: $white;
+
+        .button {
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            margin-top: 0.5rem;
+
+
+            i {
+                margin-right: 0.25rem;
+                font-size: 0.9rem;
+            }
+        }
+    }
 }

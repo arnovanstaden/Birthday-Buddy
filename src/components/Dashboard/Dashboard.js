@@ -71,7 +71,6 @@ const Dashboard = () => {
             <Nav />
             <Container>
                 <section className={styles.today}>
-                    <h1>Today's Birthdays</h1>
                     <TodayBirthdaysList birthdays={birthdays} />
                 </section>
 

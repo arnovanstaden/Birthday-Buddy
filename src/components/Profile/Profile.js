@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 // Components
 import Page from '../UI/Page/Page';
 import Input from "../UI/Library/Input/Input";
-import Card from "../UI/Library/Card/Card";
+import ContentCard from "../Content/ContentCard/ContentCard";
 
 // MUI
 import Container from "@material-ui/core/Container";
@@ -76,26 +76,16 @@ const Profile = () => {
                     <h2>On this Day</h2>
                     <Grid container spacing={3} className={styles.grid}>
                         <Grid item xs={12} md={6}>
-                            <Card className={styles.card}>
-                                <div className={styles.image}>
-                                    <img src={Logo} alt="Birthday Buddy Logo" />
-                                </div>
-                                <div className={styles.text}>
-                                    <h3>Famous Birthdays</h3>
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo alias ex autem sapiente vero</p>
-                                </div>
-                            </Card>
+                            <ContentCard className={styles.card} image={Logo}>
+                                <h3>Famous Birthdays</h3>
+                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo alias ex autem sapiente vero</p>
+                            </ContentCard>
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <Card className={styles.card}>
-                                <div className={styles.image}>
-                                    <img src={HistoryIcon} alt="History Icon" />
-                                </div>
-                                <div className={styles.text}>
-                                    <h3>Today in History</h3>
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo alias ex autem sapiente vero.</p>
-                                </div>
-                            </Card>
+                            <ContentCard className={styles.card} image={HistoryIcon}>
+                                <h3>Today in History</h3>
+                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo alias ex autem sapiente vero.</p>
+                            </ContentCard>
                         </Grid>
                     </Grid>
                 </Container>
