@@ -39,7 +39,7 @@
     }
 
     .extra {
-        padding: 2rem 1rem;
+        padding: 2rem 0rem;
         border-radius: 3rem 3rem 0 0;
         background-color: $white;
         width: 100%;
@@ -63,7 +63,7 @@
                 display: flex;
                 align-items: center;
                 background-color: $light-grey;
-                padding: 1.5rem;
+                padding: 1.5rem 1rem;
 
                 .image {
                     img {
