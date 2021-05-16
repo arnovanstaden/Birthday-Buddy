@@ -76,11 +76,9 @@ export const sortBirthdays = (birthdays) => {
 }
 
 export const sendMessage = (name) => {
-    const firstName = name.substring(0, name.indexOf(" "));
-    console.log(firstName)
     if (navigator.share) {
         navigator.share({
-            text: `Happy Birthday ${firstName}!`,
+            text: `Happy Birthday!`,
         })
             .catch((error) => console.log('Error sharing', error));
     }
