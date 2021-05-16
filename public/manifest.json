@@ -1,7 +1,7 @@
 {
   "short_name": "Birthday Buddy",
   "name": "Birthday Buddy",
-  "description": "A personal catalogue of some of Mish's personally created, go-to dishes - no life story included.",
+  "description": "A lightweight PWA for easy birthday reminders & congratulatory message sending.",
   "icons": [{
       "src": "/images/logos/logo192.png",
       "type": "image/png",

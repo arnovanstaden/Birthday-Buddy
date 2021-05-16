@@ -47,11 +47,6 @@ const Nav = ({ backButton }) => {
                                 Account Settings
                         </Link>
                         </li>
-                        <li>
-                            <Link to="/">
-                                Notifications
-                        </Link>
-                        </li>
                         <li onClick={signOut}>
                             Logout
                         </li>
