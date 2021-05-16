@@ -13,7 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import styles from "./list.module.scss";
 import Logo from "../../../assets/images/logos/logo.svg";
 
-const UpcomingBirthdaysList = ({ birthdays }) => {
+const UpcomingBirthdaysList = ({ birthdays, toggleAdd }) => {
     let upcomingBirthdays = birthdays && birthdays.filter(birthday => !isBirthdayToday(new Date(birthday.date)));
     upcomingBirthdays = upcomingBirthdays && sortBirthdays(upcomingBirthdays);
 
@@ -33,7 +33,7 @@ const UpcomingBirthdaysList = ({ birthdays }) => {
                                 <>
                                     <h3>No Birthdays Yet :(</h3>
                                     <p>Add a birthday remind yourself and send your congratulations.</p>
-                                    <Button className={styles.button}>
+                                    <Button className={styles.button} onClick={toggleAdd}>
                                         <i className="icon-add"></i>
                                     Add a Birthday
                                 </Button>
