@@ -1,6 +1,6 @@
 import ClassNames from "classnames";
 import { Link } from "react-router-dom";
-import { getBirthdayDaysAway, getCardFormatAge, getCardFormatBirthday } from "../../../utils/general"
+import { getBirthdayDaysAway, getCardFormatAge, getCardFormatBirthday, sendMessage } from "../../../utils/general"
 
 
 // Components
@@ -49,14 +49,14 @@ const BirthdayCard = ({ birthday, today }) => {
                         </div>
                         {today ?
                             <div className={styles.options}>
-                                <Button className={styles.button}>
+                                <Button className={styles.button} onClick={sendMessage}>
                                     <i className="icon-paper-plane"></i>
-                                Send Message
-                            </Button>
+                                    Send Message
+                                </Button>
                                 <Button hollow className={styles.button}>
                                     <i className="icon-notifications"></i>
-                                Remind Me
-                            </Button>
+                                    Remind Me
+                                </Button>
                             </div>
                             : null
                         }

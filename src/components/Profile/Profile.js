@@ -2,7 +2,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState, useContext } from "react";
 import { getFamousBirthdays, getTodayInHistory } from "../../utils/profile"
 import { getBirthday, deleteBirthday } from "../../utils/birthdays"
-import { getCardFormatAge, isBirthdayToday } from "../../utils/general"
+import { isBirthdayToday, sendMessage } from "../../utils/general"
 
 // Context
 import { LoaderContext } from "../../context/LoaderContext";
@@ -142,7 +142,7 @@ const Profile = () => {
                             <>
                                 <p><span>Birthday:</span> {isBirthdayToday(birthDate) ? <span className={styles.today}>Today</span> : birthday.date} </p>
                                 <div className={styles.options}>
-                                    <Button className={styles.button}>
+                                    <Button className={styles.button} onClick={sendMessage}>
                                         <i className="icon-paper-plane"></i>
                                         Send Message
                                     </Button>
@@ -205,6 +205,9 @@ const Profile = () => {
                     <Button onClick={handleDelete}>
                         Delete
                         </Button>
+                    <Button onClick={() => setShowDeleteModal(false)} hollow>
+                        Cancel
+                    </Button>
                 </Modal>
 
             </Page>
