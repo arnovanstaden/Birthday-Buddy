@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { registerServiceWorker } from "../../utils/pwa";
+import { registerServiceWorker, requestNotificationPermission } from "../../utils/pwa";
 
 // Components
 import AppWrap from "./AppWrap";
@@ -12,6 +12,7 @@ import "typeface-rubik";
 function App() {
   useEffect(() => {
     registerServiceWorker();
+    requestNotificationPermission();
   }, [])
   return (
     <AppWrap>
