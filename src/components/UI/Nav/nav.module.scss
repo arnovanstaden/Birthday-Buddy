@@ -33,6 +33,7 @@
         height: 0;
         display: flex;
         justify-content: flex-end;
+        overflow: hidden;
 
         ul {
             @include reset-list;

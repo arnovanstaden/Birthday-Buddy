@@ -94,7 +94,7 @@ const Dashboard = () => {
                 </div>
 
             </Container>
-            {showAddBirthday ? <ManageBirthday toggle={toggleAddBirthday} addBirthdayUI={addBirthdayUI} /> : null}
+            {showAddBirthday ? <ManageBirthday open={showAddBirthday} toggle={toggleAddBirthday} addBirthdayUI={addBirthdayUI} /> : null}
         </Page>
     )
 }

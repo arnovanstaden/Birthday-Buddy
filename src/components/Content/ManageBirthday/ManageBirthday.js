@@ -13,13 +13,14 @@ import { LoaderContext } from "../../../context/LoaderContext";
 // MUI
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import Fade from '@material-ui/core/Fade';
 
 // Styles & Images
 import styles from "./manage.module.scss"
 import profile from "../../../assets/icons/custom/profile.svg";
 
 
-const AddBirthday = ({ toggle, addBirthdayUI, editBirthdayState, birthday }) => {
+const AddBirthday = ({ open, toggle, addBirthdayUI, editBirthdayState, birthday }) => {
 
     // Config
     const { enqueueSnackbar } = useSnackbar();
@@ -114,57 +115,58 @@ const AddBirthday = ({ toggle, addBirthdayUI, editBirthdayState, birthday }) => 
 
 
     return (
-        <section className={styles.add}>
-            <div className={styles.overlay} onClick={toggle}></div>
-            <div className={styles.content}>
-                <Container>
-                    <div className={styles.top}>
-                        <h1>{!birthday ? "Add a" : "Edit"} Birthday</h1>
-                        <div className={styles.image}>
-                            <img src={birthday && birthday.profilePictureUrl ? birthday.profilePictureUrl : profile} alt="Profile" onClick={handlePictureUpload} />
-                            <input ref={profilePictureRef} type="file" accept="image/x-png,image/jpeg,image/jpg" />
+        <Fade in={open} timeout={500}>
+            <section className={styles.add}>
+                <div className={styles.overlay} onClick={toggle}></div>
+                <div className={styles.content}>
+                    <Container>
+                        <div className={styles.top}>
+                            <h1>{!birthday ? "Add a" : "Edit"} Birthday</h1>
+                            <div className={styles.image}>
+                                <img src={birthday && birthday.profilePictureUrl ? birthday.profilePictureUrl : profile} alt="Profile" onClick={handlePictureUpload} />
+                                <input ref={profilePictureRef} type="file" accept="image/x-png,image/jpeg,image/jpg" />
+                            </div>
                         </div>
-                    </div>
-                    <form ref={formRef}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} md={6}>
-                                <Input
-                                    label="Name"
-                                    type="text"
-                                    required
-                                    defaultValue={birthday && birthday.name}
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <Input
-                                    label="Date"
-                                    type="date"
-                                    required
-                                    defaultValue={birthday && birthday.date}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Input
-                                    label="Notes"
-                                    type="text"
-                                    textArea={4}
-                                    defaultValue={birthday && birthday.notes}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Button
-                                    onClick={birthday ? handleEditBirthday : handleAddBirthday}
-                                    fullWidth
-                                >
-                                    Save Birthday
+                        <form ref={formRef}>
+                            <Grid container spacing={3}>
+                                <Grid item xs={12} md={6}>
+                                    <Input
+                                        label="Name"
+                                        type="text"
+                                        required
+                                        defaultValue={birthday && birthday.name}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <Input
+                                        label="Date"
+                                        type="date"
+                                        required
+                                        defaultValue={birthday && birthday.date}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Input
+                                        label="Notes"
+                                        type="text"
+                                        textArea={4}
+                                        defaultValue={birthday && birthday.notes}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Button
+                                        onClick={birthday ? handleEditBirthday : handleAddBirthday}
+                                        fullWidth
+                                    >
+                                        Save Birthday
                                 </Button>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </form>
-                </Container>
-
-            </div>
-        </section>
+                        </form>
+                    </Container>
+                </div>
+            </section>
+        </Fade>
     )
 }
 

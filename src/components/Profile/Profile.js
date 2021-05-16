@@ -194,7 +194,7 @@ const Profile = () => {
                     </Container>
                 </section>
 
-                {showEditBirthday ? <ManageBirthday toggle={toggleEditBirthday} editBirthdayState={handleEdit} birthday={birthday} /> : null}
+                {showEditBirthday ? <ManageBirthday open={showEditBirthday} toggle={toggleEditBirthday} editBirthdayState={handleEdit} birthday={birthday} /> : null}
 
 
                 <Modal status={showDeleteModal}
