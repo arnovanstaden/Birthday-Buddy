@@ -1,6 +1,7 @@
 {
   "short_name": "Birthday Buddy",
   "name": "Birthday Buddy",
+  "description": "A personal catalogue of some of Mish's personally created, go-to dishes - no life story included.",
   "icons": [{
       "src": "/images/logos/logo192.png",
       "type": "image/png",
@@ -10,10 +11,17 @@
       "src": "/images/logos/logo512.png",
       "type": "image/png",
       "sizes": "512x512"
+    }, {
+      "src": "/images/logos/logo.svg",
+      "purpose": "maskable",
+      "type": "image/svg"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#29C13E",
+  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "gcm_sender_id": "479609409443",
+  "gcm_user_visible_only": true
 }
