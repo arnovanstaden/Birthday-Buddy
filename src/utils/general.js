@@ -75,11 +75,12 @@ export const sortBirthdays = (birthdays) => {
     return sorted
 }
 
-export const sendMessage = () => {
+export const sendMessage = (name) => {
+    const firstName = name.substring(0, name.indexOf(" "));
+    console.log(firstName)
     if (navigator.share) {
         navigator.share({
-            title: "Happy Birthday",
-            text: `Happy Birthday!`,
+            text: `Happy Birthday ${firstName}!`,
         })
             .catch((error) => console.log('Error sharing', error));
     }

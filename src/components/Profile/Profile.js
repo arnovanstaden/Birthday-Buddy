@@ -142,7 +142,7 @@ const Profile = () => {
                             <>
                                 <p><span>Birthday:</span> {isBirthdayToday(birthDate) ? <span className={styles.today}>Today</span> : birthday.date} </p>
                                 <div className={styles.options}>
-                                    <Button className={styles.button} onClick={sendMessage}>
+                                    <Button className={styles.button} onClick={() => sendMessage(birthday.name)}>
                                         <i className="icon-paper-plane"></i>
                                         Send Message
                                     </Button>
