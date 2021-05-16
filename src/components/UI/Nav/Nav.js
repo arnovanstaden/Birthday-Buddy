@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+import { useRef, useContext } from "react";
+
+import { UserContext } from "../../../context/UserContext";
+
 
 // MUI
 import Container from "@material-ui/core/Container";
@@ -8,8 +12,17 @@ import styles from "./nav.module.scss";
 import Logo from "../../../assets/images/logos/logo.svg"
 
 const Nav = ({ backButton }) => {
+    // Config
+    const { signOut } = useContext(UserContext);
+    const menuRef = useRef();
+
+    // Handlers
+    const toggleMenu = () => {
+        menuRef.current.classList.toggle(styles.open)
+    }
+
     return (
-        <header>
+        <header className={styles.header}>
             <Container>
                 <nav className={styles.nav}>
                     <div className={styles.left}>
@@ -22,29 +35,29 @@ const Nav = ({ backButton }) => {
                             : <img src={Logo} alt="Birthday Buddy Logo" />}
                     </div>
                     <div className={styles.right}>
-                        |||
+                        <i className="icon-lines" onClick={toggleMenu}></i>
                     </div>
-                    {/* <div className={styles.menu}>
-                        <ul>
-                            <li>
-                                <Link to="/">
-                                    Account Settings
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/">
-                                    Notifications
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/">
-                                    Logout
-                                </Link>
-                            </li>
-                        </ul>
-                    </div> */}
                 </nav>
             </Container >
+            <div className={styles.menu} ref={menuRef}>
+                <Container>
+                    <ul>
+                        <li>
+                            <Link to="/">
+                                Account Settings
+                        </Link>
+                        </li>
+                        <li>
+                            <Link to="/">
+                                Notifications
+                        </Link>
+                        </li>
+                        <li onClick={signOut}>
+                            Logout
+                        </li>
+                    </ul>
+                </Container>
+            </div>
         </header>
     )
 }
