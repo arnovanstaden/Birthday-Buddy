@@ -1,7 +1,6 @@
 import { db } from "../config/firebase";
 import { auth } from "../config/firebase";
-import { uploadProfilePicture } from "./storage";
-import { resizeProfilePicture } from "./general";
+import { uploadProfilePicture, deleteProfilePicture } from "./storage";
 
 // Firestore Refs
 const userRef = db.collection('users');
@@ -102,6 +101,7 @@ export const deleteBirthday = async (birthday_id) => {
 
     const result = await await birthdaysCollectionRef(uid).doc(birthday_id).delete()
         .then(() => {
+            deleteProfilePicture(birthday_id)
             return {
                 message: "Birthday Deleted"
             }

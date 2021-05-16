@@ -31,6 +31,10 @@
         padding: 1rem;
         display: flex;
         justify-content: center;
+
+        button:hover {
+            background-color: white !important;
+        }
     }
 
 }

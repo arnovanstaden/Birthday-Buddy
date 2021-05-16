@@ -1,7 +1,9 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { useSnackbar } from 'notistack';
 import { addBirthday, editBirthday } from "../../../utils/birthdays";
 import { validateForm, resizeProfilePicture } from "../../../utils/general";
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 
 // Components
 import Input from "../../UI/Library/Input/Input";
@@ -26,7 +28,8 @@ const AddBirthday = ({ open, toggle, addBirthdayUI, editBirthdayState, birthday 
     const { enqueueSnackbar } = useSnackbar();
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const formRef = useRef();
-    const profilePictureRef = useRef()
+    const profilePictureRef = useRef();
+    const [crop, setCrop] = useState({ aspect: 1 / 1 });
 
     // Handlers
     const handleAddBirthday = async (e) => {
@@ -36,7 +39,6 @@ const AddBirthday = ({ open, toggle, addBirthdayUI, editBirthdayState, birthday 
                 variant: 'error',
             });
         }
-        showLoader("Saving Birthday")
 
         // Build Data
         const data = {}
@@ -44,13 +46,13 @@ const AddBirthday = ({ open, toggle, addBirthdayUI, editBirthdayState, birthday 
         formData.forEach((value, key) => data[key] = value);
         const profilePicture = profilePictureRef.current.files[0];
         if (profilePicture) {
-            // const resizedPicture = await resizeProfilePicture(profilePicture);
-            // console.log(resizedPicture)
-            data.profilePicture = profilePicture
+            const resizedPicture = await resizeProfilePicture(profilePicture);
+            data.profilePicture = resizedPicture
         } else {
             data.profilePicture = null
         }
 
+        showLoader("Saving Birthday")
         addBirthday(data)
             .then(result => {
                 hideLoader();
@@ -113,60 +115,67 @@ const AddBirthday = ({ open, toggle, addBirthdayUI, editBirthdayState, birthday 
         profilePictureRef.current.click()
     }
 
+    const handleImageSelect = () => {
+        console.log("changed")
+    }
 
     return (
-        <Fade in={open} timeout={500}>
-            <section className={styles.add}>
-                <div className={styles.overlay} onClick={toggle}></div>
-                <div className={styles.content}>
-                    <Container>
-                        <div className={styles.top}>
-                            <h1>{!birthday ? "Add a" : "Edit"} Birthday</h1>
-                            <div className={styles.image}>
-                                <img src={birthday && birthday.profilePictureUrl ? birthday.profilePictureUrl : profile} alt="Profile" onClick={handlePictureUpload} />
-                                <input ref={profilePictureRef} type="file" accept="image/x-png,image/jpeg,image/jpg" />
+        <>
+            <Fade in={open} timeout={500}>
+                <section className={styles.add}>
+                    <div className={styles.overlay} onClick={toggle}></div>
+                    <div className={styles.content}>
+                        <Container>
+                            <div className={styles.top}>
+                                <h1>{!birthday ? "Add a" : "Edit"} Birthday</h1>
+                                <div className={styles.image}>
+                                    <img src={birthday && birthday.profilePictureUrl ? birthday.profilePictureUrl : profile} alt="Profile" onClick={handlePictureUpload} />
+                                    <input ref={profilePictureRef} type="file" accept="image/x-png,image/jpeg,image/jpg" onChange={handleImageSelect} />
+                                </div>
                             </div>
-                        </div>
-                        <form ref={formRef}>
-                            <Grid container spacing={3}>
-                                <Grid item xs={12} md={6}>
-                                    <Input
-                                        label="Name"
-                                        type="text"
-                                        required
-                                        defaultValue={birthday && birthday.name}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <Input
-                                        label="Date"
-                                        type="date"
-                                        required
-                                        defaultValue={birthday && birthday.date}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Input
-                                        label="Notes"
-                                        type="text"
-                                        textArea={4}
-                                        defaultValue={birthday && birthday.notes}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Button
-                                        onClick={birthday ? handleEditBirthday : handleAddBirthday}
-                                        fullWidth
-                                    >
-                                        Save Birthday
+                            <form ref={formRef}>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={12} md={6}>
+                                        <Input
+                                            label="Name"
+                                            type="text"
+                                            required
+                                            defaultValue={birthday && birthday.name}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+                                        <Input
+                                            label="Date"
+                                            type="date"
+                                            required
+                                            defaultValue={birthday && birthday.date}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Input
+                                            label="Notes"
+                                            type="text"
+                                            textArea={4}
+                                            defaultValue={birthday && birthday.notes}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Button
+                                            onClick={birthday ? handleEditBirthday : handleAddBirthday}
+                                            fullWidth
+                                        >
+                                            Save Birthday
                                 </Button>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </form>
-                    </Container>
-                </div>
-            </section>
-        </Fade>
+                            </form>
+                        </Container>
+                    </div>
+                </section>
+
+            </Fade>
+            <ReactCrop src="../../../assets/images/other/emptyProfile.png" crop={crop} />
+        </>
     )
 }
 
