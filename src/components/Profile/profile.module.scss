@@ -40,6 +40,34 @@
         p span {
             font-size: 1rem;
             font-weight: 500;
+
+            &.today {
+                font-weight: 500;
+                color: $green;
+            }
+        }
+
+        .options {
+            margin-top: 0.75rem;
+            display: flex;
+            justify-content: center;
+
+            .button {
+                font-size: 0.8rem;
+                display: flex;
+                align-items: center;
+                padding: 0.5rem 1rem;
+
+
+                i {
+                    margin-right: 0.25rem;
+                    font-size: 0.9rem;
+                }
+
+                &:last-child {
+                    margin-left: 0.75rem;
+                }
+            }
         }
     }
 

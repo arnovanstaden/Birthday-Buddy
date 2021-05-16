@@ -2,14 +2,16 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState, useContext } from "react";
 import { getFamousBirthdays, getTodayInHistory } from "../../utils/profile"
 import { getBirthday, deleteBirthday } from "../../utils/birthdays"
-import { getCardFormatAge } from "../../utils/general"
+import { getCardFormatAge, isBirthdayToday } from "../../utils/general"
 
 // Context
 import { LoaderContext } from "../../context/LoaderContext";
 
 // Components
 import Page from '../UI/Page/Page';
+import Modal from '../UI/Modal/Modal';
 import Input from "../UI/Library/Input/Input";
+import Button from "../UI/Library/Button/Button";
 import ContentCard from "../Content/ContentCard/ContentCard";
 import Loader from "../UI/Library/Loader/Loader";
 import ManageBirthday from "../Content/ManageBirthday/ManageBirthday";
@@ -39,6 +41,7 @@ const Profile = () => {
     const [todayInHistory, setTodayInHistory] = useState()
     const [anchorEl, setAnchorEl] = useState(null);
     const [showEditBirthday, setShowEditBirthday] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     // Hooks
     useEffect(() => {
@@ -65,7 +68,7 @@ const Profile = () => {
             getBirthday(id)
                 .then(result => {
                     setBirthday(result);
-                    hideLoader()
+                    hideLoader();
                 })
         } else {
             hideLoader()
@@ -88,6 +91,7 @@ const Profile = () => {
     }
 
     const handleDelete = () => {
+        setShowDeleteModal(false)
         handleNavClose();
         showLoader("Deleting Birthday");
         deleteBirthday(id)
@@ -122,7 +126,7 @@ const Profile = () => {
                             onClose={handleNavClose}
                         >
                             <MenuItem onClick={toggleEditBirthday}>Edit Birthday</MenuItem>
-                            <MenuItem onClick={handleDelete}>Delete Birthday</MenuItem>
+                            <MenuItem onClick={() => setShowDeleteModal(true)}>Delete Birthday</MenuItem>
                         </Menu>
                     </nav>
                 </Container>
@@ -131,8 +135,24 @@ const Profile = () => {
                     <section className={styles.info}>
                         <img src={birthday.profilePictureUrl || EmptyProfileImg} alt="Profile" />
                         <h1>{birthday.name}</h1>
-                        <p><span>Birthday:</span> {birthday.date} </p>
-                        <p><span>Age:</span> {getCardFormatAge(birthDate) - 1} </p>
+                        {!isBirthdayToday(birthDate)
+                            ?
+                            <p><span>Birthday:</span>  {birthday.date}</p>
+                            :
+                            <>
+                                <p><span>Birthday:</span> {isBirthdayToday(birthDate) ? <span className={styles.today}>Today</span> : birthday.date} </p>
+                                <div className={styles.options}>
+                                    <Button className={styles.button}>
+                                        <i className="icon-paper-plane"></i>
+                                        Send Message
+                                    </Button>
+                                    <Button hollow className={styles.button}>
+                                        <i className="icon-notifications"></i>
+                                        Remind Me
+                                    </Button>
+                                </div>
+                            </>
+                        }
                     </section>
                 </Container>
 
@@ -173,7 +193,20 @@ const Profile = () => {
                         </Grid>
                     </Container>
                 </section>
+
                 {showEditBirthday ? <ManageBirthday toggle={toggleEditBirthday} editBirthdayState={handleEdit} birthday={birthday} /> : null}
+
+
+                <Modal status={showDeleteModal}
+                    content={{
+                        heading: "Are you sure?",
+                        text: "If you delete this birthday the data will be lost forever."
+                    }}>
+                    <Button onClick={handleDelete}>
+                        Delete
+                        </Button>
+                </Modal>
+
             </Page>
         )
     }

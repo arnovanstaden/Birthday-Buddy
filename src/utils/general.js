@@ -72,6 +72,5 @@ export const getBirthdayDaysAway = (date) => {
 
 export const sortBirthdays = (birthdays) => {
     const sorted = birthdays.sort((a, b) => getNextBirthday(new Date(a.date)) - getNextBirthday(new Date(b.date)));
-    console.log(sorted)
     return sorted
 }
