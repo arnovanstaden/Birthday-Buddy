@@ -133,7 +133,9 @@ const Profile = () => {
 
                 <Container>
                     <section className={styles.info}>
-                        <img src={birthday.profilePictureUrl || EmptyProfileImg} alt="Profile" />
+                        <div className={styles.image}>
+                            <img src={birthday.profilePictureUrl || EmptyProfileImg} alt="Profile" />
+                        </div>
                         <h1>{birthday.name}</h1>
                         {!isBirthdayToday(birthDate)
                             ?

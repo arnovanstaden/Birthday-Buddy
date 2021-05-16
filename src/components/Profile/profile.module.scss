@@ -25,10 +25,23 @@
     .info {
         padding: 2rem 0;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-        img {
+
+        .image {
             border-radius: 50%;
+            overflow: hidden;
             width: 10rem;
+            height: 10rem;
+
+            img {
+                width: 100%;
+                min-height: 100%;
+                object-fit: cover;
+                object-position: center center;
+            }
         }
 
         h1 {

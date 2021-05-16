@@ -12,22 +12,24 @@ export const validateForm = (e, form) => {
     return true
 }
 
-export const resizeProfilePicture = (file) => {
-    console.log(file)
-
-    const image = Resizer.imageFileResizer(
-        file,
-        200,
-        200,
-        "png",
-        100,
-        0,
-        (uri) => {
-            return uri;
-        },
-        "file"
-    );
-    console.log(image)
+export const resizeProfilePicture = async (file) => {
+    const image = new Promise((resolve) => {
+        Resizer.imageFileResizer(
+            file,
+            200,
+            200,
+            "jpeg",
+            80,
+            0,
+            (uri) => {
+                resolve(uri);
+            },
+            "file",
+            200,
+            200
+        );
+    });
+    return image
 }
 
 const getNextBirthday = (date) => {
