@@ -87,7 +87,8 @@ const AddBirthday = ({ open, toggle, addBirthdayUI, editBirthdayState, birthday 
         const profilePicture = profilePictureRef.current.files[0];
 
         if (profilePicture) {
-            data.profilePicture = await resizeProfilePicture(profilePicture);
+            const resizedPicture = await resizeProfilePicture(profilePicture);
+            data.profilePicture = resizedPicture
         } else if (birthday.profilePictureUrl) {
             data.profilePictureUrl = birthday.profilePictureUrl
         } else {
