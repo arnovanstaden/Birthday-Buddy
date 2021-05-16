@@ -3,7 +3,6 @@ import { isBirthdayToday } from "../../../utils/general";
 
 // Components
 import BirthdayCard from "../BirthdayCard/BirthdayCard";
-import Card from "../../UI/Library/Card/Card"
 
 // MUI
 import Grid from "@material-ui/core/Grid";

@@ -1,4 +1,5 @@
 import { differenceInYears, getMonth, getDate, getYear, isPast, addYears, differenceInCalendarDays, format, isToday } from 'date-fns'
+import Resizer from "react-image-file-resizer";
 
 export const validateForm = (e, form) => {
     e.preventDefault()
@@ -9,6 +10,24 @@ export const validateForm = (e, form) => {
     }
 
     return true
+}
+
+export const resizeProfilePicture = (file) => {
+    console.log(file)
+
+    const image = Resizer.imageFileResizer(
+        file,
+        200,
+        200,
+        "png",
+        100,
+        0,
+        (uri) => {
+            return uri;
+        },
+        "file"
+    );
+    console.log(image)
 }
 
 const getNextBirthday = (date) => {
@@ -52,6 +71,7 @@ export const getBirthdayDaysAway = (date) => {
 }
 
 export const sortBirthdays = (birthdays) => {
-    const sorted = birthdays.sort((a, b) => new Date(b.date) - new Date(a.date))
+    const sorted = birthdays.sort((a, b) => getNextBirthday(new Date(a.date)) - getNextBirthday(new Date(b.date)));
+    console.log(sorted)
     return sorted
 }

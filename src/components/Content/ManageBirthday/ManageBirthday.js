@@ -1,7 +1,7 @@
 import { useContext, useRef } from "react";
 import { useSnackbar } from 'notistack';
 import { addBirthday, editBirthday } from "../../../utils/birthdays";
-import { validateForm } from "../../../utils/general";
+import { validateForm, resizeProfilePicture } from "../../../utils/general";
 
 // Components
 import Input from "../../UI/Library/Input/Input";
@@ -26,7 +26,6 @@ const AddBirthday = ({ toggle, addBirthdayUI, editBirthdayState, birthday }) => 
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const formRef = useRef();
     const profilePictureRef = useRef()
-    const monthRef = useRef();
 
     // Handlers
     const handleAddBirthday = async (e) => {
@@ -43,7 +42,13 @@ const AddBirthday = ({ toggle, addBirthdayUI, editBirthdayState, birthday }) => 
         const formData = new FormData(formRef.current);
         formData.forEach((value, key) => data[key] = value);
         const profilePicture = profilePictureRef.current.files[0];
-        data.profilePicture = profilePicture || null
+        if (profilePicture) {
+            // const resizedPicture = await resizeProfilePicture(profilePicture);
+            // console.log(resizedPicture)
+            data.profilePicture = profilePicture
+        } else {
+            data.profilePicture = null
+        }
 
         addBirthday(data)
             .then(result => {
@@ -79,7 +84,7 @@ const AddBirthday = ({ toggle, addBirthdayUI, editBirthdayState, birthday }) => 
         const profilePicture = profilePictureRef.current.files[0];
 
         if (profilePicture) {
-            data.profilePicture = profilePicture;
+            data.profilePicture = await resizeProfilePicture(profilePicture);
         } else if (birthday.profilePictureUrl) {
             data.profilePictureUrl = birthday.profilePictureUrl
         } else {
@@ -116,7 +121,7 @@ const AddBirthday = ({ toggle, addBirthdayUI, editBirthdayState, birthday }) => 
                     <div className={styles.top}>
                         <h1>{!birthday ? "Add a" : "Edit"} Birthday</h1>
                         <div className={styles.image}>
-                            <img src={birthday.profilePictureUrl ? birthday.profilePictureUrl : profile} alt="Profile" onClick={handlePictureUpload} />
+                            <img src={birthday && birthday.profilePictureUrl ? birthday.profilePictureUrl : profile} alt="Profile" onClick={handlePictureUpload} />
                             <input ref={profilePictureRef} type="file" accept="image/x-png,image/jpeg,image/jpg" />
                         </div>
                     </div>

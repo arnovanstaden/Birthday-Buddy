@@ -1,5 +1,4 @@
 import { storage } from "../config/firebase";
-import { uploadBytes } from "firebase/storage";
 
 // Config
 

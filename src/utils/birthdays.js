@@ -1,6 +1,7 @@
 import { db } from "../config/firebase";
 import { auth } from "../config/firebase";
 import { uploadProfilePicture } from "./storage";
+import { resizeProfilePicture } from "./general";
 
 // Firestore Refs
 const userRef = db.collection('users');
@@ -38,6 +39,7 @@ export const addBirthday = async (data) => {
         birthday: result,
         message: "Birthday Saved Successfully"
     }
+
 }
 
 export const getAllBirthdays = async () => {

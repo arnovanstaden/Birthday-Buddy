@@ -15,7 +15,6 @@ import Nav from "../UI/Nav/Nav";
 
 // MUI
 import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
 
 // Styles
 import styles from "./dashboard.module.scss";
@@ -65,8 +64,6 @@ const Dashboard = () => {
     const addBirthdayUI = (birthday) => {
         setBirthdays(prev => [...prev, birthday])
     }
-
-    console.log(searchResults.length)
 
     return (
         <Page
