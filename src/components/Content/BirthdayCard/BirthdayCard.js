@@ -1,5 +1,6 @@
 import ClassNames from "classnames";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { getBirthdayDaysAway, getCardFormatAge, getCardFormatBirthday, sendMessage } from "../../../utils/general"
 
 
@@ -14,11 +15,25 @@ import EmptyProfileImg from "../../../assets/images/other/emptyProfile.png";
 const BirthdayCard = ({ birthday, today }) => {
     // Config
     const birthDate = new Date(birthday.date);
+    const history = useHistory();
+
+    // State
+    const [showReminderModal, setShowReminderModal] = useState(false)
 
     const classes = ClassNames(
         styles.card,
         today ? styles.today : null
     )
+
+    const handleSendMessage = () => {
+        history.block()
+        sendMessage(birthday.name)
+    }
+
+    const handleSetReminder = () => {
+        history.block()
+        setShowReminderModal(true)
+    }
 
     return (
         <Link to={`/birthday/${birthday.id}`}>
@@ -49,11 +64,11 @@ const BirthdayCard = ({ birthday, today }) => {
                         </div>
                         {today ?
                             <div className={styles.options}>
-                                <Button className={styles.button} onClick={() => sendMessage(birthday.name)}>
+                                <Button className={styles.button} onClick={handleSendMessage}>
                                     <i className="icon-paper-plane"></i>
                                     Send Message
                                 </Button>
-                                <Button hollow className={styles.button}>
+                                <Button hollow className={styles.button} onClick={handleSetReminder}>
                                     <i className="icon-notifications"></i>
                                     Remind Me
                                 </Button>
