@@ -10,7 +10,6 @@ import { LoaderContext } from "../../context/LoaderContext";
 // Components
 import Page from '../UI/Page/Page';
 import Modal from '../UI/Modal/Modal';
-import Input from "../UI/Library/Input/Input";
 import Button from "../UI/Library/Button/Button";
 import ContentCard from "../Content/ContentCard/ContentCard";
 import Loader from "../UI/Library/Loader/Loader";
