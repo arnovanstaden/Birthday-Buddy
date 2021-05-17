@@ -93,14 +93,25 @@
         bottom: 0;
         box-sizing: border-box;
 
-        textarea {
-            background-color: $light-grey;
+        .notes {
+            margin-bottom: 2rem;
+
+            p {
+                display: block;
+                margin: 0;
+                font-weight: 400;
+                font-size: 0.9rem;
+                padding-left: 1rem;
+                color: $medium-grey;
+            }
         }
 
         h2 {
             font-size: 1.4rem;
             font-weight: 600;
-            margin: 2rem 0;
+            margin: 0;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
         }
     }
 }

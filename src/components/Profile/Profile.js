@@ -154,12 +154,13 @@ const Profile = () => {
 
                 <section className={styles.extra}>
                     <Container>
-                        <Input
-                            label="Notes"
-                            type="text"
-                            textArea={4}
-                            defaultValue={birthday.notes || null}
-                        />
+                        <div className={styles.notes}>
+                            <h2>Notes</h2>
+                            <p>
+                                {birthday.notes || "No notes yet..."}
+                            </p>
+                        </div>
+
                         <h2>On this Day</h2>
                         <Grid container spacing={3} className={styles.grid}>
                             <Grid item xs={12} md={6}>
