@@ -3,7 +3,7 @@ import "firebase/auth";
 import "firebase/storage";
 import "firebase/firestore";
 import "firebase/analytics";
-import "firebase/messaging";
+import { getMessaging, getToken } from "firebase/messaging";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -43,4 +43,6 @@ export const analytics = firebase.analytics();
 
 // Messaging
 export const messaging = firebase.messaging();
+
+
 
