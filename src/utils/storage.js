@@ -1,7 +1,5 @@
 import { storage } from "../config/firebase";
 
-// Config
-
 export const uploadProfilePicture = async (id, file) => {
     const oldName = file.name;
     const newName = `${id}.${oldName.substring(oldName.indexOf(".") + 1, oldName.length)}`
@@ -23,7 +21,6 @@ export const deleteProfilePicture = async (id) => {
         console.log(error)
     });
 }
-
 
 
 

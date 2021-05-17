@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { registerServiceWorker, requestNotificationPermission } from "../../utils/pwa";
-import { initializeNotifications } from "../../utils/notifications";
 
 // Components
 import AppWrap from "./AppWrap";
@@ -14,7 +13,6 @@ function App() {
   useEffect(() => {
     registerServiceWorker();
     requestNotificationPermission();
-    initializeNotifications()
   }, [])
   return (
     <AppWrap>

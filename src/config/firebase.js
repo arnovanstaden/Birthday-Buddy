@@ -3,7 +3,8 @@ import "firebase/auth";
 import "firebase/storage";
 import "firebase/firestore";
 import "firebase/analytics";
-import { getMessaging, getToken } from "firebase/messaging";
+import "firebase/messaging";
+import { storeFCMRegToken } from "../utils/notifications"
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -44,5 +45,17 @@ export const analytics = firebase.analytics();
 // Messaging
 export const messaging = firebase.messaging();
 
+messaging.getToken({ vapidKey: process.env.REACT_APP_FIREBASE_WPC_KEY_PAIR }).then((currentToken) => {
+    if (currentToken) {
+        storeFCMRegToken(currentToken)
+    }
+}).catch((err) => {
+    console.log('An error occurred while retrieving token. ', err);
+});
 
+// export const onMessageListener = messaging.onMessage((payload) => {
+//     // FIX THIS
+//     console.log('Message received. ', payload);
+//     // ...
+// });
 
