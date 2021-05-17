@@ -1,9 +1,7 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { useSnackbar } from 'notistack';
 import { addBirthday, editBirthday } from "../../../utils/birthdays";
 import { validateForm, resizeProfilePicture } from "../../../utils/general";
-import ReactCrop from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
 
 // Components
 import Input from "../../UI/Library/Input/Input";
@@ -29,7 +27,6 @@ const AddBirthday = ({ open, toggle, addBirthdayUI, editBirthdayState, birthday 
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const formRef = useRef();
     const profilePictureRef = useRef();
-    const [crop, setCrop] = useState({ aspect: 1 / 1 });
 
     // Handlers
     const handleAddBirthday = async (e) => {
@@ -175,7 +172,6 @@ const AddBirthday = ({ open, toggle, addBirthdayUI, editBirthdayState, birthday 
                 </section>
 
             </Fade>
-            <ReactCrop src="../../../assets/images/other/emptyProfile.png" crop={crop} />
         </>
     )
 }

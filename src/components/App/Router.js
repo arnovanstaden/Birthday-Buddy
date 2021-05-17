@@ -40,4 +40,4 @@ const Router = ({ children }) => {
     )
 }
 
-export default Router
+export default Router;

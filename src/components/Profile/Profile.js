@@ -8,9 +8,9 @@ import { isBirthdayToday, sendMessage } from "../../utils/general"
 import { LoaderContext } from "../../context/LoaderContext";
 
 // Components
+import withAuth from "../HOC/withAuth";
 import Page from '../UI/Page/Page';
 import Modal from '../UI/Modal/Modal';
-import Input from "../UI/Library/Input/Input";
 import Button from "../UI/Library/Button/Button";
 import ContentCard from "../Content/ContentCard/ContentCard";
 import Loader from "../UI/Library/Loader/Loader";
@@ -45,29 +45,23 @@ const Profile = () => {
 
     // Hooks
     useEffect(() => {
-        if (!famousBirthdays) {
-            getFamousBirthdays(new Date()) //Fix THis
-                .then(result => {
-                    setFamousBirthdays(result);
-                })
-        }
-    }, [famousBirthdays]);
-
-    useEffect(() => {
-        if (!todayInHistory) {
-            getTodayInHistory(new Date()) //Fix THis
-                .then(result => {
-                    setTodayInHistory(result);
-                })
-        }
-    }, [todayInHistory]);
-
-    useEffect(() => {
         if (!birthday) {
             showLoader("Fetching Birthday");
             getBirthday(id)
                 .then(result => {
                     setBirthday(result);
+                    if (!famousBirthdays) {
+                        getFamousBirthdays(new Date(result.date)) //Fix THis
+                            .then(result => {
+                                setFamousBirthdays(result);
+                            })
+                    }
+                    if (!todayInHistory) {
+                        getTodayInHistory(new Date(result.date)) //Fix THis
+                            .then(result => {
+                                setTodayInHistory(result);
+                            })
+                    }
                     hideLoader();
                 })
         } else {
@@ -160,12 +154,13 @@ const Profile = () => {
 
                 <section className={styles.extra}>
                     <Container>
-                        <Input
-                            label="Notes"
-                            type="text"
-                            textArea={4}
-                            defaultValue={birthday.notes || null}
-                        />
+                        <div className={styles.notes}>
+                            <h2>Notes</h2>
+                            <p>
+                                {birthday.notes || "No notes yet..."}
+                            </p>
+                        </div>
+
                         <h2>On this Day</h2>
                         <Grid container spacing={3} className={styles.grid}>
                             <Grid item xs={12} md={6}>
@@ -218,4 +213,4 @@ const Profile = () => {
     return null
 }
 
-export default Profile
+export default withAuth(Profile);
