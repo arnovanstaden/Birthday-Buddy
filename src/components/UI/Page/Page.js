@@ -1,8 +1,5 @@
 import ClassNames from "classnames";
 
-// Components
-import withAuth from "../../HOC/withAuth";
-
 // Styles
 import styles from "./page.module.scss";
 
@@ -24,4 +21,4 @@ const Page = ({ children, className, center, fullscreen, backButton }) => {
     )
 }
 
-export default withAuth(Page);
+export default Page;

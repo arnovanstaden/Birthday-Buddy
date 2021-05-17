@@ -8,6 +8,7 @@ import { isBirthdayToday, sendMessage } from "../../utils/general"
 import { LoaderContext } from "../../context/LoaderContext";
 
 // Components
+import withAuth from "../HOC/withAuth";
 import Page from '../UI/Page/Page';
 import Modal from '../UI/Modal/Modal';
 import Button from "../UI/Library/Button/Button";
@@ -212,4 +213,4 @@ const Profile = () => {
     return null
 }
 
-export default Profile
+export default withAuth(Profile);
