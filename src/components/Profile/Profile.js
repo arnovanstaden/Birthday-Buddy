@@ -45,29 +45,23 @@ const Profile = () => {
 
     // Hooks
     useEffect(() => {
-        if (!famousBirthdays) {
-            getFamousBirthdays(new Date()) //Fix THis
-                .then(result => {
-                    setFamousBirthdays(result);
-                })
-        }
-    }, [famousBirthdays]);
-
-    useEffect(() => {
-        if (!todayInHistory) {
-            getTodayInHistory(new Date()) //Fix THis
-                .then(result => {
-                    setTodayInHistory(result);
-                })
-        }
-    }, [todayInHistory]);
-
-    useEffect(() => {
         if (!birthday) {
             showLoader("Fetching Birthday");
             getBirthday(id)
                 .then(result => {
                     setBirthday(result);
+                    if (!famousBirthdays) {
+                        getFamousBirthdays(new Date(result.date)) //Fix THis
+                            .then(result => {
+                                setFamousBirthdays(result);
+                            })
+                    }
+                    if (!todayInHistory) {
+                        getTodayInHistory(new Date(result.date)) //Fix THis
+                            .then(result => {
+                                setTodayInHistory(result);
+                            })
+                    }
                     hideLoader();
                 })
         } else {

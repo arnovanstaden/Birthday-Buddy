@@ -12,10 +12,13 @@ export const getFamousBirthdays = async (birthday) => {
 }
 
 export const getTodayInHistory = async (birthday) => {
-    const dateToGet = `${getMonth(birthday) + 1}/${getDate(birthday)}`
+    const dateToGet = `${getMonth(birthday) + 1}/${getDate(birthday)}`;
     const result = axios({
         method: "GET",
-        url: `http://numbersapi.com/${dateToGet}/date`
+        url: `https://numbersapi.p.rapidapi.com/${dateToGet}/date`,
+        headers: {
+            "x-rapidapi-key": process.env.REACT_APP_RAPID_NUMBERS_API_KEY
+        }
     }).then(response => {
         return response.data
     }).catch(err => console.log(err))
