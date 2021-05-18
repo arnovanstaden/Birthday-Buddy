@@ -48,7 +48,7 @@ const BirthdayCard = ({ birthday, today }) => {
     const handleSetReminder = (hours) => {
         setShowReminderModal(false)
         showLoader("Setting Reminder")
-        scheduleReminder(3, birthday).then(result => {
+        scheduleReminder(hours, birthday).then(result => {
             hideLoader()
             enqueueSnackbar(result.message, {
                 variant: 'success',

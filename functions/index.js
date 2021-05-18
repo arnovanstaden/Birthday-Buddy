@@ -1,6 +1,6 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-admin.initializeApp(functions.config().firebase)
+admin.initializeApp(functions.config().firebase);
 
 exports.sendDailyNotifications = functions.https.onRequest((req, res) => {
     const usersRef = admin.firestore().collection('users');
@@ -35,21 +35,22 @@ exports.sendDailyNotifications = functions.https.onRequest((req, res) => {
                     const message = {
                         data: {
                             title: "Birthday Reminder",
-                            body: `It's ${allBirthdaysToday[0].name}'s birthday today. Send him a message.`,
+                            body: `It's ${allBirthdaysToday[0].name}'s birthday today. Remember to send your congratulations!`,
                             url: `https://birthday-buddy.vercel.app/birthday/${allBirthdaysToday[0].id}`,
                         },
                         token: user.fcm_token
                     };
 
                     if (allBirthdaysToday.length > 1) {
-                        message.notification.body = `You have ${allBirthdaysToday.length} friends who celebrate their birthdays today! Send them a message!`
+                        message.notification.body = `You have ${allBirthdaysToday.length} friends who celebrate their birthday today. Remember to send your congratulations!`
                         message.data.url = `https://birthday-buddy.vercel.app/`
                     }
 
-                    admin.messaging().send(message).then((response) => {
-                        // Response is a message ID string.
-                        console.log(`Successfully sent message: to: ${user.displayName}`, response);
-                    })
+                    admin.messaging().send(message)
+                        .then((response) => {
+                            // Response is a message ID string.
+                            console.log(`Successfully Sent Daily Reminder to: ${user.displayName} -`, response);
+                        })
                         .catch((error) => {
                             console.log('Error sending message:', error);
                         });
@@ -61,4 +62,61 @@ exports.sendDailyNotifications = functions.https.onRequest((req, res) => {
             }
         })
     })
+});
+
+
+exports.sendReminderNotifications = functions.https.onRequest((req, res) => {
+    const usersRef = admin.firestore().collection('users');
+
+    // Get users with reminders === true
+    usersRef.where('reminders', '==', true).get().then((usersSnapshot) => {
+        const users = usersSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+
+        // Get Birthdays Today
+        users.forEach((user, index) => {
+            admin.firestore().collectionGroup('reminders').where('uid', '==', user.id).get().then((remindersSnapshot) => {
+                const reminders = remindersSnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+
+                reminders.forEach(reminder => {
+                    // Send Notifications
+                    // Test if reminder is past
+                    if (reminder.time.toDate() < new Date()) {
+                        console.log(reminder.time.toDate(), new Date())
+                        const message = {
+                            data: {
+                                title: "Birthday Reminder",
+                                body: `This is your reminder to wish ${reminder.birthday.name} a happy birthday today. Remember to send your congratulations!`,
+                                url: `https://birthday-buddy.vercel.app/birthday/${reminder.birthday.id}`,
+                            },
+                            token: user.fcm_token
+                        };
+
+                        admin.messaging().send(message)
+                            .then((response) => {
+                                // Response is a message ID string.
+                                console.log(`Successfully Sent Birthday Reminder to: ${user.displayName} - `, response);
+                            })
+                            .catch((error) => {
+                                console.log('Error sending message:', error);
+                            });
+
+                        // Delete Reminder
+                    }
+
+                });
+            });
+
+            if (users.length - 1 === index) {
+                res.status(200).send("OK")
+            }
+        })
+    })
 })
+
+
