@@ -53,4 +53,29 @@ messaging.getToken({ vapidKey: process.env.REACT_APP_FIREBASE_WPC_KEY_PAIR }).th
     console.log('An error occurred while retrieving token. ', err);
 });
 
+messaging.onMessage((payload) => {
+    console.log('Foreground Message received. ', payload);
+
+
+    if (Notification.permission === "granted") {
+        const notificationOptions = {
+            title: payload.notification.title,
+            icon: '/images/logos/logo192-transparent.png',
+            badge: '/images/logos/logo192-transparent.png',
+            vibrate: [100, 50, 100],
+            body: payload.notification.body,
+            data: {
+                time: new Date(Date.now()).toString(),
+                primaryKey: 1,
+                url: payload.data.url
+            }
+        };
+
+        const notification = new Notification(notificationOptions.title, notificationOptions);
+        notification.onclick = ((e) => {
+            e.preventDefault();
+            window.open(e.currentTarget.data.url, '_blank');
+        })
+    }
+});
 
