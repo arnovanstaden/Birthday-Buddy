@@ -27,6 +27,7 @@ const app = firebase.app();
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(function (payload) {
+    console.log("here")
     console.log('Received background message ', payload);
     const notificationOptions = {
         title: payload.notification.title,
