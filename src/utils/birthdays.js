@@ -58,15 +58,14 @@ export const getBirthday = async (birthday_id) => {
 
     const result = await birthdaysCollectionRef(uid).doc(birthday_id).get()
         .then((doc) => {
-            if (!doc) {
-                return undefined
+            if (!doc.data()) {
+                return null
             }
             return {
                 id: doc.id,
                 ...doc.data(),
             }
         });
-
     return result
 }
 

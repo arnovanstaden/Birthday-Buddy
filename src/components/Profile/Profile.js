@@ -49,6 +49,9 @@ const Profile = () => {
             showLoader("Fetching Birthday");
             getBirthday(id)
                 .then(result => {
+                    if (!result) {
+                        return history.replace("/")
+                    }
                     setBirthday(result);
                     if (!famousBirthdays) {
                         getFamousBirthdays(new Date(result.date)) //Fix THis
