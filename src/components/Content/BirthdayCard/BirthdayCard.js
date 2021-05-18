@@ -1,12 +1,17 @@
 import ClassNames from "classnames";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { getBirthdayDaysAway, getCardFormatAge, getCardFormatBirthday, sendMessage } from "../../../utils/general"
+import { scheduleReminder } from "../../../utils/reminders";
+import { useSnackbar } from 'notistack';
 
+// Context
+import { LoaderContext } from "../../../context/LoaderContext";
 
 // Components
 import Button from "../../UI/Library/Button/Button"
 import Card from "../../UI/Library/Card/Card"
+import Modal from "../../UI/Modal/Modal";
 
 // Styles & Images
 import styles from "./card.module.scss";
@@ -16,6 +21,8 @@ const BirthdayCard = ({ birthday, today }) => {
     // Config
     const birthDate = new Date(birthday.date);
     const history = useHistory();
+    const { enqueueSnackbar } = useSnackbar();
+    const { showLoader, hideLoader } = useContext(LoaderContext);
 
     // State
     const [showReminderModal, setShowReminderModal] = useState(false)
@@ -30,12 +37,24 @@ const BirthdayCard = ({ birthday, today }) => {
         sendMessage(birthday.name)
     }
 
-    const handleSetReminder = () => {
+    const handleShowReminderModal = () => {
         history.block()
         if (Notification.permission !== "granted") {
             return alert("You need to enable notifications for this app first.")
         }
         setShowReminderModal(true)
+    }
+
+    const handleSetReminder = (hours) => {
+        setShowReminderModal(false)
+        showLoader("Setting Reminder")
+        scheduleReminder(3, birthday).then(result => {
+            hideLoader()
+            enqueueSnackbar(result.message, {
+                variant: 'success',
+            });
+            console.log(result);
+        })
     }
 
     return (
@@ -71,7 +90,7 @@ const BirthdayCard = ({ birthday, today }) => {
                                     <i className="icon-paper-plane"></i>
                                     Send Message
                                 </Button>
-                                <Button hollow className={styles.button} onClick={handleSetReminder}>
+                                <Button hollow className={styles.button} onClick={handleShowReminderModal}>
                                     <i className="icon-notifications"></i>
                                     Remind Me
                                 </Button>
@@ -81,7 +100,26 @@ const BirthdayCard = ({ birthday, today }) => {
                     </div>
                 </div>
             </Card >
-        </Link>
+
+            <Modal status={showReminderModal}
+                content={{
+                    heading: "Set Reminder",
+                    text: "Please choose an option when you would like to be reminded:"
+                }}>
+                <Button onClick={() => handleSetReminder(1)}>
+                    1 Hour From Now
+                    </Button>
+                <Button onClick={() => handleSetReminder(3)}>
+                    3 Hours From Now
+                    </Button>
+                <Button onClick={() => handleSetReminder(6)}>
+                    6 Hours From Now
+                    </Button>
+                <Button onClick={() => setShowReminderModal(false)} hollow>
+                    Cancel
+                    </Button>
+            </Modal>
+        </Link >
     )
 }
 
