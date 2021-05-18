@@ -26,14 +26,35 @@ const app = firebase.app();
 // Retrieve firebase messaging
 const messaging = firebase.messaging();
 
+const showNotification = (payload) => {
+    const notificationOptions = {
+        title: payload.data.title,
+        icon: '/images/logos/logo192-transparent.png',
+        badge: '/images/logos/logo192-transparent.png',
+        vibrate: [100, 50, 100],
+        body: payload.data.body,
+        data: {
+            time: new Date(Date.now()).toString(),
+            primaryKey: 1,
+            url: payload.data.url
+        }
+    };
+    // notification.action ? options[actions] === notification.action : null;
+    self.registration.showNotification(notificationOptions.title, notificationOptions);
+}
+
+
 messaging.onBackgroundMessage(function (payload) {
     console.log('Received background message ', payload);
+    showNotification(payload)
+});
 
-    const notificationTitle = payload.notification.title;
-    const notificationOptions = {
-        body: payload.notification.body,
-    };
-
-    self.registration.showNotification(notificationTitle,
-        notificationOptions);
+self.addEventListener('notificationclick', function (e) {
+    console.log("here")
+    const notification = e.notification;
+    const primaryKey = notification.data.primaryKey;
+    if (primaryKey === 1) {
+        clients.openWindow(notification.data.url);
+    }
+    notification.close();
 });
