@@ -54,16 +54,13 @@ messaging.getToken({ vapidKey: process.env.REACT_APP_FIREBASE_WPC_KEY_PAIR }).th
 });
 
 messaging.onMessage((payload) => {
-    console.log('Foreground Message received. ', payload);
-
-
     if (Notification.permission === "granted") {
         const notificationOptions = {
-            title: payload.notification.title,
+            title: payload.data.title,
             icon: '/images/logos/logo192-transparent.png',
             badge: '/images/logos/logo192-transparent.png',
             vibrate: [100, 50, 100],
-            body: payload.notification.body,
+            body: payload.data.body,
             data: {
                 time: new Date(Date.now()).toString(),
                 primaryKey: 1,

@@ -28,11 +28,11 @@ const messaging = firebase.messaging();
 
 const showNotification = (payload) => {
     const notificationOptions = {
-        title: payload.notification.title,
+        title: payload.data.title,
         icon: '/images/logos/logo192-transparent.png',
         badge: '/images/logos/logo192-transparent.png',
         vibrate: [100, 50, 100],
-        body: payload.notification.body,
+        body: payload.data.body,
         data: {
             time: new Date(Date.now()).toString(),
             primaryKey: 1,
