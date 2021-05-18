@@ -21,6 +21,9 @@ export const getTodayInHistory = async (birthday) => {
         }
     }).then(response => {
         return response.data
-    }).catch(err => console.log(err))
+    }).catch(err => {
+        console.log(err);
+        return err.response
+    })
     return result
 }

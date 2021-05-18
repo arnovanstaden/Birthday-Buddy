@@ -28,12 +28,28 @@ const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(function (payload) {
     console.log('Received background message ', payload);
-
-    const notificationTitle = payload.notification.title;
     const notificationOptions = {
+        title: payload.notification.title,
+        icon: '/images/logos/logo195.png',
+        badge: '/images/logos/logo195.png',
+        vibrate: [100, 50, 100],
         body: payload.notification.body,
+        data: {
+            time: new Date(Date.now()).toString(),
+            primaryKey: 1,
+            url: payload.data.url
+        }
     };
+    // notification.action ? options[actions] === notification.action : null;
+    self.registration.showNotification(notificationOptions.title, notificationOptions);
+});
 
-    self.registration.showNotification(notificationTitle,
-        notificationOptions);
+self.addEventListener('notificationclick', function (e) {
+    console.log("here")
+    const notification = e.notification;
+    const primaryKey = notification.data.primaryKey;
+    if (primaryKey === 1) {
+        clients.openWindow(notification.data.url);
+    }
+    notification.close();
 });

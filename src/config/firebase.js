@@ -53,9 +53,4 @@ messaging.getToken({ vapidKey: process.env.REACT_APP_FIREBASE_WPC_KEY_PAIR }).th
     console.log('An error occurred while retrieving token. ', err);
 });
 
-// export const onMessageListener = messaging.onMessage((payload) => {
-//     // FIX THIS
-//     console.log('Message received. ', payload);
-//     // ...
-// });
 
