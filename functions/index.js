@@ -33,12 +33,10 @@ exports.sendDailyNotifications = functions.https.onRequest((req, res) => {
                 // Send Notifications
                 if (allBirthdaysToday.length > 0) {
                     const message = {
-                        notification: {
+                        data: {
                             title: "Birthday Reminder",
                             body: `It's ${allBirthdaysToday[0].name}'s birthday today. Send him a message.`,
-                        },
-                        data: {
-                            url: `https://birthday-buddy.vercel.app/birthday/${allBirthdaysToday[0].id}`
+                            url: `https://birthday-buddy.vercel.app/birthday/${allBirthdaysToday[0].id}`,
                         },
                         token: user.fcm_token
                     };
@@ -50,7 +48,7 @@ exports.sendDailyNotifications = functions.https.onRequest((req, res) => {
 
                     admin.messaging().send(message).then((response) => {
                         // Response is a message ID string.
-                        console.log('Successfully sent message:', response);
+                        console.log(`Successfully sent message: to: ${user.displayName}`, response);
                     })
                         .catch((error) => {
                             console.log('Error sending message:', error);

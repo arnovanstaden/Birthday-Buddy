@@ -26,15 +26,13 @@ const app = firebase.app();
 // Retrieve firebase messaging
 const messaging = firebase.messaging();
 
-messaging.onBackgroundMessage(function (payload) {
-    console.log("here")
-    console.log('Received background message ', payload);
+const showNotification = (payload) => {
     const notificationOptions = {
-        title: payload.notification.title,
-        icon: '/images/logos/logo195.png',
-        badge: '/images/logos/logo195.png',
+        title: payload.data.title,
+        icon: '/images/logos/logo192-transparent.png',
+        badge: '/images/logos/logo192-transparent.png',
         vibrate: [100, 50, 100],
-        body: payload.notification.body,
+        body: payload.data.body,
         data: {
             time: new Date(Date.now()).toString(),
             primaryKey: 1,
@@ -43,6 +41,12 @@ messaging.onBackgroundMessage(function (payload) {
     };
     // notification.action ? options[actions] === notification.action : null;
     self.registration.showNotification(notificationOptions.title, notificationOptions);
+}
+
+
+messaging.onBackgroundMessage(function (payload) {
+    console.log('Received background message ', payload);
+    showNotification(payload)
 });
 
 self.addEventListener('notificationclick', function (e) {
