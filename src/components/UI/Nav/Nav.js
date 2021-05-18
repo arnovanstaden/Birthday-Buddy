@@ -3,7 +3,6 @@ import { useRef, useContext } from "react";
 
 import { UserContext } from "../../../context/UserContext";
 
-
 // MUI
 import Container from "@material-ui/core/Container";
 
@@ -42,11 +41,6 @@ const Nav = ({ backButton }) => {
             <div className={styles.menu} ref={menuRef}>
                 <Container>
                     <ul>
-                        <li>
-                            <Link to="/">
-                                Account Settings
-                        </Link>
-                        </li>
                         <li onClick={signOut}>
                             Logout
                         </li>
