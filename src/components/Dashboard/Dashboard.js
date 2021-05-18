@@ -85,7 +85,7 @@ const Dashboard = () => {
                         placeholder="Search a Person’s Name"
                         onChange={handleSearch}
                     />
-                    <UpcomingBirthdaysList birthdays={searchResults.length > 0 ? searchResults : birthdays} />
+                    <UpcomingBirthdaysList toggleAdd={toggleAddBirthday} birthdays={searchResults.length > 0 ? searchResults : birthdays} />
                 </section>
 
                 <div className={styles.add}>

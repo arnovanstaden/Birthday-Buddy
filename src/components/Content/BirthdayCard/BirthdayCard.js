@@ -32,6 +32,9 @@ const BirthdayCard = ({ birthday, today }) => {
 
     const handleSetReminder = () => {
         history.block()
+        if (Notification.permission !== "granted") {
+            return alert("You need to enable notifications for this app first.")
+        }
         setShowReminderModal(true)
     }
 
