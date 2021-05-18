@@ -24,6 +24,7 @@ export const scheduleReminder = async (hours, birthday) => {
     const reminderTime = addHours(new Date(), hours);
 
     const data = {
+        uid: uid,
         time: reminderTime,
         birthday
     }
