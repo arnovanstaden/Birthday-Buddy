@@ -4,7 +4,7 @@ import "firebase/storage";
 import "firebase/firestore";
 import "firebase/analytics";
 import "firebase/messaging";
-import { storeFCMRegToken } from "../utils/notifications"
+import { storeFCMRegToken } from "../utils/reminders"
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
