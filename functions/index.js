@@ -107,6 +107,13 @@ exports.sendReminderNotifications = functions.https.onRequest((req, res) => {
                             });
 
                         // Delete Reminder
+                        usersRef.doc(user.id).collection('reminders').doc(reminder.id).delete()
+                            .then(() => {
+                                console.log("Reminder Deleted - ", reminder.id)
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            })
                     }
 
                 });
