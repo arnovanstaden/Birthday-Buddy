@@ -27,6 +27,7 @@ const AddBirthday = ({ open, toggle, addBirthdayUI, editBirthdayState, birthday 
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const formRef = useRef();
     const profilePictureRef = useRef();
+    const profilePictureInputRef = useRef();
 
     // Handlers
     const handleAddBirthday = async (e) => {
@@ -41,7 +42,7 @@ const AddBirthday = ({ open, toggle, addBirthdayUI, editBirthdayState, birthday 
         const data = {}
         const formData = new FormData(formRef.current);
         formData.forEach((value, key) => data[key] = value);
-        const profilePicture = profilePictureRef.current.files[0];
+        const profilePicture = profilePictureInputRef.current.files[0];
         if (profilePicture) {
             const resizedPicture = await resizeProfilePicture(profilePicture);
             data.profilePicture = resizedPicture
@@ -81,7 +82,7 @@ const AddBirthday = ({ open, toggle, addBirthdayUI, editBirthdayState, birthday 
         }
         const formData = new FormData(formRef.current);
         formData.forEach((value, key) => data[key] = value);
-        const profilePicture = profilePictureRef.current.files[0];
+        const profilePicture = profilePictureInputRef.current.files[0];
 
         if (profilePicture) {
             const resizedPicture = await resizeProfilePicture(profilePicture);
@@ -110,11 +111,14 @@ const AddBirthday = ({ open, toggle, addBirthdayUI, editBirthdayState, birthday 
     }
 
     const handlePictureUpload = () => {
-        profilePictureRef.current.click()
+        profilePictureInputRef.current.click()
     }
 
     const handleImageSelect = () => {
-        console.log("changed")
+        const image = URL.createObjectURL(profilePictureInputRef.current.files[0]);
+        if (image) {
+            profilePictureRef.current.src = image
+        }
     }
 
     return (
@@ -127,8 +131,8 @@ const AddBirthday = ({ open, toggle, addBirthdayUI, editBirthdayState, birthday 
                             <div className={styles.top}>
                                 <h1>{!birthday ? "Add a" : "Edit"} Birthday</h1>
                                 <div className={styles.image}>
-                                    <img src={birthday && birthday.profilePictureUrl ? birthday.profilePictureUrl : profile} alt="Profile" onClick={handlePictureUpload} />
-                                    <input ref={profilePictureRef} type="file" accept="image/x-png,image/jpeg,image/jpg" onChange={handleImageSelect} />
+                                    <img src={birthday && birthday.profilePictureUrl ? birthday.profilePictureUrl : profile} alt="Profile" onClick={handlePictureUpload} ref={profilePictureRef} />
+                                    <input ref={profilePictureInputRef} type="file" accept="image/x-png,image/jpeg,image/jpg" onChange={handleImageSelect} />
                                 </div>
                             </div>
                             <form ref={formRef}>
