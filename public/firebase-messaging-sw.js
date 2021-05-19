@@ -24,9 +24,34 @@ if (!firebase.apps.length) {
 const app = firebase.app();
 
 // Retrieve firebase messaging
-const messaging = firebase.messaging();
+if ('serviceWorker' in navigator) {
+    const messaging = firebase.messaging();
 
-const showNotification = (payload) => {
+    navigator.serviceWorker.register('../firebase-messaging-sw.js')
+        .then(function (registration) {
+            console.log('Registration successful, scope is:', registration.scope);
+        }).catch(function (err) {
+            console.log('Service worker registration failed, error:', err);
+        });
+
+    messaging.onBackgroundMessage(function (payload) {
+        console.log('Received background message ', payload);
+        showNotification(payload)
+    });
+
+    self.addEventListener('notificationclick', function (e) {
+        console.log("here")
+        const notification = e.notification;
+        const primaryKey = notification.data.primaryKey;
+        if (primaryKey === 1) {
+            clients.openWindow(notification.data.url);
+        }
+        notification.close();
+    });
+
+}
+
+function showNotification(payload) {
     const notificationOptions = {
         title: payload.data.title,
         icon: '/images/logos/logo192-transparent.png',
@@ -44,17 +69,3 @@ const showNotification = (payload) => {
 }
 
 
-messaging.onBackgroundMessage(function (payload) {
-    console.log('Received background message ', payload);
-    showNotification(payload)
-});
-
-self.addEventListener('notificationclick', function (e) {
-    console.log("here")
-    const notification = e.notification;
-    const primaryKey = notification.data.primaryKey;
-    if (primaryKey === 1) {
-        clients.openWindow(notification.data.url);
-    }
-    notification.close();
-});
