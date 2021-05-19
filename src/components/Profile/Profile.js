@@ -99,7 +99,7 @@ const Profile = () => {
             .then(result => {
                 setBirthday(result);
                 hideLoader();
-                history.goBack();
+                history.replace("/");
             })
     }
 
