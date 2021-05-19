@@ -6,7 +6,7 @@ exports.sendDailyNotifications = functions.https.onRequest((req, res) => {
     const usersRef = admin.firestore().collection('users');
 
     // Get users with reminders === true
-    usersRef.where('reminders', '==', true).get().then((usersSnapshot) => {
+    usersRef.get().then((usersSnapshot) => {
         const users = usersSnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
@@ -69,7 +69,7 @@ exports.sendReminderNotifications = functions.https.onRequest((req, res) => {
     const usersRef = admin.firestore().collection('users');
 
     // Get users with reminders === true
-    usersRef.where('reminders', '==', true).get().then((usersSnapshot) => {
+    usersRef.get().then((usersSnapshot) => {
         const users = usersSnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
