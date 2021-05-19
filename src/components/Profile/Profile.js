@@ -3,6 +3,8 @@ import { useEffect, useState, useContext } from "react";
 import { getFamousBirthdays, getTodayInHistory } from "../../utils/profile"
 import { getBirthday, deleteBirthday } from "../../utils/birthdays"
 import { isBirthdayToday, sendMessage } from "../../utils/general"
+import { scheduleReminder } from "../../utils/reminders";
+import { useSnackbar } from 'notistack';
 
 // Context
 import { LoaderContext } from "../../context/LoaderContext";
@@ -34,6 +36,7 @@ const Profile = () => {
     const { id } = useParams();
     const history = useHistory()
     const { showLoader, hideLoader } = useContext(LoaderContext);
+    const { enqueueSnackbar } = useSnackbar();
 
     // State
     const [birthday, setBirthday] = useState()
@@ -42,6 +45,7 @@ const Profile = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [showEditBirthday, setShowEditBirthday] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showReminderModal, setShowReminderModal] = useState(false)
 
     // Hooks
     useEffect(() => {
@@ -103,6 +107,27 @@ const Profile = () => {
         setBirthday(newBirthday);
     }
 
+    const handleShowReminderModal = () => {
+        history.block()
+        if (Notification.permission !== "granted") {
+            return alert("You need to enable notifications for this app first.")
+        }
+        setShowReminderModal(true)
+    }
+
+    const handleSetReminder = (hours) => {
+        setShowReminderModal(false)
+        showLoader("Setting Reminder")
+        scheduleReminder(hours, birthday).then(result => {
+            hideLoader()
+            enqueueSnackbar(result.message, {
+                variant: 'success',
+            });
+            console.log(result);
+        })
+    }
+
+
     if (birthday) {
         const birthDate = new Date(birthday.date);
 
@@ -145,7 +170,7 @@ const Profile = () => {
                                         <i className="icon-paper-plane"></i>
                                         Send Message
                                     </Button>
-                                    <Button hollow className={styles.button}>
+                                    <Button onClick={handleShowReminderModal} hollow className={styles.button}>
                                         <i className="icon-notifications"></i>
                                         Remind Me
                                     </Button>
@@ -206,6 +231,25 @@ const Profile = () => {
                         Delete
                         </Button>
                     <Button onClick={() => setShowDeleteModal(false)} hollow>
+                        Cancel
+                    </Button>
+                </Modal>
+
+                <Modal status={showReminderModal}
+                    content={{
+                        heading: "Set Reminder",
+                        text: "Please choose an option when you would like to be reminded:"
+                    }}>
+                    <Button onClick={() => handleSetReminder(1)}>
+                        1 Hour From Now
+                    </Button>
+                    <Button onClick={() => handleSetReminder(3)}>
+                        3 Hours From Now
+                    </Button>
+                    <Button onClick={() => handleSetReminder(6)}>
+                        6 Hours From Now
+                    </Button>
+                    <Button onClick={() => setShowReminderModal(false)} hollow>
                         Cancel
                     </Button>
                 </Modal>
