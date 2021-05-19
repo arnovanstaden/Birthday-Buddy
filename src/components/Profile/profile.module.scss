@@ -6,6 +6,10 @@
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, auto);
 
+    >div:last-child {
+        background-color: $white;
+    }
+
     .nav {
         display: flex;
         justify-content: space-between;
