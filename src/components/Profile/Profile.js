@@ -4,6 +4,7 @@ import { getFamousBirthdays, getTodayInHistory } from "../../utils/profile"
 import { getBirthday, deleteBirthday } from "../../utils/birthdays"
 import { isBirthdayToday, sendMessage } from "../../utils/general"
 import { scheduleReminder } from "../../utils/reminders";
+import { shareBirt } from "../../utils/reminders";
 import { useSnackbar } from 'notistack';
 
 // Context
@@ -92,8 +93,8 @@ const Profile = () => {
     }
 
     const handleDelete = () => {
-        setShowDeleteModal(false)
         handleNavClose();
+        setShowDeleteModal(false)
         showLoader("Deleting Birthday");
         deleteBirthday(id)
             .then(result => {
@@ -147,6 +148,7 @@ const Profile = () => {
                             open={Boolean(anchorEl)}
                             onClose={handleNavClose}
                         >
+                            {/* <MenuItem onClick={}>Share Birthday</MenuItem> */}
                             <MenuItem onClick={toggleEditBirthday}>Edit Birthday</MenuItem>
                             <MenuItem onClick={() => setShowDeleteModal(true)}>Delete Birthday</MenuItem>
                         </Menu>

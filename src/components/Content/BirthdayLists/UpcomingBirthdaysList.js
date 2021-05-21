@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { isBirthdayToday, sortBirthdays } from "../../../utils/general"
+import { isBirthdayToday, sortBirthdays } from "../../../utils/general";
 
 // Components
 import BirthdayCard from "../BirthdayCard/BirthdayCard";
@@ -14,12 +14,13 @@ import styles from "./list.module.scss";
 import Logo from "../../../assets/images/logos/logo.svg";
 
 const UpcomingBirthdaysList = ({ birthdays, toggleAdd }) => {
+
     let upcomingBirthdays = birthdays && birthdays.filter(birthday => !isBirthdayToday(new Date(birthday.date)));
     upcomingBirthdays = upcomingBirthdays && sortBirthdays(upcomingBirthdays);
 
     if (birthdays) {
         return (
-            <Grid container spacing={3} className={styles.grid}>
+            <Grid container spacing={3} className={styles.grid} >
                 {upcomingBirthdays && upcomingBirthdays.length > 0 ?
                     upcomingBirthdays.map(birthday => (
                         <Grid item xs={12} sm={6} lg={4} key={uuid()}>

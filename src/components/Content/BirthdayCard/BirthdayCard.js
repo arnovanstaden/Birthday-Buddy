@@ -1,5 +1,5 @@
 import ClassNames from "classnames";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { getBirthdayDaysAway, getCardFormatAge, getCardFormatBirthday, sendMessage } from "../../../utils/general"
 import { scheduleReminder } from "../../../utils/reminders";
@@ -23,6 +23,7 @@ const BirthdayCard = ({ birthday, today }) => {
     const history = useHistory();
     const { enqueueSnackbar } = useSnackbar();
     const { showLoader, hideLoader } = useContext(LoaderContext);
+    const cardRef = useRef()
 
     // State
     const [showReminderModal, setShowReminderModal] = useState(false)
@@ -58,7 +59,7 @@ const BirthdayCard = ({ birthday, today }) => {
     }
 
     return (
-        <Link to={`/birthday/${birthday.id}`}>
+        <Link to={`/birthday/${birthday.id}`} ref={cardRef}>
             <Card className={classes}>
                 {!today
                     ? <>
