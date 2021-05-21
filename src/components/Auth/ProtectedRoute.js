@@ -2,7 +2,6 @@ import { Route } from "react-router-dom";
 import withAuth from "../HOC/withAuth"
 
 const ProtectedRoute = (props) => {
-    console.log(props)
     return (
         <Route {...props}>
             {props.children}

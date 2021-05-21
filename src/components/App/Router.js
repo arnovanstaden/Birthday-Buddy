@@ -15,17 +15,16 @@ const Router = ({ children }) => {
         <BrowserRouter>
             <Switch>
                 <ProtectedRoute exact path="/">
-                    {/* <Nav /> */}
                     <Dashboard />
-                </ProtectedRoute>
-                <ProtectedRoute path="/birthday/:id">
-                    <Profile />
                 </ProtectedRoute>
                 <ProtectedRoute path="/notifications">
                     <Notifications />
                 </ProtectedRoute>
                 <ProtectedRoute path="/settings">
                     <Settings />
+                </ProtectedRoute>
+                <ProtectedRoute path="/birthday/:id">
+                    <Profile />
                 </ProtectedRoute>
 
                 {/* Auth */}

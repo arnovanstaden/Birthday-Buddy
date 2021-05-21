@@ -1,11 +1,34 @@
-import React from 'react'
+import { useContext, useState, useEffect } from "react";
+
+// Context
+import { LoaderContext } from "../../context/LoaderContext";
+
+// Components
+import Page from "../UI/Page/Page";
+import Button from "../UI/Library/Button/Button";
+import Nav from "../UI/Nav/Nav";
+
+// MUI
+import Container from "@material-ui/core/Container";
+
+// Styles
+import styles from "./notifications.module.scss";
+
 
 const Notifications = () => {
     return (
-        <div>
-            <h1>Notifications</h1>
-        </div>
+
+        <Page
+            className={styles.dashboard}
+            fullWidth
+        >
+            <Nav />
+            <Container>
+                <h1>Notifications</h1>
+            </Container>
+        </Page>
     )
 }
+
 
 export default Notifications
