@@ -6,9 +6,13 @@ const usersRef = db.collection('users');
 
 export const createDbUser = async (newUser) => {
     const uid = await auth.currentUser.uid;
-    const saveResult = await usersRef.doc(uid).set({
-        displayName: newUser.displayName
-    })
+    delete newUser.uid;
+    const saveResult = await usersRef.doc(uid).set(
+        {
+            ...newUser,
+            reminders: true
+        }
+    )
         .then((result) => {
             return result
         })
