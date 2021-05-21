@@ -5,7 +5,6 @@ import { getAllBirthdays } from "../../utils/birthdays";
 import { LoaderContext } from "../../context/LoaderContext";
 
 // Components
-import withAuth from "../HOC/withAuth";
 import Page from "../UI/Page/Page";
 import Input from "../UI/Library/Input/Input";
 import Button from "../UI/Library/Button/Button";
@@ -100,4 +99,4 @@ const Dashboard = () => {
     )
 }
 
-export default withAuth(Dashboard);
+export default Dashboard;

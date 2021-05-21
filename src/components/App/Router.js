@@ -1,23 +1,32 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // Components
+import ProtectedRoute from "../Auth/ProtectedRoute"
 import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
 import ResetPassword from "../Auth/ResetPassword";
 import Dashboard from "../Dashboard/Dashboard";
 import Profile from "../Profile/Profile";
+import Notifications from "../Notifications/Notifications";
+import Settings from "../Settings/Settings";
 
 const Router = ({ children }) => {
     return (
         <BrowserRouter>
             <Switch>
-                <Route exact path="/">
+                <ProtectedRoute exact path="/">
                     {/* <Nav /> */}
                     <Dashboard />
-                </Route>
-                <Route path="/birthday/:id">
+                </ProtectedRoute>
+                <ProtectedRoute path="/birthday/:id">
                     <Profile />
-                </Route>
+                </ProtectedRoute>
+                <ProtectedRoute path="/notifications">
+                    <Notifications />
+                </ProtectedRoute>
+                <ProtectedRoute path="/settings">
+                    <Settings />
+                </ProtectedRoute>
 
                 {/* Auth */}
                 <Route path="/signin">
