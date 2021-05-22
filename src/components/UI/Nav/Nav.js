@@ -48,7 +48,7 @@ const Nav = ({ backButton }) => {
                             {getUsername()}
                         </li>
                         <li>
-                            <Link to="/shared">
+                            <Link to="/share">
                                 Shared Birthdays
                             </Link>
                         </li>
