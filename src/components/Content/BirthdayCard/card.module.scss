@@ -142,4 +142,10 @@
             }
         }
     }
+
+    &.shared {
+        .checkbox {
+            color: $green;
+        }
+    }
 }

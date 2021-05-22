@@ -134,6 +134,34 @@ exports.sendReminderNotifications = functions.https.onRequest((req, res) => {
     } else {
         return res.status(403).send()
     }
-})
+});
 
+exports.sendShareNotification = functions.firestore
+    .document('users/{userId}/shared/{sharedId}')
+    .onWrite((change, context) => {
+        console.log();
+
+        const usersRef = admin.firestore().collection('users').doc(context.params.userId);
+        usersRef.get().then((usersSnapshot) => {
+            const user = usersSnapshot.docs[0];
+
+            const message = {
+                data: {
+                    title: "Birthday Shares",
+                    body: `Another Birthday Buddy user shared birthdays with you! Import them to your birthdays.`,
+                    url: `https://birthday-buddy.vercel.app/share`,
+                },
+                token: user.fcm_token
+            };
+
+            admin.messaging().send(message)
+                .then((response) => {
+                    // Response is a message ID string.
+                    console.log(`Successfully Sent Share Notification to: ${user.displayName} -`, response);
+                })
+                .catch((error) => {
+                    console.log('Error sending message:', error);
+                });
+        })
+    });
 

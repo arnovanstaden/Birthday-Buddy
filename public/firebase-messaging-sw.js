@@ -1,7 +1,7 @@
 importScripts('https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.6.1/firebase-messaging.js');
 
-if ("Notification" in window) {
+if (typeof window !== "undefined" && "Notification" in window) {
 
     const firebaseConfig = {
         apiKey: "AIzaSyAPPJmu61h-lIecZyQVqDe6oHdp7Cg2KhM",

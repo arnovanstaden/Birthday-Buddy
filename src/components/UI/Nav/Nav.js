@@ -12,7 +12,7 @@ import Logo from "../../../assets/images/logos/logo.svg"
 
 const Nav = ({ backButton }) => {
     // Config
-    const { signOut } = useContext(UserContext);
+    const { signOut, getUsername } = useContext(UserContext);
     const menuRef = useRef();
 
     // Handlers
@@ -31,7 +31,10 @@ const Nav = ({ backButton }) => {
                                     <i className="icon-carrot-left"></i>
                                 </button>
                             </Link>
-                            : <img src={Logo} alt="Birthday Buddy Logo" />}
+                            :
+                            <Link to="/">
+                                <img src={Logo} alt="Birthday Buddy Logo" />
+                            </Link>}
                     </div>
                     <div className={styles.right}>
                         <i className="icon-lines" onClick={toggleMenu}></i>
@@ -41,6 +44,14 @@ const Nav = ({ backButton }) => {
             <div className={styles.menu} ref={menuRef}>
                 <Container>
                     <ul>
+                        <li className={styles.username}>
+                            {getUsername()}
+                        </li>
+                        <li>
+                            <Link to="/shared">
+                                Shared Birthdays
+                            </Link>
+                        </li>
                         <li onClick={signOut}>
                             Logout
                         </li>

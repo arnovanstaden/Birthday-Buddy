@@ -10,7 +10,8 @@ export const createDbUser = async (newUser) => {
     const saveResult = await usersRef.doc(uid).set(
         {
             ...newUser,
-            reminders: true
+            reminders: true,
+            displayName_LC: newUser.displayName
         }
     )
         .then((result) => {
@@ -21,4 +22,14 @@ export const createDbUser = async (newUser) => {
             throw err.response.data;
         })
     return saveResult
+}
+
+export const verifyUserExists = async (username) => {
+    const result = await db.collectionGroup('users').where('displayName_LC', '==', username).get().then((querySnapshot) => {
+        return querySnapshot.docs
+    }).catch(err => console.log(err))
+    if (result.length > 0) {
+        return result[0].id
+    }
+    throw Error("No user with this username found")
 }

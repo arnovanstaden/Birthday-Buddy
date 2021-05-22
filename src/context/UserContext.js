@@ -11,6 +11,10 @@ export const UserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const getUsername = () => {
+        return currentUser.displayName
+    }
+
     const signUp = async (authData) => {
         const newUser = await auth.createUserWithEmailAndPassword(authData.email, authData.password)
             .then((result) => {
@@ -81,7 +85,8 @@ export const UserProvider = ({ children }) => {
         signUp,
         signIn,
         signOut,
-        resetPassword
+        resetPassword,
+        getUsername
     }
 
     return (

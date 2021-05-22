@@ -43,7 +43,7 @@ export const storage = firebase.storage();
 export const analytics = firebase.analytics();
 
 // Messaging
-if ("Notification" in window) {
+if (typeof window !== "undefined" && "Notification" in window) {
     const messaging = firebase.messaging();
 
     messaging.getToken({ vapidKey: process.env.REACT_APP_FIREBASE_WPC_KEY_PAIR }).then((currentToken) => {

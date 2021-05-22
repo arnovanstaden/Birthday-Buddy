@@ -77,6 +77,12 @@ export const sortBirthdays = (birthdays) => {
     return sorted
 }
 
+export const sortShareBirthdays = (birthdays) => {
+    const sorted = birthdays.sort((a, b) => (new Date(a.shareDate)) - (new Date(b.shareDate)));
+    return sorted
+}
+
+
 export const sendMessage = (name) => {
     if (navigator.share) {
         navigator.share({
