@@ -1,5 +1,8 @@
 import { useContext, useState, useEffect } from "react";
-import { getAllSharedBirthdays, deleteSharedBirthdays } from "../../utils/sharing";
+import { getAllSharedBirthdays, deleteSharedBirthdays, importSharedBirthdays } from "../../utils/sharing";
+import { useSnackbar } from 'notistack';
+
+
 // Context
 import { LoaderContext } from "../../context/LoaderContext";
 import { SelectedProvider, SelectedContext } from "../../context/SelectedContext";
@@ -21,6 +24,7 @@ const SharedBirthdaysInner = () => {
     // Config
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const { getSelected } = useContext(SelectedContext);
+    const { enqueueSnackbar } = useSnackbar();
 
     // State
     const [sharedBirthdays, setSharedBirthdays] = useState(undefined);
@@ -46,6 +50,23 @@ const SharedBirthdaysInner = () => {
         if (getSelected().length < 1) {
             return alert("Please select at least 1 birthday to import first.")
         }
+        showLoader("Importing Birthdays...")
+        // Remove from firebase
+        importSharedBirthdays(getSelected()).then((result) => {
+            // Remove from UI
+            setSharedBirthdays(prev => prev.filter(item => !getSelected().includes(item)))
+            hideLoader();
+            enqueueSnackbar(result.message, {
+                variant: 'success',
+            });
+        }).catch(err => {
+            console.log(err)
+            hideLoader();
+            return enqueueSnackbar(err.message, {
+                variant: 'error',
+            });
+        })
+
     }
 
     const handleShowDeleteModal = () => {
@@ -60,10 +81,17 @@ const SharedBirthdaysInner = () => {
         showLoader("Deleting Birthdays...")
         // Remove from firebase
         deleteSharedBirthdays(getSelected()).then((result) => {
-            console.log(result);
             // Remove from UI
             setSharedBirthdays(prev => prev.filter(item => !getSelected().includes(item)))
-            hideLoader()
+            hideLoader();
+            enqueueSnackbar(result.message, {
+                variant: 'success',
+            });
+        }).catch(err => {
+            hideLoader();
+            return enqueueSnackbar(err.message, {
+                variant: 'error',
+            });
         })
     }
 
