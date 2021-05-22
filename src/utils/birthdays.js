@@ -72,16 +72,18 @@ export const getBirthday = async (birthday_id) => {
 // UPDATE
 export const editBirthday = async (data) => {
     const uid = await auth.currentUser.uid;
+    const doc_id = data.id;
+    delete data.id
     const profilePicture = data.profilePicture
     delete data.profilePicture;
 
-    await birthdaysCollectionRef(uid).doc(data.id).update(data);
+    await birthdaysCollectionRef(uid).doc(doc_id).update(data);
 
 
     // Upload Profile Picture
     if (profilePicture) {
-        const profilePictureUrl = await uploadProfilePicture(data.id, profilePicture)
-        await birthdaysCollectionRef(uid).doc(data.id).update({
+        const profilePictureUrl = await uploadProfilePicture(doc_id, profilePicture)
+        await birthdaysCollectionRef(uid).doc(doc_id).update({
             profilePictureUrl: profilePictureUrl
         })
         data.profilePictureUrl = profilePictureUrl;
