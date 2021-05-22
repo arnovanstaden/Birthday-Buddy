@@ -177,7 +177,7 @@ const SharedBirthdaysInner = () => {
                     </div>
                     {tabOption === "Import"
                         ? <SharedBirthdaysList birthdays={sharedBirthdays} />
-                        : <SharedBirthdaysList birthdays={allBirthdays} />
+                        : <SharedBirthdaysList birthdays={allBirthdays} share />
                     }
                 </section>
 
