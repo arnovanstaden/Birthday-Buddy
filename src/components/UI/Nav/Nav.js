@@ -41,16 +41,6 @@ const Nav = ({ backButton }) => {
             <div className={styles.menu} ref={menuRef}>
                 <Container>
                     <ul>
-                        <li>
-                            <Link to="/notifications">
-                                Notifications
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/settings">
-                                Settings
-                            </Link>
-                        </li>
                         <li onClick={signOut}>
                             Logout
                         </li>
