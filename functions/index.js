@@ -15,7 +15,7 @@ exports.sendDailyNotifications = functions.https.onRequest((req, res) => {
 
             // Get Birthdays Today
             users.forEach((user, index) => {
-                admin.firestore().collectionGroup('birthdays').where('uid', '==', user.id).get().then((birthdaysSnapshot) => {
+                usersRef.doc(user.id).collection('birthdays').get().then((birthdaysSnapshot) => {
                     const birthdays = birthdaysSnapshot.docs.map((doc) => ({
                         id: doc.id,
                         ...doc.data(),
@@ -84,7 +84,7 @@ exports.sendReminderNotifications = functions.https.onRequest((req, res) => {
 
             // Get Birthdays Today
             users.forEach((user, index) => {
-                admin.firestore().collectionGroup('reminders').where('uid', '==', user.id).get().then((remindersSnapshot) => {
+                usersRef.doc(user.id).collection('reminders').get().then((remindersSnapshot) => {
                     const reminders = remindersSnapshot.docs.map((doc) => ({
                         id: doc.id,
                         ...doc.data(),

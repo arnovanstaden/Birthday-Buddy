@@ -43,7 +43,7 @@ export const addBirthday = async (data) => {
 
 export const getAllBirthdays = async () => {
     const uid = await auth.currentUser.uid;
-    const querySnapshot = await db.collectionGroup('birthdays').where('uid', '==', uid).get();
+    const querySnapshot = await birthdaysCollectionRef(uid).get()
     const result = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
