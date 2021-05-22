@@ -82,6 +82,14 @@ export const sortShareBirthdays = (birthdays) => {
     return sorted
 }
 
+export const sortBirthdaysName = (birthdays) => {
+    const sorted = birthdays.sort((a, b) => {
+        if (a.name < b.name) { return -1; }
+        if (a.name > b.name) { return 1; }
+        return 0;
+    });
+    return sorted
+}
 
 export const sendMessage = (name) => {
     if (navigator.share) {

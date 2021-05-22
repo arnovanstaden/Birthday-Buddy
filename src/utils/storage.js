@@ -16,7 +16,8 @@ export const uploadProfilePicture = async (id, file) => {
 }
 
 export const deleteProfilePicture = async (id) => {
-    const storageRef = storage.ref(`images/profiles/${id}.jpeg`);
+    const uid = await auth.currentUser.uid;
+    const storageRef = storage.ref(`images/profiles/${uid}/${id}.jpeg`);
     await storageRef.delete().then(() => {
         console.log("deleted")
     }).catch((error) => {

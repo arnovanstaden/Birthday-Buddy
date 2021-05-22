@@ -84,7 +84,7 @@ const Dashboard = () => {
                     <h2>Upcoming Birthdays</h2>
                     <Input
                         type="text"
-                        placeholder="Search a Person’s Name"
+                        placeholder="Search a Friends's Name"
                         onChange={handleSearch}
                     />
                     <UpcomingBirthdaysList toggleAdd={toggleAddBirthday} birthdays={searchResults.length > 0 ? searchResults : birthdays} />
