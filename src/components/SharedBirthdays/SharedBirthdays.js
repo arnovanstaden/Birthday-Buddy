@@ -1,6 +1,8 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
+import { getAllBirthdays } from "../../utils/birthdays";
 import { getAllSharedBirthdays, deleteSharedBirthdays, importSharedBirthdays } from "../../utils/sharing";
 import { useSnackbar } from 'notistack';
+import { verifyUserExists } from "../../utils/user";
 
 
 // Context
@@ -13,6 +15,7 @@ import Button from "../UI/Library/Button/Button";
 import Nav from "../UI/Nav/Nav";
 import SharedBirthdaysList from "../Content/BirthdayLists/SharedBirthdaysList";
 import Modal from '../UI/Modal/Modal';
+import Input from "../UI/Library/Input/Input";
 
 // MUI
 import Container from "@material-ui/core/Container";
@@ -25,10 +28,14 @@ const SharedBirthdaysInner = () => {
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const { getSelected } = useContext(SelectedContext);
     const { enqueueSnackbar } = useSnackbar();
+    const emailRef = useRef();
 
     // State
     const [sharedBirthdays, setSharedBirthdays] = useState(undefined);
+    const [allBirthdays, setAllBirthdays] = useState(undefined);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showShareModal, setShowShareModal] = useState(false);
+    const [tabOption, setTabOption] = useState("Import");
 
     // Hooks
     useEffect(() => {
@@ -39,12 +46,25 @@ const SharedBirthdaysInner = () => {
                     setSharedBirthdays(result);
                     hideLoader()
                 })
+            getAllBirthdays()
+                .then(result => {
+                    setAllBirthdays(result);
+                    hideLoader()
+                })
         } else {
             hideLoader()
         }
     }, [sharedBirthdays]);
 
     // Handlers 
+    const handleTabChange = (e, tab) => {
+        const tabs = Array.from(document.getElementsByClassName(styles.tab));
+        tabs.forEach(tab => {
+            tab.classList.remove(styles.active)
+        })
+        e.target.classList.add(styles.active);
+        setTabOption(tab)
+    }
 
     const handleImport = () => {
         if (getSelected().length < 1) {
@@ -76,6 +96,8 @@ const SharedBirthdaysInner = () => {
         return setShowDeleteModal(true)
     }
 
+
+
     const handleDelete = () => {
         setShowDeleteModal(false)
         showLoader("Deleting Birthdays...")
@@ -95,6 +117,30 @@ const SharedBirthdaysInner = () => {
         })
     }
 
+    const handleShowShareModal = () => {
+        if (getSelected().length < 1) {
+            return alert("Please select at least 1 birthday to share first.")
+        }
+        return setShowShareModal(true)
+    }
+
+
+
+    const handleShare = () => {
+        const shareEmail = emailRef.current.value.toLowerCase().trim();
+        showLoader("Sharing Birthdays...")
+
+        verifyUserExists(shareEmail).then(result => {
+            setShowShareModal(false)
+
+        }).catch(err => {
+            hideLoader()
+            return enqueueSnackbar(err.message, {
+                variant: 'error',
+            });
+        });
+    }
+
     return (
         <Page
             className={styles.shared}
@@ -104,17 +150,35 @@ const SharedBirthdaysInner = () => {
             <Container>
 
                 <section>
-                    <h2>Birthdays Shared With You</h2>
-                    <SharedBirthdaysList birthdays={sharedBirthdays} />
+                    <h2>Share Birthdays</h2>
+                    <div className={styles.tabs}>
+                        <button className={`${styles.tab} ${styles.active}`} onClick={(e) => handleTabChange(e, "Import")}>
+                            Shared with You
+                        </button>
+                        <button className={styles.tab} onClick={(e) => handleTabChange(e, "Share")}>
+                            Share with Others
+                        </button>
+                    </div>
+                    {tabOption === "Import"
+                        ? <SharedBirthdaysList birthdays={sharedBirthdays} />
+                        : <SharedBirthdaysList birthdays={allBirthdays} />
+                    }
                 </section>
 
                 <div className={styles.options}>
-                    <Button onClick={handleImport}>
-                        Import
-                    </Button>
-                    <Button onClick={handleShowDeleteModal} hollow>
-                        Delete
-                    </Button>
+                    {tabOption === "Import"
+                        ? <>
+                            <Button onClick={handleImport}>
+                                Import
+                            </Button>
+                            <Button onClick={handleShowDeleteModal} hollow>
+                                Delete
+                            </Button>
+                        </>
+                        : <Button onClick={handleShowShareModal}>
+                            Share
+                        </Button>
+                    }
                 </div>
             </Container>
 
@@ -129,6 +193,21 @@ const SharedBirthdaysInner = () => {
                 <Button onClick={() => setShowDeleteModal(false)} hollow>
                     Cancel
                     </Button>
+            </Modal>
+
+            <Modal status={showShareModal}
+                content={{
+                    heading: "Enter Username",
+                    text: "Please enter the Username of the user you wish to share birthdays with."
+                }}>
+                <Input
+                    type="text"
+                    autoFocus
+                    inputRef={emailRef}
+                />
+                <Button onClick={handleShare}>
+                    Share
+                </Button>
             </Modal>
 
         </Page >

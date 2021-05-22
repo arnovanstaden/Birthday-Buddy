@@ -22,3 +22,13 @@ export const createDbUser = async (newUser) => {
         })
     return saveResult
 }
+
+export const verifyUserExists = async (email) => {
+    const result = await db.collectionGroup('users').where('email', '==', email).get().then((querySnapshot) => {
+        return querySnapshot.docs
+    });
+    if (result.length > 0) {
+        return true
+    }
+    throw Error("No user with this email found")
+}

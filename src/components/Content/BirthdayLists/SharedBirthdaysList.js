@@ -13,7 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import styles from "./list.module.scss";
 import Logo from "../../../assets/images/logos/logo.svg";
 
-const sharedBirthdaysList = ({ birthdays }) => {
+const SharedBirthdaysList = ({ birthdays }) => {
 
     const sortedBirthdays = birthdays && sortShareBirthdays(birthdays)
     if (sortedBirthdays) {
@@ -39,4 +39,4 @@ const sharedBirthdaysList = ({ birthdays }) => {
     return null
 }
 
-export default sharedBirthdaysList
+export default SharedBirthdaysList

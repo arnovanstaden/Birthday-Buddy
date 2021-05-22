@@ -26,18 +26,16 @@ export const importSharedBirthdays = async (birthdays) => {
         birthday.notes = "";
         birthday.uid = uid;
         birthday.shared = true;
+        const delete_id = birthday.id
         delete birthday.shareDate;
         delete birthday.id;
 
-        let birthdayRef = birthdaysCollectionsRef(uid).doc();
-        batch.set(birthdayRef, birthday);
-    })
+        let addBirthdayRef = birthdaysCollectionsRef(uid).doc();
+        batch.set(addBirthdayRef, birthday);
 
-    // FIX THIS - DELETE SHARED BIRTHDAY
-    // birthdays.forEach(birthday => {
-    //     let birthdayRef = sharedCollectionsRef(uid).doc(birthday.id);
-    //     batch.delete(birthdayRef);
-    // })
+        let deleteBirthdayRef = sharedCollectionsRef(uid).doc(delete_id);
+        batch.delete(deleteBirthdayRef);
+    })
 
     const result = await batch.commit().then((result) => {
         return {

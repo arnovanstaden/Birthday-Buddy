@@ -26,7 +26,7 @@ const Dashboard = () => {
     // State
     const [showAddBirthday, setShowAddBirthday] = useState(false);
     const [birthdays, setBirthdays] = useState(undefined);
-    const [searchResults, setSearchResults] = useState([])
+    const [searchResults, setSearchResults] = useState([]);
 
     // Hooks
     useEffect(() => {
@@ -41,6 +41,8 @@ const Dashboard = () => {
             hideLoader()
         }
     }, [birthdays]);
+
+
 
 
     // Handlers
@@ -64,6 +66,7 @@ const Dashboard = () => {
     const addBirthdayUI = (birthday) => {
         setBirthdays(prev => [...prev, birthday])
     }
+
 
     return (
         <Page
