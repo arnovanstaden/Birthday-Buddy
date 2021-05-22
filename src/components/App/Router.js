@@ -7,8 +7,7 @@ import SignUp from "../Auth/SignUp";
 import ResetPassword from "../Auth/ResetPassword";
 import Dashboard from "../Dashboard/Dashboard";
 import Profile from "../Profile/Profile";
-import Notifications from "../Notifications/Notifications";
-import Settings from "../Settings/Settings";
+import SharedBirthdays from "../SharedBirthdays/SharedBirthdays";
 
 const Router = ({ children }) => {
     return (
@@ -17,11 +16,8 @@ const Router = ({ children }) => {
                 <ProtectedRoute exact path="/">
                     <Dashboard />
                 </ProtectedRoute>
-                <ProtectedRoute path="/notifications">
-                    <Notifications />
-                </ProtectedRoute>
-                <ProtectedRoute path="/settings">
-                    <Settings />
+                <ProtectedRoute path="/shared">
+                    <SharedBirthdays />
                 </ProtectedRoute>
                 <ProtectedRoute path="/birthday/:id">
                     <Profile />

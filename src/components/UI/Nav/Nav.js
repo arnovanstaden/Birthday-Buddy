@@ -42,6 +42,9 @@ const Nav = ({ backButton }) => {
                 <Container>
                     <ul>
                         <li onClick={signOut}>
+                            Shared Birthdays
+                        </li>
+                        <li onClick={signOut}>
                             Logout
                         </li>
                     </ul>

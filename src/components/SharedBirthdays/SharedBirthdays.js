@@ -12,23 +12,24 @@ import Nav from "../UI/Nav/Nav";
 import Container from "@material-ui/core/Container";
 
 // Styles
-import styles from "./notifications.module.scss";
+import styles from "./shared.module.scss";
 
+const SharedBirthdays = () => {
 
-const Notifications = () => {
+    // Config
+    const { showLoader, hideLoader } = useContext(LoaderContext);
+
     return (
-
         <Page
-            className={styles.dashboard}
+            className={styles.shared}
             fullWidth
         >
             <Nav />
             <Container>
-                <h1>Notifications</h1>
+
             </Container>
         </Page>
     )
 }
 
-
-export default Notifications
+export default SharedBirthdays
