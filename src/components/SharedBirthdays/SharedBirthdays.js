@@ -7,6 +7,7 @@ import { LoaderContext } from "../../context/LoaderContext";
 import Page from "../UI/Page/Page";
 import Button from "../UI/Library/Button/Button";
 import Nav from "../UI/Nav/Nav";
+import SharedBirthdaysList from "../Content/BirthdayLists/SharedBirthdaysList";
 
 // MUI
 import Container from "@material-ui/core/Container";
@@ -47,8 +48,18 @@ const SharedBirthdays = () => {
 
                 <section>
                     <h2>Birthdays Shared With You</h2>
-                    {/* <UpcomingBirthdaysList toggleAdd={toggleAddBirthday} birthdays={searchResults.length > 0 ? searchResults : birthdays} /> */}
+                    <p>Click &amp; Hold to Select Birthdays</p>
+                    <SharedBirthdaysList birthdays={sharedBirthdays} />
                 </section>
+
+                <div className={styles.options}>
+                    <Button>
+                        + Add to Your Birthdays
+                    </Button>
+                    <Button>
+                        Delete Birthday(s)
+                    </Button>
+                </div>
             </Container>
         </Page>
     )
