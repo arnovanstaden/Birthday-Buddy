@@ -68,7 +68,9 @@ const SharedBirthdaysInner = () => {
 
     const handleImport = () => {
         if (getSelected().length < 1) {
-            return alert("Please select at least 1 birthday to import first.")
+            return enqueueSnackbar("Please select at least 1 birthday to import first.", {
+                variant: 'error',
+            });
         }
         showLoader("Importing Birthdays...")
         // Remove from firebase
@@ -91,7 +93,9 @@ const SharedBirthdaysInner = () => {
 
     const handleShowDeleteModal = () => {
         if (getSelected().length < 1) {
-            return alert("Please select at least 1 birthday to delete first.")
+            return enqueueSnackbar("Please select at least 1 birthday to delete first.", {
+                variant: 'error',
+            });
         }
         return setShowDeleteModal(true)
     }
@@ -119,7 +123,9 @@ const SharedBirthdaysInner = () => {
 
     const handleShowShareModal = () => {
         if (getSelected().length < 1) {
-            return alert("Please select at least 1 birthday to share first.")
+            return enqueueSnackbar("Please select at least 1 birthday to share first.", {
+                variant: 'error',
+            });
         }
         return setShowShareModal(true)
     }

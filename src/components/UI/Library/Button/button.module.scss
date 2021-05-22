@@ -20,7 +20,7 @@
     }
 
     &.hollow {
-        background-color: transparent;
+        background-color: $light-grey;
         color: $grey;
         border: 2px solid $green;
     }

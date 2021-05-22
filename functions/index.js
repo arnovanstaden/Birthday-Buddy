@@ -139,10 +139,10 @@ exports.sendReminderNotifications = functions.https.onRequest((req, res) => {
 exports.sendShareNotification = functions.firestore
     .document('users/{userId}/shared/{sharedId}')
     .onWrite((change, context) => {
-        console.log();
 
         const usersRef = admin.firestore().collection('users').doc(context.params.userId);
         usersRef.get().then((usersSnapshot) => {
+            console.log(usersSnapshot);
             const user = usersSnapshot.docs[0];
 
             const message = {
@@ -162,6 +162,8 @@ exports.sendShareNotification = functions.firestore
                 .catch((error) => {
                     console.log('Error sending message:', error);
                 });
+        }).catch(err => {
+            console.log(err);
         })
     });
 
