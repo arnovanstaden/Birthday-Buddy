@@ -45,9 +45,6 @@ export const importSharedBirthdays = async (birthdays) => {
         console.log(err);
         throw new Error(`${birthdays.length > 1 ? "Birthdays Imported" : "Birthday Imported"}`)
     });
-
-
-
     return result
 }
 export const deleteSharedBirthdays = async (birthdays) => {
@@ -70,5 +67,32 @@ export const deleteSharedBirthdays = async (birthdays) => {
         throw err
     });
 
+    return result
+}
+
+export const shareBirthdays = async (shareUID, birthdays) => {
+    let batch = db.batch();
+
+    birthdays.forEach(birthday => {
+        // Initial Data
+        delete birthday.shareDate;
+        delete birthday.id;
+        delete birthday.uid;
+        delete birthday.notes;
+        birthday.sharedDate = new Date();
+
+        let addSharedRef = sharedCollectionsRef(shareUID).doc();
+        batch.set(addSharedRef, birthday);
+    });
+
+
+    const result = await batch.commit().then((result) => {
+        return {
+            message: birthdays.length > 1 ? "Birthdays Shared" : "Birthday Shared"
+        }
+    }).catch(err => {
+        console.log(err);
+        throw new Error(`${birthdays.length > 1 ? "Error Sharing Birthdays" : "Error Sharing Birthday"}`)
+    });
     return result
 }

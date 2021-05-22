@@ -12,7 +12,7 @@ import Logo from "../../../assets/images/logos/logo.svg"
 
 const Nav = ({ backButton }) => {
     // Config
-    const { signOut } = useContext(UserContext);
+    const { signOut, getUsername } = useContext(UserContext);
     const menuRef = useRef();
 
     // Handlers
@@ -44,6 +44,9 @@ const Nav = ({ backButton }) => {
             <div className={styles.menu} ref={menuRef}>
                 <Container>
                     <ul>
+                        <li className={styles.username}>
+                            {getUsername()}
+                        </li>
                         <li>
                             <Link to="/shared">
                                 Shared Birthdays

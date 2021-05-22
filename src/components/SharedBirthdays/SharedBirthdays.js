@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect, useRef } from "react";
 import { getAllBirthdays } from "../../utils/birthdays";
-import { getAllSharedBirthdays, deleteSharedBirthdays, importSharedBirthdays } from "../../utils/sharing";
+import { getAllSharedBirthdays, deleteSharedBirthdays, importSharedBirthdays, shareBirthdays } from "../../utils/sharing";
 import { useSnackbar } from 'notistack';
 import { verifyUserExists } from "../../utils/user";
 
@@ -28,7 +28,7 @@ const SharedBirthdaysInner = () => {
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const { getSelected } = useContext(SelectedContext);
     const { enqueueSnackbar } = useSnackbar();
-    const emailRef = useRef();
+    const usernameRef = useRef();
 
     // State
     const [sharedBirthdays, setSharedBirthdays] = useState(undefined);
@@ -127,12 +127,22 @@ const SharedBirthdaysInner = () => {
 
 
     const handleShare = () => {
-        const shareEmail = emailRef.current.value.toLowerCase().trim();
+        const shareUsername = usernameRef.current.value.toLowerCase().trim();
         showLoader("Sharing Birthdays...")
 
-        verifyUserExists(shareEmail).then(result => {
-            setShowShareModal(false)
-
+        verifyUserExists(shareUsername).then(result => {
+            setShowShareModal(false);
+            shareBirthdays(result, getSelected()).then((result) => {
+                hideLoader();
+                enqueueSnackbar(result.message, {
+                    variant: 'success',
+                });
+            }).catch(err => {
+                hideLoader();
+                return enqueueSnackbar(err.message, {
+                    variant: 'error',
+                });
+            })
         }).catch(err => {
             hideLoader()
             return enqueueSnackbar(err.message, {
@@ -203,7 +213,7 @@ const SharedBirthdaysInner = () => {
                 <Input
                     type="text"
                     autoFocus
-                    inputRef={emailRef}
+                    inputRef={usernameRef}
                 />
                 <Button onClick={handleShare}>
                     Share
