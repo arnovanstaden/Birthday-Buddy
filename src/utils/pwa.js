@@ -19,7 +19,7 @@ export const registerServiceWorker = () => {
 // Notifications - Setup
 
 export const requestNotificationPermission = () => {
-    if ("Notification" in window) {
+    if (typeof window !== "undefined" && "Notification" in window) {
         Notification.requestPermission()
     }
 }

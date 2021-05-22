@@ -1,3 +1,9 @@
 @import "../../styles/variables.scss";
 
-.shared {}
+.shared {
+
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+}

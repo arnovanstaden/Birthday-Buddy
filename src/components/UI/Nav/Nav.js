@@ -41,8 +41,10 @@ const Nav = ({ backButton }) => {
             <div className={styles.menu} ref={menuRef}>
                 <Container>
                     <ul>
-                        <li onClick={signOut}>
-                            Shared Birthdays
+                        <li>
+                            <Link to="/shared">
+                                Shared Birthdays
+                            </Link>
                         </li>
                         <li onClick={signOut}>
                             Logout
