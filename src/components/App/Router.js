@@ -16,7 +16,7 @@ const Router = ({ children }) => {
                 <ProtectedRoute exact path="/">
                     <Dashboard />
                 </ProtectedRoute>
-                <ProtectedRoute path="/shared">
+                <ProtectedRoute path="/share">
                     <SharedBirthdays />
                 </ProtectedRoute>
                 <ProtectedRoute path="/birthday/:id">
