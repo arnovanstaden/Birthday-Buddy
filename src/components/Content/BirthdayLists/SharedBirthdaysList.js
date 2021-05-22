@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { isBirthdayToday, sortBirthdays } from "../../../utils/general";
+import { sortShareBirthdays } from "../../../utils/general";
 
 // Components
 import SharedBirthdayCard from "../BirthdayCard/SharedBirthdayCard";
@@ -14,11 +14,13 @@ import styles from "./list.module.scss";
 import Logo from "../../../assets/images/logos/logo.svg";
 
 const sharedBirthdaysList = ({ birthdays }) => {
-    if (birthdays) {
+
+    const sortedBirthdays = birthdays && sortShareBirthdays(birthdays)
+    if (sortedBirthdays) {
         return (
             <Grid container spacing={3} className={styles.grid} >
-                {birthdays && birthdays.length > 0 ?
-                    birthdays.map(birthday => (
+                {sortedBirthdays && sortedBirthdays.length > 0 ?
+                    sortedBirthdays.map(birthday => (
                         <Grid item xs={12} sm={6} lg={4} key={uuid()}>
                             <SharedBirthdayCard birthday={birthday} />
                         </Grid>

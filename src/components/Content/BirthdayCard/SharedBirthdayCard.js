@@ -1,17 +1,16 @@
 import ClassNames from "classnames";
-import { useState, useContext, useRef } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { getBirthdayDaysAway, getCardFormatAge, getCardFormatBirthday, sendMessage } from "../../../utils/general"
-import { scheduleReminder } from "../../../utils/reminders";
-import { useSnackbar } from 'notistack';
+import { getCardFormatBirthday } from "../../../utils/general";
+import { useContext, useState } from "react"
 
 // Context
-import { LoaderContext } from "../../../context/LoaderContext";
+import { SelectedContext } from "../../../context/SelectedContext";
 
 // Components
-import Button from "../../UI/Library/Button/Button"
-import Card from "../../UI/Library/Card/Card"
-import Modal from "../../UI/Modal/Modal";
+import Card from "../../UI/Library/Card/Card";
+
+// MUI
+import Checkbox from '@material-ui/core/Checkbox';
+
 
 // Styles & Images
 import styles from "./card.module.scss";
@@ -20,47 +19,36 @@ import EmptyProfileImg from "../../../assets/images/other/emptyProfile.png";
 const SharedBirthdayCard = ({ birthday, today }) => {
     // Config
     const birthDate = new Date(birthday.date);
-    const history = useHistory();
-    const { enqueueSnackbar } = useSnackbar();
-    const { showLoader, hideLoader } = useContext(LoaderContext);
-    const cardRef = useRef()
-
-    // State
-    const [showReminderModal, setShowReminderModal] = useState(false)
-
+    const { addSelected, removeSelected, getSelected } = useContext(SelectedContext);
     const classes = ClassNames(
         styles.card,
-        today ? styles.today : null
+        styles.shared
     )
 
-    const handleSendMessage = () => {
-        history.block()
-        sendMessage(birthday.name)
-    }
+    // State
+    const [checked, setChecked] = useState(getSelected().includes(birthday))
 
-    const handleShowReminderModal = () => {
-        history.block()
-        if (Notification.permission !== "granted") {
-            return alert("You need to enable notifications for this app first.")
+    // Handlers
+    const onChangeHandler = (e) => {
+        if (e.target.checked) {
+            setChecked(true)
+            addSelected(birthday)
+        } else {
+            setChecked(false)
+            removeSelected(birthday)
         }
-        setShowReminderModal(true)
-    }
-
-    const handleSetReminder = (hours) => {
-        setShowReminderModal(false)
-        showLoader("Setting Reminder")
-        scheduleReminder(hours, birthday).then(result => {
-            hideLoader()
-            enqueueSnackbar(result.message, {
-                variant: 'success',
-            });
-            console.log(result);
-        })
     }
 
     return (
         <Card className={classes}>
             <div className={styles.content}>
+                <Checkbox
+                    checked={checked}
+                    onChange={onChangeHandler}
+                    classes={{
+                        checked: styles.checkbox
+                    }}
+                />
                 <div className={styles.image}>
                     <img src={birthday.profilePictureUrl || EmptyProfileImg} alt="Profile" />
                 </div>

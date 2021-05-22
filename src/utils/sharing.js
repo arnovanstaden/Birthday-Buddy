@@ -14,3 +14,19 @@ export const getAllSharedBirthdays = async () => {
     }));
     return result
 }
+
+export const deleteSharedBirthdays = async (birthdays) => {
+    const uid = await auth.currentUser.uid;
+    let batch = db.batch();
+
+
+    birthdays.forEach(birthday => {
+        let birthdayRef = sharedCollectionsRef(uid).doc(birthday.id);
+        batch.delete(birthdayRef);
+    })
+
+    const result = await batch.commit().then((result) => {
+        return
+    }).catch(err => console.log(err));
+    return result
+}
