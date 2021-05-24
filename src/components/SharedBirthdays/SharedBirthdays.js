@@ -26,7 +26,7 @@ import styles from "./shared.module.scss";
 const SharedBirthdaysInner = () => {
     // Config
     const { showLoader, hideLoader } = useContext(LoaderContext);
-    const { getSelected } = useContext(SelectedContext);
+    const { getSelected, clearSelected } = useContext(SelectedContext);
     const { enqueueSnackbar } = useSnackbar();
     const usernameRef = useRef();
 
@@ -139,6 +139,7 @@ const SharedBirthdaysInner = () => {
         verifyUserExists(shareUsername).then(result => {
             setShowShareModal(false);
             shareBirthdays(result, getSelected()).then((result) => {
+                clearSelected()
                 hideLoader();
                 enqueueSnackbar(result.message, {
                     variant: 'success',

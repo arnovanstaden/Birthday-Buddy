@@ -138,13 +138,13 @@ exports.sendReminderNotifications = functions.https.onRequest((req, res) => {
 
 exports.sendShareNotification = functions.firestore
     .document('users/{userId}/shared/{sharedId}')
-    .onWrite((change, context) => {
-
-        const usersRef = admin.firestore().collection('users').doc(context.params.userId);
-        usersRef.get().then((usersSnapshot) => {
-            console.log(usersSnapshot);
-            const user = usersSnapshot.docs[0];
-
+    .onCreate((change, context) => {
+        const userRef = admin.firestore().collection('users').doc(context.params.userId);
+        userRef.get().then((doc) => {
+            if (!doc.data()) {
+                return
+            }
+            const user = doc.data()
             const message = {
                 data: {
                     title: "Birthday Shares",
@@ -165,5 +165,6 @@ exports.sendShareNotification = functions.firestore
         }).catch(err => {
             console.log(err);
         })
-    });
+    })
+
 

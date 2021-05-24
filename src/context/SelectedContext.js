@@ -20,8 +20,13 @@ export const SelectedProvider = ({ children }) => {
         selected.current = selected.current.filter(item => item.id !== itemToRemove.id);
     }
 
+    const clearSelected = () => {
+        selected.current = []
+    }
+
+
     return (
-        <SelectedContext.Provider value={{ addSelected, removeSelected, getSelected }}>
+        <SelectedContext.Provider value={{ addSelected, removeSelected, getSelected, clearSelected }}>
             { children}
         </SelectedContext.Provider>
     );
