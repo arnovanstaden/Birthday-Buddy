@@ -11,7 +11,7 @@ export const createDbUser = async (newUser) => {
         {
             ...newUser,
             reminders: true,
-            displayName_LC: newUser.displayName
+            displayName_LC: newUser.displayName.toLowerCase().trim()
         }
     )
         .then((result) => {
