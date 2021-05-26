@@ -43,39 +43,40 @@ export const storage = firebase.storage();
 export const analytics = firebase.analytics();
 
 // Messaging
-if (typeof window !== "undefined" && "Notification" in window) {
-    const messaging = firebase.messaging();
 
-    messaging.getToken({ vapidKey: process.env.REACT_APP_FIREBASE_WPC_KEY_PAIR }).then((currentToken) => {
-        if (currentToken) {
-            storeFCMRegToken(currentToken)
-        }
-    }).catch((err) => {
-        console.log('An error occurred while retrieving token. ', err);
-    });
+const messaging = firebase.messaging();
 
-    messaging.onMessage((payload) => {
-        if (Notification.permission === "granted") {
-            const notificationOptions = {
-                title: payload.data.title,
-                icon: '/images/logos/logo192-transparent.png',
-                badge: '/images/logos/logo192-transparent.png',
-                vibrate: [100, 50, 100],
-                body: payload.data.body,
-                data: {
-                    time: new Date(Date.now()).toString(),
-                    primaryKey: 1,
-                    url: payload.data.url
-                }
-            };
+messaging.getToken({ vapidKey: process.env.REACT_APP_FIREBASE_WPC_KEY_PAIR }).then((currentToken) => {
+    if (currentToken) {
+        storeFCMRegToken(currentToken)
+    }
+}).catch((err) => {
+    console.log('An error occurred while retrieving token. ', err);
+});
 
-            const notification = new Notification(notificationOptions.title, notificationOptions);
-            notification.onclick = ((e) => {
-                e.preventDefault();
-                window.open(e.currentTarget.data.url, '_blank');
-            })
-        }
-    });
+messaging.onMessage((payload) => {
+    console.log("foreground message received", payload)
+    if (Notification.permission === "granted") {
+        const notificationOptions = {
+            title: payload.data.title,
+            icon: '/images/logos/logo192-transparent.png',
+            badge: '/images/logos/logo192-transparent.png',
+            vibrate: [100, 50, 100],
+            body: payload.data.body,
+            data: {
+                time: new Date(Date.now()).toString(),
+                primaryKey: 1,
+                url: payload.data.url
+            }
+        };
+
+        const notification = new Notification(notificationOptions.title, notificationOptions);
+        notification.onclick = ((e) => {
+            e.preventDefault();
+            window.open(e.currentTarget.data.url, '_blank');
+        })
+    }
+});
 
 
-}
+
