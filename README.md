@@ -2,7 +2,7 @@
 A lightweight PWA for easy birthday reminders, sharing & congratulatory message sending.
 
 ## Link
-You can visit the site [here](birthday-buddy.vercel.app).
+You Can Explore This App With A Demo Account [here](https://birthday-buddy.vercel.app/signin?test).
 
 ## Features
 * Save Birthdays & Keep Track of Upcoming Birthdays
