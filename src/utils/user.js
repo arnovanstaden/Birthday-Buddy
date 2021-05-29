@@ -24,12 +24,12 @@ export const createDbUser = async (newUser) => {
     return saveResult
 }
 
-export const verifyUserExists = async (username) => {
-    const result = await db.collectionGroup('users').where('displayName_LC', '==', username).get().then((querySnapshot) => {
+export const verifyUserExists = async (email) => {
+    const result = await db.collectionGroup('users').where('email', '==', email).get().then((querySnapshot) => {
         return querySnapshot.docs
     }).catch(err => console.log(err))
     if (result.length > 0) {
         return result[0].id
     }
-    throw Error("No user with this username found")
+    throw Error("No user with this email found")
 }

@@ -2,6 +2,7 @@ import { useContext, useRef, useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { useHistory, Link } from "react-router-dom";
 import { validateForm } from "../../utils/general"
+import { verifyUserExists } from "../../utils/user"
 
 // Context
 import { UserContext } from "../../context/UserContext"
@@ -57,9 +58,6 @@ export default function SignUp() {
             });
         }
 
-
-        showLoader("Creating Your Profile")
-
         // Data
         const authData = {
             email: emailRef.current.value.toLowerCase().trim(),
@@ -75,6 +73,7 @@ export default function SignUp() {
             });
         }
 
+        showLoader("Creating Your Profile")
         signUp(authData)
             .then(result => {
                 hideLoader();
@@ -90,6 +89,7 @@ export default function SignUp() {
                 });
             })
     }
+
 
 
     return (

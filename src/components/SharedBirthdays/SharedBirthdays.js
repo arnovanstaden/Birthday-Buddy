@@ -28,7 +28,7 @@ const SharedBirthdaysInner = () => {
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const { getSelected, clearSelected } = useContext(SelectedContext);
     const { enqueueSnackbar } = useSnackbar();
-    const usernameRef = useRef();
+    const emailRef = useRef();
 
     // State
     const [sharedBirthdays, setSharedBirthdays] = useState(undefined);
@@ -133,10 +133,10 @@ const SharedBirthdaysInner = () => {
 
 
     const handleShare = () => {
-        const shareUsername = usernameRef.current.value.toLowerCase().trim();
+        const shareEmail = emailRef.current.value.toLowerCase().trim();
         showLoader("Sharing Birthdays...")
 
-        verifyUserExists(shareUsername).then(result => {
+        verifyUserExists(shareEmail).then(result => {
             setShowShareModal(false);
             shareBirthdays(result, getSelected()).then((result) => {
                 clearSelected()
@@ -214,13 +214,13 @@ const SharedBirthdaysInner = () => {
 
             <Modal status={showShareModal}
                 content={{
-                    heading: "Enter Username",
-                    text: "Please enter the Username of the user you wish to share birthdays with."
+                    heading: "Enter User Email",
+                    text: "Please enter the registered email of the user you wish to share birthdays with."
                 }}>
                 <Input
-                    type="text"
+                    type="email"
                     autoFocus
-                    inputRef={usernameRef}
+                    inputRef={emailRef}
                 />
                 <Button onClick={handleShare}>
                     Share

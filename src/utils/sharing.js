@@ -47,6 +47,7 @@ export const importSharedBirthdays = async (birthdays) => {
     });
     return result
 }
+
 export const deleteSharedBirthdays = async (birthdays) => {
     const uid = await auth.currentUser.uid;
     let batch = db.batch();
