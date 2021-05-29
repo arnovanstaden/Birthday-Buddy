@@ -33,28 +33,22 @@ exports.sendDailyNotifications = functions.https.onRequest((req, res) => {
 
                     // Send Notifications
                     if (allBirthdaysToday.length > 0) {
-                        const message = {
-                            data: {
+
+                        if (user.fcm_tokens && user.fcm_tokens.length > 0) {
+                            const message = {
                                 title: "Birthday Reminder",
                                 body: `It's ${allBirthdaysToday[0].name}'s birthday today. Remember to send your congratulations!`,
                                 url: `https://birthday-buddy.vercel.app/birthday/${allBirthdaysToday[0].id}`,
-                            },
-                            tokens: user.fcm_tokens
-                        };
+                                tokens: user.fcm_tokens
+                            };
 
-                        if (allBirthdaysToday.length > 1) {
-                            message.notification.body = `You have ${allBirthdaysToday.length} friends who celebrate their birthday today. Remember to send your congratulations!`
-                            message.data.url = `https://birthday-buddy.vercel.app/`
+                            if (allBirthdaysToday.length > 1) {
+                                message.body = `You have ${allBirthdaysToday.length} friends who celebrate their birthday today. Remember to send your congratulations!`
+                                message.url = `https://birthday-buddy.vercel.app/`
+                            }
+
+                            sendMessages(message)
                         }
-
-                        admin.messaging().sendMulticast(message)
-                            .then((response) => {
-                                // Response is a message ID string.
-                                console.log(`Successfully Sent Daily Reminder to: ${response.successCount} devices -`, response);
-                            })
-                            .catch((error) => {
-                                console.log('Error sending message:', error);
-                            });
                     }
                 });
 
@@ -94,24 +88,15 @@ exports.sendReminderNotifications = functions.https.onRequest((req, res) => {
                         // Send Notifications
                         // Test if reminder is past
                         if (reminder.time.toDate() < new Date()) {
-                            console.log(reminder.time.toDate(), new Date())
-                            const message = {
-                                data: {
+
+                            if (user.fcm_tokens && user.fcm_tokens.length > 0) {
+                                sendMessages({
                                     title: "Birthday Reminder",
                                     body: `This is your reminder to wish ${reminder.birthday.name} a happy birthday today. Remember to send your congratulations!`,
                                     url: `https://birthday-buddy.vercel.app/birthday/${reminder.birthday.id}`,
-                                },
-                                tokens: user.fcm_tokens
-                            };
-
-                            admin.messaging().sendMulticast(message)
-                                .then((response) => {
-                                    // Response is a message ID string.
-                                    console.log(`Successfully Sent Birthday Reminders to: ${response.successCount} devices - `, response);
+                                    tokens: user.fcm_tokens
                                 })
-                                .catch((error) => {
-                                    console.log('Error sending message:', error);
-                                });
+                            }
 
                             // Delete Reminder
                             usersRef.doc(user.id).collection('reminders').doc(reminder.id).delete()
@@ -146,27 +131,13 @@ exports.sendShareNotification = functions.firestore
                 return
             }
             const user = doc.data()
-            if (user.fcm_token) {
-                const message = {
-                    data: {
-                        title: "Birthday Shares",
-                        body: `${sharedBirthday.sharedBy} shared birthdays with you! Import them to your birthdays.`,
-                        url: `https://birthday-buddy.vercel.app/share`,
-                    },
+            if (user.fcm_tokens && user.fcm_tokens.length > 0) {
+                sendMessages({
+                    title: "Birthday Shares",
+                    body: `${sharedBirthday.sharedBy} shared birthdays with you! Import them to your birthdays.`,
+                    url: `https://birthday-buddy.vercel.app/share`,
                     tokens: user.fcm_tokens
-                };
-
-                admin.messaging().sendMulticast(message)
-                    .then((response) => {
-                        // Response is a message ID string.
-                        console.log(`Successfully Sent Share Notification to: ${response.successCount} devices -`, response);
-                    })
-                    .catch((error) => {
-                        console.log('Error sending message:', error);
-                    });
-            } else {
-                console.log("no fcm token")
-                return
+                })
             }
         }).catch(err => {
             console.log(err);
@@ -174,3 +145,22 @@ exports.sendShareNotification = functions.firestore
     })
 
 
+function sendMessages(messageData) {
+    const message = {
+        data: {
+            title: messageData.title,
+            body: messageData.body,
+            url: messageData.url,
+        },
+        tokens: messageData.tokens
+    };
+
+    admin.messaging().sendMulticast(message)
+        .then((response) => {
+            // Response is a message ID string.
+            console.log(`Successfully Sent Messages to: ${response.successCount} devices -`, response);
+        })
+        .catch((error) => {
+            console.log('Error sending messages:', error);
+        });
+}
