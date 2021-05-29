@@ -8,7 +8,13 @@ export const storeFCMRegToken = async (token) => {
         const uid = await auth.currentUser.uid;
         await db.collection('users').doc(uid).update({
             fcm_token: token
-        });
+        }).then(() => {
+            console.log("Token Updated!");
+        })
+            .catch((error) => {
+                // The document probably doesn't exist.
+                console.error("Error updating token: ", error);
+            });
     }
     return
 }
