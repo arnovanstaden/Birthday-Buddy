@@ -148,7 +148,7 @@ exports.sendShareNotification = functions.firestore
             const message = {
                 data: {
                     title: "Birthday Shares",
-                    body: `Another Birthday Buddy user shared birthdays with you! Import them to your birthdays.`,
+                    body: `${change.after.data().sharedBy} shared birthdays with you! Import them to your birthdays.`,
                     url: `https://birthday-buddy.vercel.app/share`,
                 },
                 token: user.fcm_token

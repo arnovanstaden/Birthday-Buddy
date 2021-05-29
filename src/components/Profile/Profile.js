@@ -1,10 +1,12 @@
 import { useParams, useHistory } from 'react-router-dom';
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import { getFamousBirthdays, getTodayInHistory } from "../../utils/profile"
 import { getBirthday, deleteBirthday } from "../../utils/birthdays"
 import { isBirthdayToday, sendMessage } from "../../utils/general"
 import { scheduleReminder } from "../../utils/reminders";
 import { useSnackbar } from 'notistack';
+import { shareBirthdays } from "../../utils/sharing";
+import { verifyUserExists } from "../../utils/user";
 
 // Context
 import { LoaderContext } from "../../context/LoaderContext";
@@ -13,6 +15,7 @@ import { LoaderContext } from "../../context/LoaderContext";
 import Page from '../UI/Page/Page';
 import Modal from '../UI/Modal/Modal';
 import Button from "../UI/Library/Button/Button";
+import Input from "../UI/Library/Input/Input";
 import ContentCard from "../Content/ContentCard/ContentCard";
 import Loader from "../UI/Library/Loader/Loader";
 import ManageBirthday from "../Content/ManageBirthday/ManageBirthday";
@@ -36,6 +39,7 @@ const Profile = () => {
     const history = useHistory()
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const { enqueueSnackbar } = useSnackbar();
+    const shareEmailRef = useRef();
 
     // State
     const [birthday, setBirthday] = useState()
@@ -45,6 +49,7 @@ const Profile = () => {
     const [showEditBirthday, setShowEditBirthday] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showReminderModal, setShowReminderModal] = useState(false)
+    const [showShareModal, setShowShareModal] = useState(false);
 
     // Hooks
     useEffect(() => {
@@ -126,6 +131,33 @@ const Profile = () => {
         })
     }
 
+    const handleShare = () => {
+        const shareEmail = shareEmailRef.current.value.toLowerCase().trim();
+        showLoader("Sharing Birthdays...")
+
+        verifyUserExists(shareEmail).then(result => {
+            handleNavClose();
+            setShowShareModal(false);
+            shareBirthdays(result, [birthday]).then((result) => {
+                hideLoader();
+                enqueueSnackbar(result.message, {
+                    variant: 'success',
+                });
+            }).catch(err => {
+                hideLoader();
+                return enqueueSnackbar(err.message, {
+                    variant: 'error',
+                });
+            })
+        }).catch(err => {
+            hideLoader()
+            return enqueueSnackbar(err.message, {
+                variant: 'error',
+            });
+        });
+    }
+
+
 
     if (birthday) {
         const birthDate = new Date(birthday.date);
@@ -148,6 +180,7 @@ const Profile = () => {
                         >
                             {/* <MenuItem onClick={}>Share Birthday</MenuItem> */}
                             <MenuItem onClick={toggleEditBirthday}>Edit Birthday</MenuItem>
+                            <MenuItem onClick={() => setShowShareModal(true)}>Share Birthday</MenuItem>
                             <MenuItem onClick={() => setShowDeleteModal(true)}>Delete Birthday</MenuItem>
                         </Menu>
                     </nav>
@@ -253,6 +286,25 @@ const Profile = () => {
                         Cancel
                     </Button>
                 </Modal>
+
+                <Modal status={showShareModal}
+                    content={{
+                        heading: "Enter User Email",
+                        text: "Please enter the registered email of the user you wish to share birthdays with."
+                    }}>
+                    <Input
+                        type="email"
+                        autoFocus
+                        inputRef={shareEmailRef}
+                    />
+                    <Button onClick={handleShare}>
+                        Share
+                </Button>
+                    <Button onClick={() => setShowShareModal(false)} hollow>
+                        Cancel
+                </Button>
+                </Modal>
+
 
             </Page>
         )
