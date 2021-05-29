@@ -4,7 +4,6 @@ import "firebase/storage";
 import "firebase/firestore";
 import "firebase/analytics";
 import "firebase/messaging";
-import { storeFCMRegToken } from "../utils/reminders"
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -47,14 +46,7 @@ if (!('Notification' in window)) {
     console.log("This browser does not support notifications.");
 } else {
     const messaging = firebase.messaging();
-
-    messaging.getToken({ vapidKey: process.env.REACT_APP_FIREBASE_WPC_KEY_PAIR }).then((currentToken) => {
-        if (currentToken) {
-            storeFCMRegToken(currentToken)
-        }
-    }).catch((err) => {
-        console.log('An error occurred while retrieving token. ', err);
-    });
+    console.log(auth.currentUser)
 
     messaging.onMessage((payload) => {
         console.log("foreground message received", payload)

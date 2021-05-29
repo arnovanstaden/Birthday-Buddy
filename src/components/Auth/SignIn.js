@@ -1,8 +1,7 @@
 import { useContext, useRef, useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { useHistory, Link } from "react-router-dom";
-import { validateForm } from "../../utils/general"
-
+import { validateForm } from "../../utils/general";
 
 // Context
 import { UserContext } from "../../context/UserContext"

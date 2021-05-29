@@ -39,7 +39,7 @@ exports.sendDailyNotifications = functions.https.onRequest((req, res) => {
                                 body: `It's ${allBirthdaysToday[0].name}'s birthday today. Remember to send your congratulations!`,
                                 url: `https://birthday-buddy.vercel.app/birthday/${allBirthdaysToday[0].id}`,
                             },
-                            token: user.fcm_token
+                            tokens: user.fcm_tokens
                         };
 
                         if (allBirthdaysToday.length > 1) {
@@ -47,10 +47,10 @@ exports.sendDailyNotifications = functions.https.onRequest((req, res) => {
                             message.data.url = `https://birthday-buddy.vercel.app/`
                         }
 
-                        admin.messaging().send(message)
+                        admin.messaging().sendMulticast(message)
                             .then((response) => {
                                 // Response is a message ID string.
-                                console.log(`Successfully Sent Daily Reminder to: ${user.displayName} -`, response);
+                                console.log(`Successfully Sent Daily Reminder to: ${response.successCount} devices -`, response);
                             })
                             .catch((error) => {
                                 console.log('Error sending message:', error);
@@ -101,13 +101,13 @@ exports.sendReminderNotifications = functions.https.onRequest((req, res) => {
                                     body: `This is your reminder to wish ${reminder.birthday.name} a happy birthday today. Remember to send your congratulations!`,
                                     url: `https://birthday-buddy.vercel.app/birthday/${reminder.birthday.id}`,
                                 },
-                                token: user.fcm_token
+                                tokens: user.fcm_tokens
                             };
 
-                            admin.messaging().send(message)
+                            admin.messaging().sendMulticast(message)
                                 .then((response) => {
                                     // Response is a message ID string.
-                                    console.log(`Successfully Sent Birthday Reminder to: ${user.displayName} - `, response);
+                                    console.log(`Successfully Sent Birthday Reminders to: ${response.successCount} devices - `, response);
                                 })
                                 .catch((error) => {
                                     console.log('Error sending message:', error);
@@ -153,13 +153,13 @@ exports.sendShareNotification = functions.firestore
                         body: `${sharedBirthday.sharedBy} shared birthdays with you! Import them to your birthdays.`,
                         url: `https://birthday-buddy.vercel.app/share`,
                     },
-                    token: user.fcm_token
+                    tokens: user.fcm_tokens
                 };
 
-                admin.messaging().send(message)
+                admin.messaging().sendMulticast(message)
                     .then((response) => {
                         // Response is a message ID string.
-                        console.log(`Successfully Sent Share Notification to: ${user.displayName} -`, response);
+                        console.log(`Successfully Sent Share Notification to: ${response.successCount} devices -`, response);
                     })
                     .catch((error) => {
                         console.log('Error sending message:', error);

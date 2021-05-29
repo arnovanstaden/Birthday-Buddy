@@ -90,8 +90,6 @@ export default function SignUp() {
             })
     }
 
-
-
     return (
         <Page
             title="Sign Up"

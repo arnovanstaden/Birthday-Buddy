@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { auth, analytics } from "../config/firebase";
 import { createDbUser } from "../utils/user";
+import { storeFCMRegToken, deleteFCMRegToken } from "../utils/reminders";
 
 export const UserContext = createContext(null);
 
@@ -32,6 +33,7 @@ export const UserProvider = ({ children }) => {
                 throw error
             });
         await createDbUser(newUser)
+        storeFCMRegToken()
         analytics.logEvent("sign_up")
         return newUser
     }
@@ -45,11 +47,13 @@ export const UserProvider = ({ children }) => {
                 console.log(error)
                 throw error
             });
+        storeFCMRegToken()
         analytics.logEvent("login")
         return authResult
     };
 
     const signOut = async () => {
+        await deleteFCMRegToken()
         return await auth.signOut()
     };
 
@@ -77,7 +81,6 @@ export const UserProvider = ({ children }) => {
             }
         });
     }, []);
-
 
     // Context Value
     const value = {
