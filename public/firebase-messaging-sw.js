@@ -32,7 +32,6 @@ messaging.onBackgroundMessage(function (payload) {
 });
 
 self.addEventListener('notificationclick', function (e) {
-    console.log("here")
     const notification = e.notification;
     const primaryKey = notification.data.primaryKey;
     if (primaryKey === 1) {

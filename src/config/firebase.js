@@ -46,7 +46,6 @@ if (!('Notification' in window)) {
     console.log("This browser does not support notifications.");
 } else {
     const messaging = firebase.messaging();
-    console.log(auth.currentUser)
 
     messaging.onMessage((payload) => {
         console.log("foreground message received", payload)
@@ -64,11 +63,10 @@ if (!('Notification' in window)) {
                 }
             };
 
-            const notification = new Notification(notificationOptions.title, notificationOptions);
-            notification.onclick = ((e) => {
-                e.preventDefault();
-                window.open(e.currentTarget.data.url, '_blank');
-            })
+
+            navigator.serviceWorker.ready.then(function (registration) {
+                registration.showNotification(notificationOptions.title, notificationOptions);
+            });
         }
     });
 }
