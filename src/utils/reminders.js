@@ -2,9 +2,6 @@ import { db } from "../config/firebase";
 import { auth } from "../config/firebase";
 import { addHours } from 'date-fns'
 
-
-
-
 export const storeFCMRegToken = async (token) => {
     if (auth.currentUser) {
         const uid = await auth.currentUser.uid;
@@ -28,7 +25,7 @@ export const scheduleReminder = async (hours, birthday) => {
         time: reminderTime,
         birthday
     }
-    const result = await remindersCollectionRef(uid).add(data)
+    await remindersCollectionRef(uid).add(data)
         .then((ref) => {
             console.log(ref)
             return {

@@ -1,18 +1,15 @@
-import { urlBase64ToUint8Array } from "./general";
-import axios from "axios";
-
 export const registerServiceWorker = () => {
 
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js')
-            .then(function (registration) {
-                registration.addEventListener('updatefound', function () {
-                    var installingWorker = registration.installing;
-                });
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        navigator.serviceWorker.register('/service-worker.js', {
+            scope: '.'
+        }).then(function (registration) {
+            // Registration was successful
+            // console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function (err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+        });
     }
 }
 

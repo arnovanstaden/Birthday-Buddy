@@ -49,6 +49,7 @@ const messaging = firebase.messaging();
 messaging.getToken({ vapidKey: process.env.REACT_APP_FIREBASE_WPC_KEY_PAIR }).then((currentToken) => {
     if (currentToken) {
         storeFCMRegToken(currentToken)
+        console.log("New FCm Token Stored")
     }
 }).catch((err) => {
     console.log('An error occurred while retrieving token. ', err);
