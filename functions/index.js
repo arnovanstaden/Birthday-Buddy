@@ -146,23 +146,28 @@ exports.sendShareNotification = functions.firestore
                 return
             }
             const user = doc.data()
-            const message = {
-                data: {
-                    title: "Birthday Shares",
-                    body: `${sharedBirthday.sharedBy} shared birthdays with you! Import them to your birthdays.`,
-                    url: `https://birthday-buddy.vercel.app/share`,
-                },
-                token: user.fcm_token
-            };
+            if (user.fcm_token) {
+                const message = {
+                    data: {
+                        title: "Birthday Shares",
+                        body: `${sharedBirthday.sharedBy} shared birthdays with you! Import them to your birthdays.`,
+                        url: `https://birthday-buddy.vercel.app/share`,
+                    },
+                    token: user.fcm_token
+                };
 
-            admin.messaging().send(message)
-                .then((response) => {
-                    // Response is a message ID string.
-                    console.log(`Successfully Sent Share Notification to: ${user.displayName} -`, response);
-                })
-                .catch((error) => {
-                    console.log('Error sending message:', error);
-                });
+                admin.messaging().send(message)
+                    .then((response) => {
+                        // Response is a message ID string.
+                        console.log(`Successfully Sent Share Notification to: ${user.displayName} -`, response);
+                    })
+                    .catch((error) => {
+                        console.log('Error sending message:', error);
+                    });
+            } else {
+                console.log("no fcm token")
+                return
+            }
         }).catch(err => {
             console.log(err);
         })

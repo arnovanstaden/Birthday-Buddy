@@ -3,13 +3,13 @@ import { auth } from "../config/firebase";
 import { addHours } from 'date-fns'
 
 export const storeFCMRegToken = async (token) => {
+    console.log(token)
     if (auth.currentUser) {
         const uid = await auth.currentUser.uid;
         await db.collection('users').doc(uid).update({
             fcm_token: token
         });
     }
-
     return
 }
 
