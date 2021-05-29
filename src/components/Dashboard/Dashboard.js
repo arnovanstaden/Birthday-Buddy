@@ -52,7 +52,6 @@ const Dashboard = () => {
         console.log(matches)
 
         if (matches.length > 0) {
-            console.log("here")
             setSearchResults(matches)
         } else {
             setSearchResults([])

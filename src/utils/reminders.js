@@ -71,7 +71,6 @@ export const scheduleReminder = async (hours, birthday) => {
     }
     await remindersCollectionRef(uid).add(data)
         .then((ref) => {
-            console.log(ref)
             return {
                 ...data,
                 id: ref.id,

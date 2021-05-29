@@ -127,7 +127,6 @@ const Profile = () => {
             enqueueSnackbar(result.message, {
                 variant: 'success',
             });
-            console.log(result);
         })
     }
 
