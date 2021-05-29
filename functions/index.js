@@ -138,7 +138,8 @@ exports.sendReminderNotifications = functions.https.onRequest((req, res) => {
 
 exports.sendShareNotification = functions.firestore
     .document('users/{userId}/shared/{sharedId}')
-    .onCreate((change, context) => {
+    .onCreate((snap, context) => {
+        const sharedBirthday = snap.data()
         const userRef = admin.firestore().collection('users').doc(context.params.userId);
         userRef.get().then((doc) => {
             if (!doc.data()) {
@@ -148,7 +149,7 @@ exports.sendShareNotification = functions.firestore
             const message = {
                 data: {
                     title: "Birthday Shares",
-                    body: `${change.after.data().sharedBy} shared birthdays with you! Import them to your birthdays.`,
+                    body: `${sharedBirthday.sharedBy} shared birthdays with you! Import them to your birthdays.`,
                     url: `https://birthday-buddy.vercel.app/share`,
                 },
                 token: user.fcm_token
