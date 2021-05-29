@@ -73,6 +73,12 @@ export const deleteSharedBirthdays = async (birthdays) => {
 export const shareBirthdays = async (shareUID, birthdays) => {
     let batch = db.batch();
 
+    const querySnapshot = await sharedCollectionsRef(shareUID).get()
+    const sharedBirthdays = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    }));
+
     birthdays.forEach(birthday => {
         // Initial Data
         delete birthday.shareDate;
@@ -81,10 +87,13 @@ export const shareBirthdays = async (shareUID, birthdays) => {
         delete birthday.notes;
         birthday.sharedDate = new Date();
 
-        let addSharedRef = sharedCollectionsRef(shareUID).doc();
-        batch.set(addSharedRef, birthday);
+        // Handle Duplicates
+        const duplicate = sharedBirthdays.filter(item => item.name === birthday.name && item.date === birthday.date && item.profilePictureUrl === birthday.profilePictureUrl);
+        if (!duplicate.length > 0) {
+            let addSharedRef = sharedCollectionsRef(shareUID).doc();
+            batch.set(addSharedRef, birthday);
+        }
     });
-
 
     const result = await batch.commit().then((result) => {
         return {

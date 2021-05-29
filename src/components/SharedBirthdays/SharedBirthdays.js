@@ -225,6 +225,9 @@ const SharedBirthdaysInner = () => {
                 <Button onClick={handleShare}>
                     Share
                 </Button>
+                <Button onClick={() => setShowShareModal(false)} hollow>
+                    Cancel
+                </Button>
             </Modal>
 
         </Page >

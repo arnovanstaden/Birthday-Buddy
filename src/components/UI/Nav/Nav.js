@@ -49,7 +49,7 @@ const Nav = ({ backButton }) => {
                         </li>
                         <li>
                             <Link to="/share">
-                                Shared Birthdays
+                                Share Birthdays
                             </Link>
                         </li>
                         <li onClick={signOut}>
