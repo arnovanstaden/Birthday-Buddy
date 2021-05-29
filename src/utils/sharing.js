@@ -71,6 +71,7 @@ export const deleteSharedBirthdays = async (birthdays) => {
 }
 
 export const shareBirthdays = async (shareUID, birthdays) => {
+    const uid = await auth.currentUser.uid;
     let batch = db.batch();
 
     const querySnapshot = await sharedCollectionsRef(shareUID).get()
@@ -81,11 +82,11 @@ export const shareBirthdays = async (shareUID, birthdays) => {
 
     birthdays.forEach(birthday => {
         // Initial Data
-        delete birthday.shareDate;
+        birthday.sharedDate = new Date();
+        birthday.sharedUID = uid;
         delete birthday.id;
         delete birthday.uid;
         delete birthday.notes;
-        birthday.sharedDate = new Date();
 
         // Handle Duplicates
         const duplicate = sharedBirthdays.filter(item => item.name === birthday.name && item.date === birthday.date && item.profilePictureUrl === birthday.profilePictureUrl);
