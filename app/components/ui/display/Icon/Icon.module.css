@@ -1,0 +1,27 @@
+.Icon {
+  position: relative;
+  font-display: block;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  user-select: none;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  font-family: "MaterialSymbolsRounded";
+  font-variation-settings: "FILL" 1;
+}
+.Icon.colour-gray {
+  color: #959595;
+}
+.Icon.colour-green {
+  color: #29C13E;
+}
+
+/*# sourceMappingURL=Icon.module.css.map */

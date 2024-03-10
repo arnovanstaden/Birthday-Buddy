@@ -1,0 +1,13 @@
+.MobileNavbar {
+  border-top: 0.25px solid rgba(149, 149, 149, 0.25);
+  background-color: #181818;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.MobileNavbar button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+/*# sourceMappingURL=MobileNavbar.module.css.map */

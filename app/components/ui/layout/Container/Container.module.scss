@@ -1,0 +1,27 @@
+@import '../../../../styles/mixins';
+
+.Container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  @include breakpoint-sm {
+    padding: 0 24px;
+  }
+
+  @include breakpoint-md {
+    max-width: 750px;
+  }
+
+  @include breakpoint-lg {
+    max-width: 970px;
+  }
+
+  @include breakpoint-xl {
+    max-width: 1170px;
+  }
+
+  @include breakpoint-xxl {
+    max-width: 1570px;
+  }
+}

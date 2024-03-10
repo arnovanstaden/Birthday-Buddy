@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "MaterialSymbolsRounded";
+  src: url("/fonts/MaterialSymbolsRounded.woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #181818;
+  color: #FDFDFD;
+  width: 100%;
+  height: 100%;
+}
+
+/*# sourceMappingURL=global.css.map */

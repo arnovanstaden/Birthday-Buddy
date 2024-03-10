@@ -27,6 +27,8 @@ module.exports = {
   ],
   rules: {
     "react/react-in-jsx-scope": "off",
+    "react/no-unused-prop-types": "off",
+    "react/prop-types": "off",
   },
   ignorePatterns: [
     'public',

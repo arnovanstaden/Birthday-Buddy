@@ -25,6 +25,9 @@
       "@components/*": [
         "app/components/*"
       ],
+      "@styles/*": [
+        "app/styles/*"
+      ],
     },
     "noEmit": true
   }

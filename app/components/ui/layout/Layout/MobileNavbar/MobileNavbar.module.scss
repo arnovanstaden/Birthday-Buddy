@@ -1,0 +1,14 @@
+@import '../../../../../styles/_variables';
+
+.MobileNavbar {
+  border-top: 0.25px solid rgba($colour-text-secondary, 0.25);
+  background-color: $colour-background;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+  }
+}
