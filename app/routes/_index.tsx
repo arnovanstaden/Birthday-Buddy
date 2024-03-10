@@ -1,4 +1,3 @@
-import Button from 'app/components/ui/input/Button/Button';
 import type { MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
@@ -11,7 +10,7 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   return (
     <main>
-      <Button />
+      Hello
     </main>
   );
 }
