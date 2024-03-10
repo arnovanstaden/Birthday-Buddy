@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["MobileNavbar.module.scss","../../../../../styles/_variables.scss"],"names":[],"mappings":"AAEA;EACE;EACA,kBCJkB;EDKlB;EACA;;AAEA;EACE;EACA;EACA","file":"MobileNavbar.module.css"}
+{"version":3,"sourceRoot":"","sources":["MobileNavbar.module.scss","../../../../../styles/_variables.scss","../../../../../styles/_mixins.scss"],"names":[],"mappings":"AAEA;EACE;EACA,kBCJkB;EDKlB;EACA;;AAEA;EACE;;AAEA;EACE;EACA;EACA;EACA;EACA;EEiBJ;EACA;EACA;EACA","file":"MobileNavbar.module.css"}

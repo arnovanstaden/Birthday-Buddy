@@ -1,5 +1,5 @@
-@import './_variables';
-@import './mixins';
+@import './config.scss';
+
 @import './fonts/fonts.scss';
 
 * {
@@ -20,4 +20,9 @@ body {
   color: $colour-text-primary;
   width: 100%;
   height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
