@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "birthday-bud",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -13,6 +13,10 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@capacitor/android": "^5.7.4",
+    "@capacitor/cli": "^5.7.4",
+    "@capacitor/core": "^5.7.4",
+    "@capacitor/ios": "^5.7.4",
     "@remix-run/css-bundle": "^2.8.1",
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
