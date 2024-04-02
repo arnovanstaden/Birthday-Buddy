@@ -1,3 +1,15 @@
 .Button {
-  background-color: blue;
-  border: none; }
+  background-color: #29C13E;
+  color: #181818;
+  border: none;
+  padding: 8px 32px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.Button.colour-secondary {
+  background-color: #242424;
+  color: #29C13E;
+}
+
+/*# sourceMappingURL=Button.module.css.map */

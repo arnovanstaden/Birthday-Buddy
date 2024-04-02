@@ -1,4 +1,16 @@
+@import '../../../../styles/_config';
+
 .Button {
-  background-color: blue;
+  background-color: $colour-primary-green-primary;
+  color: $colour-text-on-colour;
   border: none;
+  padding: 8px 32px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &.colour-secondary {
+    background-color: $colour-container;
+    color: $colour-primary-green-primary;
+  }
 }

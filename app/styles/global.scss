@@ -1,9 +1,9 @@
-@import './config.scss';
-
+@import './_config.scss';
 @import './fonts/fonts.scss';
 
 * {
   box-sizing: border-box;
+  font-family: Poppins;
 }
 
 html {
@@ -20,6 +20,8 @@ body {
   color: $colour-text-primary;
   width: 100%;
   height: 100%;
+  font-family: Poppins;
+  font-size: 16px;
 }
 
 a {

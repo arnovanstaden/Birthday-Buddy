@@ -10,10 +10,19 @@ export default meta;
 
 type ButtonStory = StoryObj<typeof Button>;
 
-export const Default: ButtonStory = {
+export const Primary: ButtonStory = {
   render: (args) => <Button {...args} />,
-  name: 'Default',
+  name: 'Primary',
   args: {
+    children: 'Primary Button'
+  },
+};
 
+export const Secondary: ButtonStory = {
+  render: (args) => <Button {...args} />,
+  name: 'Secondary',
+  args: {
+    children: 'Secondary Button',
+    colour: 'secondary'
   },
 };
