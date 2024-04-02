@@ -18,13 +18,7 @@ module.exports = {
       version: 'detect',
     },
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:import/typescript',
-  ],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react-hooks/recommended', 'plugin:import/typescript', 'plugin:storybook/recommended'],
   rules: {
     "react/react-in-jsx-scope": "off",
     "react/no-unused-prop-types": "off",
