@@ -1,0 +1,21 @@
+.Input {
+  display: block;
+  border-radius: 8px;
+  background-color: #242424;
+  border: 1px solid #242424;
+  outline: none;
+  padding: 16px;
+  font-weight: 500;
+  width: 100%;
+  color: #FDFDFD;
+  transition: 0.3s ease-in-out;
+}
+.Input::placeholder {
+  color: #959595;
+  font-weight: 500;
+}
+.Input:focus {
+  border-color: #29C13E;
+}
+
+/*# sourceMappingURL=Input.module.css.map */

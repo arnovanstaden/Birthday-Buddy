@@ -1,0 +1,61 @@
+@import '../../../../styles/_config';
+
+.Typography {
+  margin: 0;
+
+  &.variant {
+    &-h1 {
+      font-weight: 600;
+      font-size: 40px;
+    }
+
+    &-h2 {
+      font-weight: 600;
+      font-size: 32px;
+    }
+
+    &-h3 {
+      font-weight: 600;
+      font-size: 28px;
+    }
+
+    &-h4 {
+      font-weight: 600;
+      font-size: 24px;
+    }
+
+    &-h5 {
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+    &-h6 {
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    &-p {
+      font-size: 16px;
+    }
+
+    &-small {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+  }
+
+  &.color {
+    &-primary {
+      color: $colour-text-primary;
+    }
+
+    &-secondary {
+      color: $colour-text-secondary;
+    }
+
+    &-green {
+      color: $colour-primary-green-primary;
+    }
+  }
+}

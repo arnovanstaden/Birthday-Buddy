@@ -4,10 +4,12 @@
   background-color: $colour-primary-green-primary;
   color: $colour-text-on-colour;
   border: none;
-  padding: 8px 32px;
+  padding: 16px 32px;
   font-weight: 500;
   border-radius: 8px;
   cursor: pointer;
+  width: 100%;
+  text-align: center;
 
   &.colour-secondary {
     background-color: $colour-container;

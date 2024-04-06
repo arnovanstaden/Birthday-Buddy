@@ -1,0 +1,23 @@
+@import '../../../../styles/_config';
+
+.Input {
+  display: block;
+  border-radius: 8px;
+  background-color: $colour-container;
+  border: 1px solid $colour-container;
+  outline: none;
+  padding: 16px;
+  font-weight: 500;
+  width: 100%;
+  color: $colour-text-primary;
+  transition: 0.3s ease-in-out;
+
+  &::placeholder {
+    color: $colour-text-secondary;
+    font-weight: 500;
+  }
+
+  &:focus {
+    border-color: $colour-primary-green-primary;
+  }
+}

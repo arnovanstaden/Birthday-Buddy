@@ -2,10 +2,12 @@
   background-color: #29C13E;
   color: #181818;
   border: none;
-  padding: 8px 32px;
+  padding: 16px 32px;
   font-weight: 500;
   border-radius: 8px;
   cursor: pointer;
+  width: 100%;
+  text-align: center;
 }
 .Button.colour-secondary {
   background-color: #242424;
