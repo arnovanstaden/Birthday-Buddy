@@ -1,3 +1,4 @@
+import Heading from '@components/ui/display/Heading/Heading';
 import Typography from '@components/ui/display/Typography/Typography';
 import Button from '@components/ui/input/Button/Button';
 import IconButton from '@components/ui/input/IconButton/IconButton';
@@ -14,17 +15,10 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   return (
     <div>
-      <Typography
-        variant='h6'
-        color='secondary'
-      >
-        Welcome
-      </Typography>
-      <Typography
-        variant='h3'
-      >
-        Sign In
-      </Typography>
+      <Heading
+        title="Sign In"
+        subtitle="Welcome"
+      />
       <Input
         type='email'
         placeholder='Email'

@@ -1,0 +1,21 @@
+.BirthdayCard {
+  background-color: #242424;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: auto auto auto 1fr;
+  gap: 16px;
+  align-items: center;
+  border-radius: 16px;
+}
+.BirthdayCard .left {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.BirthdayCard .divider {
+  width: 1px;
+  background-color: #959595;
+  height: 100%;
+}
+
+/*# sourceMappingURL=BirthdayCard.module.css.map */

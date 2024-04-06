@@ -1,0 +1,23 @@
+@import '../../../styles/variables';
+
+.BirthdayCard {
+  background-color: $colour-container;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: auto auto auto 1fr;
+  gap: 16px;
+  align-items: center;
+  border-radius: 16px;
+
+  .left {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .divider {
+    width: 1px;
+    background-color: $colour-text-secondary;
+    height: 100%;
+  }
+}
