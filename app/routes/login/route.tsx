@@ -4,6 +4,8 @@ import Button from '@components/ui/input/Button/Button';
 import IconButton from '@components/ui/input/IconButton/IconButton';
 import Input from '@components/ui/input/Input/Input';
 import type { MetaFunction } from "@remix-run/node";
+import styles from './login.module.css';
+import { Link } from '@remix-run/react';
 
 export const meta: MetaFunction = () => {
   return [
@@ -14,33 +16,49 @@ export const meta: MetaFunction = () => {
 
 const Login = () => {
   return (
-    <div>
+    <div className={styles.Login}>
       <Heading
         title="Sign In"
         subtitle="Welcome"
       />
-      <Input
-        type='email'
-        placeholder='Email'
-        name='email'
-      />
-      <Input
-        type='password'
-        placeholder='Password'
-        name='password'
-      />
-      <Button colour="secondary">Sign in </Button>
-      <Typography color="secondary" variant="small">OR</Typography>
-      <IconButton name="login" />
-      <IconButton name="login" />
-      <Typography>
-        Don't have an account yet?
-        <a href="/">
+
+      <div className={styles.content}>
+        <form action="">
+          <Input
+            type='email'
+            placeholder='Email'
+            name='email'
+          />
+          <Input
+            type='password'
+            placeholder='Password'
+            name='password'
+          />
+          <Button colour="secondary">Sign in </Button>
+        </form>
+        <Typography
+          color="secondary"
+          variant="p"
+          className={styles.divider}
+        >
+          OR
+        </Typography>
+        <div className={styles.social}>
+          <IconButton name="login" />
+          <IconButton name="login" />
+        </div>
+      </div>
+      <div className={styles.bottom}>
+        <Typography>
+          Don't have an account yet?
+
+        </Typography>
+        <Link to="/signup">
           <Typography color="green">
             Sign Up
           </Typography>
-        </a>
-      </Typography>
+        </Link>
+      </div>
     </div>
   );
 }

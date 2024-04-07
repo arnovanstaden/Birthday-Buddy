@@ -1,4 +1,4 @@
-import Container from '../Container/Container';
+import Container from '../../ui/layout/Container/Container';
 import styles from './Layout.module.css';
 import MobileNavbar from './MobileNavbar/MobileNavbar';
 

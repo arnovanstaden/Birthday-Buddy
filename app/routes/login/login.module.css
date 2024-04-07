@@ -1,0 +1,38 @@
+.Login {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 24px;
+  padding-bottom: 16px;
+}
+.Login .content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.Login .content form {
+  display: grid;
+  gap: 24px;
+  width: 100%;
+}
+.Login .divider {
+  margin: 24px 0;
+  text-align: center;
+}
+.Login .social {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+.Login .bottom {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/*# sourceMappingURL=login.module.css.map */

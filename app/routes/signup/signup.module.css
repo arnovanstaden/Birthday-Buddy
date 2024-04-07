@@ -1,0 +1,38 @@
+.SignUp {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 24px;
+  padding-bottom: 16px;
+}
+.SignUp .content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.SignUp .content form {
+  display: grid;
+  gap: 24px;
+  width: 100%;
+}
+.SignUp .divider {
+  margin: 24px 0;
+  text-align: center;
+}
+.SignUp .social {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+.SignUp .bottom {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/*# sourceMappingURL=signup.module.css.map */

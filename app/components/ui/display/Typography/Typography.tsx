@@ -9,6 +9,8 @@ const Typography: React.FC<TypographyProps> = ({
   children,
   ...props
 }) => {
+  if (!children) return null;
+
   const classes = classNames(
     props.className,
     styles.Typography,

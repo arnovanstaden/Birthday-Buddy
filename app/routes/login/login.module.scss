@@ -1,0 +1,41 @@
+.Login {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 24px;
+  padding-bottom: 16px;
+
+  .content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    form {
+      display: grid;
+      gap: 24px;
+      width: 100%;
+    }
+  }
+
+  .divider {
+    margin: 24px 0;
+    text-align: center;
+  }
+
+  .social {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .bottom {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 8px;
+  }
+}

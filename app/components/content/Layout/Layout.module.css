@@ -5,6 +5,7 @@
 }
 .Layout main {
   height: 100%;
+  overflow-y: auto;
 }
 
 /*# sourceMappingURL=Layout.module.css.map */

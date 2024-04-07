@@ -13,6 +13,7 @@ const Heading: React.FC<HeadingProps> = (props) => {
       <Typography
         variant='h6'
         color='secondary'
+        weight={500}
       >
         {props.subtitle}
       </Typography>

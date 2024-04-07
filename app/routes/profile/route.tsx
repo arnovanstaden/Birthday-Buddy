@@ -24,9 +24,23 @@ const Profile = () => {
           size={150}
           src='https://www.tandem.net/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2F0uov5tlk8deu%2F3EhMdZzYvroc6S5lN9ntZD%2F32df91b1dc1522ccacbdf1a9aaf5e235%2Farno.jpg&w=767&q=100'
         />
-        <Typography>Arno van Staden</Typography>
-        <Typography>Monday 24 January 2022</Typography>
-        <Typography>Turns 29</Typography>
+        <Typography
+          variant='h4'
+          weight={500}
+        >
+          Arno van Staden
+        </Typography>
+        <Typography
+          color='green'
+        >
+          Monday 24 January 2022
+        </Typography>
+        <Typography
+          color='secondary'
+          variant='small'
+        >
+          Turns 29
+        </Typography>
       </div>
       <div className={styles.settings}>
         <Setting
