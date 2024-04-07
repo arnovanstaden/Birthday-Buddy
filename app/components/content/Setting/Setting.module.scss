@@ -4,4 +4,14 @@
   background-color: $colour-container;
   border-radius: 8px;
   padding: 16px 20px;
+
+  .top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .subtitle {
+    padding-top: 8px;
+  }
 }

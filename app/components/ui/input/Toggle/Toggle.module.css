@@ -1,0 +1,41 @@
+.Toggle {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 22px;
+  border: 2px solid #959595;
+  border-radius: 32px;
+  -webkit-transition: 0.3s ease-out;
+  transition: 0.3s ease-out;
+}
+.Toggle input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 48px;
+  height: 24px;
+}
+.Toggle .handle {
+  position: absolute;
+  cursor: pointer;
+  top: 2px;
+  left: 2px;
+  height: 14px;
+  width: 14px;
+  background-color: transparent;
+  -webkit-transition: inherit;
+  transition: inherit;
+  background-color: #959595;
+  border-radius: 50%;
+}
+.Toggle.toggled {
+  border-color: #29C13E;
+}
+.Toggle.toggled .handle {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+  background-color: #29C13E;
+}
+
+/*# sourceMappingURL=Toggle.module.css.map */

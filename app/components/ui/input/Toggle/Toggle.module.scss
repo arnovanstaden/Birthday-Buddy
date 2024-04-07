@@ -1,0 +1,46 @@
+@import '../../../../styles/config';
+
+.Toggle {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 22px;
+  border: 2px solid $colour-text-secondary;
+  border-radius: 32px;
+  -webkit-transition: .3s ease-out;
+  transition: .3s ease-out;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    width: 48px;
+    height: 24px;
+  }
+
+  .handle {
+    position: absolute;
+    cursor: pointer;
+    top: 2px;
+    left: 2px;
+    height: 14px;
+    width: 14px;
+    background-color: transparent;
+    -webkit-transition: inherit;
+    transition: inherit;
+    background-color: $colour-text-secondary;
+    border-radius: 50%;
+  }
+
+  &.toggled {
+    border-color: $colour-primary-green-primary;
+
+    .handle {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+      background-color: $colour-primary-green-primary;
+      ;
+    }
+  }
+}

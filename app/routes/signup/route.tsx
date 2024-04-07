@@ -39,6 +39,7 @@ const SignUp = () => {
         placeholder='Confirm Password'
         name='confirm password'
       />
+      {/* Add your birthday here */}
       <Button colour="secondary">Sign in </Button>
       <Typography color="secondary" variant="small">OR</Typography>
       <IconButton name="login" />

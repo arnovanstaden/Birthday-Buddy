@@ -3,5 +3,13 @@
   border-radius: 8px;
   padding: 16px 20px;
 }
+.Setting .top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+.Setting .subtitle {
+  padding-top: 8px;
+}
 
 /*# sourceMappingURL=Setting.module.css.map */

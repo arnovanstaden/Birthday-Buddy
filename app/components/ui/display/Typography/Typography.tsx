@@ -7,13 +7,14 @@ const Typography: React.FC<TypographyProps> = ({
   variant = 'p',
   color = 'primary',
   children,
-  className,
+  ...props
 }) => {
   const classes = classNames(
-    className,
+    props.className,
     styles.Typography,
     styles[`color-${color}`],
-    styles[`variant-${variant}`]
+    styles[`variant-${variant}`],
+    styles[`weight-${props.weight}`]
   );
 
   switch (variant) {

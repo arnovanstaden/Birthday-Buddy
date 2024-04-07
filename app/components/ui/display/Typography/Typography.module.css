@@ -1,5 +1,6 @@
 .Typography {
   margin: 0;
+  display: block;
 }
 .Typography.variant-h1 {
   font-weight: 600;
@@ -22,15 +23,16 @@
   font-size: 20px;
 }
 .Typography.variant-h6 {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
 }
 .Typography.variant-p {
   font-size: 16px;
+  font-weight: 400;
 }
 .Typography.variant-small {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
 }
 .Typography.color-primary {
   color: #FDFDFD;
@@ -40,6 +42,18 @@
 }
 .Typography.color-green {
   color: #29C13E;
+}
+.Typography.weight-300 {
+  font-weight: 300;
+}
+.Typography.weight-400 {
+  font-weight: 400;
+}
+.Typography.weight-500 {
+  font-weight: 500;
+}
+.Typography.weight-600 {
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=Typography.module.css.map */
