@@ -1,0 +1,24 @@
+@import '../../../styles/variables';
+
+.TodayBirthdayCard {
+  background-color: $colour-container;
+  padding: 16px;
+  border: 2px solid $colour-primary-green-primary;
+  border-radius: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+
+  .top {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+  }
+
+  .bottom {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr auto;
+
+  }
+}

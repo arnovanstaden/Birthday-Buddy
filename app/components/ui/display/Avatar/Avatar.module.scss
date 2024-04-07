@@ -1,6 +1,5 @@
 .Avatar {
-  height: 42px;
-  width: 42px;
+
   border-radius: 8px;
   overflow: hidden;
 
@@ -9,5 +8,17 @@
     width: 100%;
     object-fit: cover;
     object-position: center;
+  }
+
+  &.size {
+    &-42 {
+      height: 42px;
+      width: 42px;
+    }
+
+    &-64 {
+      height: 64px;
+      width: 64px;
+    }
   }
 }

@@ -1,0 +1,21 @@
+.TodayBirthdayCard {
+  background-color: #242424;
+  padding: 16px;
+  border: 2px solid #29C13E;
+  border-radius: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.TodayBirthdayCard .top {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+}
+.TodayBirthdayCard .bottom {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr auto;
+}
+
+/*# sourceMappingURL=TodayBirthdayCard.module.css.map */
