@@ -1,3 +1,4 @@
+import Heading from '@components/ui/display/Heading/Heading';
 import Typography from '@components/ui/display/Typography/Typography';
 import Button from '@components/ui/input/Button/Button';
 import IconButton from '@components/ui/input/IconButton/IconButton';
@@ -11,20 +12,13 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function Index() {
+const Login = () => {
   return (
     <div>
-      <Typography
-        variant='h6'
-        color='secondary'
-      >
-        Welcome
-      </Typography>
-      <Typography
-        variant='h3'
-      >
-        Sign In
-      </Typography>
+      <Heading
+        title="Sign In"
+        subtitle="Welcome"
+      />
       <Input
         type='email'
         placeholder='Email'
@@ -43,7 +37,6 @@ export default function Index() {
         Don't have an account yet?
         <a href="/">
           <Typography color="green">
-
             Sign Up
           </Typography>
         </a>
@@ -51,3 +44,5 @@ export default function Index() {
     </div>
   );
 }
+
+export default Login;

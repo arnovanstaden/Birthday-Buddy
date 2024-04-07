@@ -16,5 +16,9 @@
   height: 64px;
   width: 64px;
 }
+.Avatar.size-150 {
+  height: 150px;
+  width: 150px;
+}
 
 /*# sourceMappingURL=Avatar.module.css.map */

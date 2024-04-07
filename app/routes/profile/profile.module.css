@@ -1,0 +1,13 @@
+.Profile .bio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 24px 0;
+}
+.Profile .settings {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/*# sourceMappingURL=profile.module.css.map */

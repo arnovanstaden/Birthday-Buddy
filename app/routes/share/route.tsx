@@ -1,3 +1,4 @@
+import Heading from '@components/ui/display/Heading/Heading';
 import type { MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
@@ -7,10 +8,14 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function Index() {
+const ShareBirthday = () => {
   return (
     <div>
-      Share
+      <Heading
+        title="Share Birthdays"
+        subtitle="Lets get sharing!"
+      />
     </div>
   );
 }
+export default ShareBirthday;

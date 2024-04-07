@@ -7,17 +7,22 @@ import type { MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Login | Birthday Buddy" },
+    { title: "Sign Up | Birthday Buddy" },
     { name: "description", content: "Birthday Buddy" },
   ];
 };
 
-export default function Index() {
+const SignUp = () => {
   return (
     <div>
       <Heading
-        title="Sign In"
-        subtitle="Welcome"
+        title="Sign Up"
+        subtitle="Let's get started"
+      />
+      <Input
+        type='name'
+        placeholder='Full Name'
+        name='name'
       />
       <Input
         type='email'
@@ -29,19 +34,25 @@ export default function Index() {
         placeholder='Password'
         name='password'
       />
+      <Input
+        type='password'
+        placeholder='Confirm Password'
+        name='confirm password'
+      />
       <Button colour="secondary">Sign in </Button>
       <Typography color="secondary" variant="small">OR</Typography>
       <IconButton name="login" />
       <IconButton name="login" />
       <Typography>
-        Don't have an account yet?
+        Already have an account?
         <a href="/">
           <Typography color="green">
-
-            Sign Up
+            Sign In
           </Typography>
         </a>
       </Typography>
     </div>
   );
 }
+
+export default SignUp;
