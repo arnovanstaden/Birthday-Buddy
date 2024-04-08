@@ -1,0 +1,34 @@
+@import '../../../styles/config';
+
+.PhotoPicker {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  input {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .icon {
+    color: $colour-text-on-colour;
+    background-color: $colour-container;
+    border-radius: 16px;
+  }
+
+  img {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    border-radius: 16px;
+    object-fit: cover;
+    object-position: center;
+  }
+}

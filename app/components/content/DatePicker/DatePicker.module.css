@@ -1,7 +1,7 @@
 .DatePicker {
   display: grid;
   align-items: center;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr;
   gap: 16px;
   width: 100%;
 }
