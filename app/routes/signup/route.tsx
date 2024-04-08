@@ -43,8 +43,7 @@ const SignUp = () => {
             placeholder='Confirm Password'
             name='confirm password'
           />
-          {/* Add your birthday here */}
-          <Button colour="secondary">Sign in </Button>
+          <Button colour="secondary">Sign In</Button>
         </form>
         <Typography
           color="secondary"
@@ -52,7 +51,8 @@ const SignUp = () => {
           className={styles.divider}
         >
           OR
-        </Typography>        <div className={styles.social}>
+        </Typography>
+        <div className={styles.social}>
           <IconButton name="login" />
           <IconButton name="login" />
         </div>
@@ -60,7 +60,6 @@ const SignUp = () => {
       <div className={styles.bottom}>
         <Typography>
           Don't have an account yet?
-
         </Typography>
         <Link to="/login">
           <Typography color="green">

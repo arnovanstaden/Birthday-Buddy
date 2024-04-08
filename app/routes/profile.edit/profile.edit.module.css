@@ -1,0 +1,12 @@
+.ProfileEdit form {
+  display: grid;
+  gap: 24px;
+  padding-top: 32px;
+}
+.ProfileEdit form .row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/*# sourceMappingURL=profile.edit.module.css.map */

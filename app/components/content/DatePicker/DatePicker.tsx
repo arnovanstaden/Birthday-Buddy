@@ -37,57 +37,64 @@ const yearOptions = years.map((year) => ({
   label: year
 }));
 
-const DatePicker: React.FC<DatePickerProps> = () => {
+const DatePicker: React.FC<DatePickerProps> = ({ label }) => {
   return (
     <div className={styles.DatePicker}>
-      <Select
-        placeholder="Month"
-        options={monthOptions}
-        aria-label="Months"
-        className={styles.select}
-        components={{
-          IndicatorsContainer: () => null
-        }}
-        classNames={{
-          control: ({ isFocused }) => classNames(styles.control, isFocused && styles.focused),
-          menu: () => styles.menu,
-          singleValue: () => styles.value,
-          option: ({ isSelected }) => classNames(styles.option, isSelected && styles.selected)
-        }}
-        isSearchable={false}
-      />
-      <Select
-        placeholder="Day"
-        options={dayOptions}
-        aria-label="Days"
-        className={styles.select}
-        components={{
-          IndicatorsContainer: () => null
-        }}
-        classNames={{
-          control: ({ isFocused }) => classNames(styles.control, isFocused && styles.focused),
-          menu: () => styles.menu,
-          singleValue: () => styles.value,
-          option: ({ isSelected }) => classNames(styles.option, isSelected && styles.selected)
-        }}
-        isSearchable={false}
-      />
-      <Select
-        placeholder="Year"
-        options={yearOptions}
-        aria-label="Years"
-        className={styles.select}
-        components={{
-          IndicatorsContainer: () => null
-        }}
-        classNames={{
-          control: ({ isFocused }) => classNames(styles.control, isFocused && styles.focused),
-          menu: () => styles.menu,
-          singleValue: () => styles.value,
-          option: ({ isSelected }) => classNames(styles.option, isSelected && styles.selected)
-        }}
-        isSearchable={false}
-      />
+      {label && (
+        <label>
+          {label}
+        </label>
+      )}
+      <div className={styles.row}>
+        <Select
+          placeholder="Month"
+          options={monthOptions}
+          aria-label="Months"
+          className={styles.select}
+          components={{
+            IndicatorsContainer: () => null
+          }}
+          classNames={{
+            control: ({ isFocused }) => classNames(styles.control, isFocused && styles.focused),
+            menu: () => styles.menu,
+            singleValue: () => styles.value,
+            option: ({ isSelected }) => classNames(styles.option, isSelected && styles.selected)
+          }}
+          isSearchable={false}
+        />
+        <Select
+          placeholder="Day"
+          options={dayOptions}
+          aria-label="Days"
+          className={styles.select}
+          components={{
+            IndicatorsContainer: () => null
+          }}
+          classNames={{
+            control: ({ isFocused }) => classNames(styles.control, isFocused && styles.focused),
+            menu: () => styles.menu,
+            singleValue: () => styles.value,
+            option: ({ isSelected }) => classNames(styles.option, isSelected && styles.selected)
+          }}
+          isSearchable={false}
+        />
+        <Select
+          placeholder="Year"
+          options={yearOptions}
+          aria-label="Years"
+          className={styles.select}
+          components={{
+            IndicatorsContainer: () => null
+          }}
+          classNames={{
+            control: ({ isFocused }) => classNames(styles.control, isFocused && styles.focused),
+            menu: () => styles.menu,
+            singleValue: () => styles.value,
+            option: ({ isSelected }) => classNames(styles.option, isSelected && styles.selected)
+          }}
+          isSearchable={false}
+        />
+      </div>
     </div>
   );
 };

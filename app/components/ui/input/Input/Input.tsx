@@ -9,10 +9,16 @@ const Input: React.FC<InputProps> = (props) => {
   );
 
   return (
-    <input
-      {...props}
-      className={classes}
-    />
+    <div className={classes}>
+      {props.label && (
+        <label>
+          {props.label}
+        </label>
+      )}
+      <input
+        {...props}
+      />
+    </div>
   );
 };
 

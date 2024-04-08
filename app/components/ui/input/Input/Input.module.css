@@ -1,4 +1,7 @@
 .Input {
+  width: 100%;
+}
+.Input input {
   display: block;
   border-radius: 16px;
   background-color: #242424;
@@ -11,18 +14,22 @@
   transition: 0.3s ease-in-out;
   font-size: 14px;
 }
-.Input::placeholder {
+.Input input::placeholder {
   color: #959595;
   font-weight: 500;
 }
-.Input:focus {
+.Input input:focus {
   border-color: #29C13E;
 }
-.Input:disabled {
+.Input input:disabled {
   color: rgba(149, 149, 149, 0.5);
   background-color: rgba(36, 36, 36, 0.5);
   user-select: none;
   cursor: none;
+}
+.Input label {
+  font-size: 14px;
+  font-weight: 400;
 }
 
 /*# sourceMappingURL=Input.module.css.map */

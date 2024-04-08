@@ -1,4 +1,9 @@
 .Heading {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+.Heading .left {
   display: flex;
   flex-direction: column-reverse;
   margin-top: 48px;

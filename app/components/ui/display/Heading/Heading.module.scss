@@ -1,6 +1,12 @@
 .Heading {
-  display: flex;
-  flex-direction: column-reverse;
-  margin-top: 48px;
-  margin-bottom: 32px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+
+  .left {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: 48px;
+    margin-bottom: 32px;
+  }
 }

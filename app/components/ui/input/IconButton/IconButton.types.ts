@@ -2,4 +2,5 @@ import { MaterialSymbolName } from '@components/ui/display/Icon/MaterialSymbolNa
 
 export interface IconButtonProps {
   name: MaterialSymbolName;
+  variant?: 'contained' | 'icon';
 }

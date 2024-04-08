@@ -1,50 +1,59 @@
 @import '../../../styles/config';
 
 .DatePicker {
-  display: grid;
-  align-items: center;
-  grid-template-columns: 3fr 1fr 1fr;
-  gap: 16px;
-  width: 100%;
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 8px 8px;
+  }
 
-  .select {
+  .row {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 3fr 1fr 1fr;
+    gap: 8px;
     width: 100%;
-    color: $colour-text-primary;
 
-    .control {
-      background-color: $colour-container;
-      border: none;
-      font-weight: 500;
-      border-radius: 16px;
-      padding: 16px;
+    .select {
+      width: 100%;
       color: $colour-text-primary;
 
-      &.focused {
-        border-color: $colour-primary-green-primary;
-        box-shadow: 0 0 0 1px $colour-primary-green-primary;
+      .control {
+        background-color: $colour-container;
+        border: none;
+        font-weight: 500;
+        border-radius: 16px;
+        padding: 16px;
+        color: $colour-text-primary;
+
+        &.focused {
+          border-color: $colour-primary-green-primary;
+          box-shadow: 0 0 0 1px $colour-primary-green-primary;
+        }
       }
-    }
 
-    .menu {
-      background-color: $colour-container;
-      border-radius: 16px;
-      padding: 8px;
-      font-size: 14px;
-    }
+      .menu {
+        background-color: $colour-container;
+        border-radius: 16px;
+        padding: 8px;
+        font-size: 14px;
+      }
 
-    .value {
-      color: $colour-text-primary;
-      font-size: 14px;
-    }
+      .value {
+        color: $colour-text-primary;
+        font-size: 14px;
+      }
 
-    .option {
-      color: $colour-text-primary;
-      background-color: $colour-container;
-      font-size: 14px;
+      .option {
+        color: $colour-text-primary;
+        background-color: $colour-container;
+        font-size: 14px;
 
-      &.selected {
-        background-color: $colour-primary-green-primary;
-        color: $colour-text-on-colour;
+        &.selected {
+          background-color: $colour-primary-green-primary;
+          color: $colour-text-on-colour;
+        }
       }
     }
   }

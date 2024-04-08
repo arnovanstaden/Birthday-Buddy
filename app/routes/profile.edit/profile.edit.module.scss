@@ -1,0 +1,13 @@
+.ProfileEdit {
+  form {
+    display: grid;
+    gap: 24px;
+    padding-top: 32px;
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+  }
+}
