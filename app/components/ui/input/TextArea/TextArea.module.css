@@ -1,4 +1,4 @@
-.Input {
+.TextArea {
   display: block;
   border-radius: 16px;
   background-color: #242424;
@@ -9,19 +9,14 @@
   width: 100%;
   color: #FDFDFD;
   transition: 0.3s ease-in-out;
+  resize: none;
 }
-.Input::placeholder {
+.TextArea::placeholder {
   color: #959595;
   font-weight: 500;
 }
-.Input:focus {
+.TextArea:focus {
   border-color: #29C13E;
 }
-.Input:disabled {
-  color: rgba(149, 149, 149, 0.5);
-  background-color: rgba(36, 36, 36, 0.5);
-  user-select: none;
-  cursor: none;
-}
 
-/*# sourceMappingURL=Input.module.css.map */
+/*# sourceMappingURL=TextArea.module.css.map */

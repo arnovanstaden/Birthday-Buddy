@@ -1,6 +1,6 @@
 @import '../../../../styles/_config';
 
-.Input {
+.TextArea {
   display: block;
   border-radius: 16px;
   background-color: $colour-container;
@@ -11,6 +11,7 @@
   width: 100%;
   color: $colour-text-primary;
   transition: 0.3s ease-in-out;
+  resize: none;
 
   &::placeholder {
     color: $colour-text-secondary;
@@ -19,12 +20,5 @@
 
   &:focus {
     border-color: $colour-primary-green-primary;
-  }
-
-  &:disabled {
-    color: rgba($colour-text-secondary, 0.5);
-    background-color: rgba($colour-container, 0.5);
-    user-select: none;
-    cursor: none;
   }
 }

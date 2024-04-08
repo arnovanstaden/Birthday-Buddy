@@ -1,0 +1,12 @@
+.Add {
+  form {
+    display: grid;
+    gap: 24px;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+}

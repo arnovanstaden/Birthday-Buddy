@@ -11,6 +11,12 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 16px;
+  align-items: center;
+}
+.TodayBirthdayCard .top .date {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 .TodayBirthdayCard .bottom {
   display: grid;

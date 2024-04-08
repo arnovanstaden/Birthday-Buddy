@@ -16,19 +16,19 @@ const BirthdayCard: React.FC<BirthdayCardProps> = (props) => {
   return (
     <div className={styles.BirthdayCard}>
       <div className={styles.left}>
-        <Typography variant='h6' color='green'>
+        <Typography variant='h5' color='green'>
           {daysUntilNextYearSameDay(date)}
         </Typography>
         <Typography color='secondary' variant='small'>days</Typography>
       </div>
       <div className={styles.divider} />
-      <Avatar src={props.avatarSrc}
+      <Avatar src={props.avatarSrc} size={64}
       />
       <div className={styles.right}>
         <Typography variant='h6'>
           {props.name}
         </Typography>
-        <Typography color='green'>
+        <Typography color='green' weight={500}>
           {date.toDateString()}
         </Typography>
         <Typography color='secondary' variant='small'>

@@ -1,0 +1,11 @@
+.Add form {
+  display: grid;
+  gap: 24px;
+}
+.Add .row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/*# sourceMappingURL=add.module.css.map */

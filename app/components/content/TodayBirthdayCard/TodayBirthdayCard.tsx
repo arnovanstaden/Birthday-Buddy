@@ -17,12 +17,12 @@ const TodayBirthdayCard: React.FC<BirthdayCardProps> = (props) => {
           <Typography variant='h6'>
             {props.name}
           </Typography>
-          <div>
-            <Typography color='green'>
+          <div className={styles.date}>
+            <Typography color='green' weight={500}>
               Today
             </Typography>
             <Typography color='secondary' variant='small'>
-              Turns {getAge(props.date)}
+              •  Turns {getAge(props.date)}
             </Typography>
           </div>
         </div>

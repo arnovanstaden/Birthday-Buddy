@@ -23,10 +23,12 @@ const Profile = () => {
         <Avatar
           size={150}
           src='https://www.tandem.net/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2F0uov5tlk8deu%2F3EhMdZzYvroc6S5lN9ntZD%2F32df91b1dc1522ccacbdf1a9aaf5e235%2Farno.jpg&w=767&q=100'
+
         />
         <Typography
           variant='h4'
           weight={500}
+          className={styles.name}
         >
           Arno van Staden
         </Typography>

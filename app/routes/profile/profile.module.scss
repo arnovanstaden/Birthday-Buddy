@@ -3,7 +3,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 24px 0;
+    margin: 32px 0 32px 0;
+
+    .name {
+      margin-top: 24px;
+    }
   }
 
   .settings {

@@ -13,12 +13,18 @@
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 16px;
+    align-items: center;
+
+    .date {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
   }
 
   .bottom {
     display: grid;
     gap: 16px;
     grid-template-columns: 1fr auto;
-
   }
 }
