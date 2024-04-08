@@ -1,12 +1,36 @@
+@import '../../styles/config';
+
 .Add {
+  height: 100%;
+
   form {
     display: grid;
     gap: 24px;
-  }
+    padding-top: 32px;
 
-  .row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .addBirthday {
+      display: flex;
+      gap: 16px;
+      flex-direction: column;
+      align-items: center;
+
+      button {
+        background-color: transparent;
+        border: none;
+        background-color: $colour-container;
+        display: flex;
+        border-radius: 16px;
+
+        .icon {
+          color: $colour-text-on-colour;
+        }
+      }
+    }
   }
 }

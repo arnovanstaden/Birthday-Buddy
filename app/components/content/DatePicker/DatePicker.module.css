@@ -1,0 +1,44 @@
+.DatePicker {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+.DatePicker .select {
+  width: 100%;
+  color: #FDFDFD;
+}
+.DatePicker .select .control {
+  background-color: #242424;
+  border: none;
+  font-weight: 500;
+  border-radius: 16px;
+  padding: 16px;
+  color: #FDFDFD;
+}
+.DatePicker .select .control.focused {
+  border-color: #29C13E;
+  box-shadow: 0 0 0 1px #29C13E;
+}
+.DatePicker .select .menu {
+  background-color: #242424;
+  border-radius: 16px;
+  padding: 8px;
+  font-size: 14px;
+}
+.DatePicker .select .value {
+  color: #FDFDFD;
+  font-size: 14px;
+}
+.DatePicker .select .option {
+  color: #FDFDFD;
+  background-color: #242424;
+  font-size: 14px;
+}
+.DatePicker .select .option.selected {
+  background-color: #29C13E;
+  color: #181818;
+}
+
+/*# sourceMappingURL=DatePicker.module.css.map */

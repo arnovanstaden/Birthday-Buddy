@@ -1,11 +1,31 @@
+.Add {
+  height: 100%;
+}
 .Add form {
   display: grid;
   gap: 24px;
+  padding-top: 32px;
 }
-.Add .row {
+.Add form .row {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+.Add form .addBirthday {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+}
+.Add form .addBirthday button {
+  background-color: transparent;
+  border: none;
+  background-color: #242424;
+  display: flex;
+  border-radius: 16px;
+}
+.Add form .addBirthday button .icon {
+  color: #181818;
 }
 
 /*# sourceMappingURL=add.module.css.map */
