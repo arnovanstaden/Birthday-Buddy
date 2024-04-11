@@ -1,0 +1,12 @@
+.SignUpProfile form {
+  display: grid;
+  gap: 24px;
+  padding-top: 32px;
+}
+.SignUpProfile form .row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/*# sourceMappingURL=signUpProfile.module.css.map */

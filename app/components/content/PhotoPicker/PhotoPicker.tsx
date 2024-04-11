@@ -25,12 +25,14 @@ const PhotoPicker: React.FC<PhotoPickerProps> = (props) => {
           <img
             src={image}
             alt="Preview"
+            width={150}
+            height={150}
           />
           :
           <Icon
             name="account_circle"
             className={styles.icon}
-            size={110}
+            size={150}
           />
       }
     </div>
