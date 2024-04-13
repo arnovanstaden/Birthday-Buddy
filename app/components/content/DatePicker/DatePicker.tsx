@@ -37,7 +37,7 @@ const yearOptions = years.map((year) => ({
   label: year
 }));
 
-const DatePicker: React.FC<DatePickerProps> = ({ label }) => {
+const DatePicker: React.FC<DatePickerProps> = ({ label, ...props }) => {
   return (
     <div className={styles.DatePicker}>
       {label && (
@@ -67,6 +67,10 @@ const DatePicker: React.FC<DatePickerProps> = ({ label }) => {
           options={dayOptions}
           aria-label="Days"
           className={styles.select}
+          value={props.day && {
+            value: props.day,
+            label: props.day
+          }}
           components={{
             IndicatorsContainer: () => null
           }}
@@ -83,6 +87,10 @@ const DatePicker: React.FC<DatePickerProps> = ({ label }) => {
           options={yearOptions}
           aria-label="Years"
           className={styles.select}
+          value={props.year && {
+            value: props.year,
+            label: props.year
+          }}
           components={{
             IndicatorsContainer: () => null
           }}

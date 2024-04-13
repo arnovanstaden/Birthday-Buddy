@@ -8,12 +8,13 @@
   position: relative;
 
   input {
-    width: 100%;
-    height: 100%;
+    width: 150px;
+    height: 150px;
     opacity: 0;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1;
   }
 
@@ -25,7 +26,6 @@
 
   img {
     position: relative;
-    ;
     border-radius: 16px;
     object-fit: cover;
     object-position: center;

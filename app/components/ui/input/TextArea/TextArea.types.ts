@@ -1,3 +1,3 @@
-export interface TextAreaProps extends React.HTMLProps<HTMLTextAreaElement> {
-
+export interface TextAreaProps extends Omit<React.HTMLProps<HTMLTextAreaElement>, 'onChange'> {
+  onChange?: (value: string) => void;
 }

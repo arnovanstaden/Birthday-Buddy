@@ -10,7 +10,6 @@ const BirthdayCard: React.FC<Birthday> = (birthday) => {
   if (isBirthdayToday(birthday.day, birthday.month)) {
     return <TodayBirthdayCard {...birthday} />;
   }
-  const avatarSrc = 'https://www.tandem.net/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2F0uov5tlk8deu%2F3EhMdZzYvroc6S5lN9ntZD%2F32df91b1dc1522ccacbdf1a9aaf5e235%2Farno.jpg&w=767&q=100';
 
   return (
     <Link to={`/birthday/${birthday.id}`}>
@@ -22,7 +21,7 @@ const BirthdayCard: React.FC<Birthday> = (birthday) => {
           <Typography color='secondary' variant='small'>days</Typography>
         </div>
         <div className={styles.divider} />
-        <Avatar src={avatarSrc} size={64}
+        <Avatar src={birthday.avatar} size={64}
         />
         <div className={styles.right}>
           <Typography variant='h6'>

@@ -11,4 +11,5 @@ export interface BirthdayDB {
 export interface Birthday extends BirthdayDB {
   age?: number;
   date: string;
+  avatar: string;
 }

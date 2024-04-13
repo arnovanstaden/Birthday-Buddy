@@ -7,6 +7,7 @@ export const transformBirthday = (birthday: BirthdayDB): Birthday => {
     ...birthday,
     date,
     age: getAge(date, birthday.year),
+    avatar: `https://caddasfkyvctkqlspemd.supabase.co/storage/v1/object/public/avatars/${birthday.id}.webp`
   }
 }
 

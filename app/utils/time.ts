@@ -7,22 +7,10 @@ export const getAge = (date: string, year: number | undefined): number | undefin
   return ((new Date(date).getFullYear() < currentYear) ? currentYear + 1 : currentYear) - year;
 }
 
-export const daysUntilNextYearSameDay = (date: Date): number => {
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-
-  const targetYear = currentYear + 1;
-  const targetDate = new Date(targetYear, date.getMonth(), date.getDate());
-
-  const timeDifference = targetDate.getTime() - currentDate.getTime();
-  const daysUntilNextYear = Math.round(timeDifference / (1000 * 60 * 60 * 24));
-  return daysUntilNextYear;
-}
-
 /**
- * Returns the number of days until the next occurrence of a specific day and month.
+ * Returns the date of the next occurrence of a specific day and month.
  */
-export const daysUntilNextOccurrence = (birthDay: number, birthMonth: number): number => {
+export const getNextBirthday = (birthDay: number, birthMonth: number): Date => {
   const today = new Date();
   const currentMonth = today.getMonth();
 
@@ -34,6 +22,16 @@ export const daysUntilNextOccurrence = (birthDay: number, birthMonth: number): n
 
   // Construct target date for next occurrence
   const targetDate = new Date(targetYear, birthMonth - 1, birthDay); // Month indexes start from 0, so we subtract 1
+
+  return targetDate;
+}
+
+/**
+ * Returns the number of days until the next occurrence of a specific day and month.
+ */
+export const daysUntilNextOccurrence = (birthDay: number, birthMonth: number): number => {
+  const targetDate = getNextBirthday(birthDay, birthMonth);
+  const today = new Date();
 
   // Calculate the difference in milliseconds between today and the target date
   const differenceMillis = targetDate.getTime() - today.getTime();
