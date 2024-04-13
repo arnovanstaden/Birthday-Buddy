@@ -1,11 +1,13 @@
 import Heading from '@components/ui/display/Heading/Heading';
 import styles from './birthday.module.css';
-import type { MetaFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import Avatar from '@components/ui/display/Avatar/Avatar';
 import Typography from '@components/ui/display/Typography/Typography';
 import IconButton from '@components/ui/input/IconButton/IconButton';
-import { Link } from '@remix-run/react';
+import { Link, json, useLoaderData } from '@remix-run/react';
 import CountdownTimer from '@components/content/CountdownTimer/CountdownTimer';
+import { getBirthday } from 'app/lib/birthdays';
+import { formatBirthday } from 'app/utils/time';
 
 export const meta: MetaFunction = () => {
   return [
@@ -15,14 +17,23 @@ export const meta: MetaFunction = () => {
 };
 
 
+export const loader = async ({ request, params }: LoaderFunctionArgs) => {
+  const birthday = await getBirthday(request, params.id as string);
+  if (!birthday) return;
+  return json({ birthday });
+};
+
+
 const BirthdayView: React.FC = () => {
+  const { birthday } = useLoaderData<typeof loader>();
+
   return (
     <div className={styles.BirthdayView}>
       <Heading
         title="Birthday"
         subtitle="Don't forget again!"
         action={(
-          <Link to="/birthday/1/edit">
+          <Link to={`/birthday/${birthday.id}/edit`}>
             <IconButton name="edit" variant="icon" />
           </Link>
         )}
@@ -37,19 +48,21 @@ const BirthdayView: React.FC = () => {
           weight={500}
           className={styles.name}
         >
-          Arno van Staden
+          {birthday.name}
         </Typography>
         <Typography
           color='green'
         >
-          Monday 24 January 2022
+          {formatBirthday(birthday.date)}
         </Typography>
-        <Typography
-          color='secondary'
-          variant='small'
-        >
-          Turns 29
-        </Typography>
+        {birthday.age && (
+          <Typography
+            color='secondary'
+            variant='small'
+          >
+            Turns {birthday.age}
+          </Typography>
+        )}
       </div>
       <CountdownTimer date={new Date(1994, 3, 14)} />
     </div>

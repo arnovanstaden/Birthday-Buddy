@@ -1,7 +1,10 @@
 import BirthdayCard from '@components/content/BirthdayCard/BirthdayCard';
 import Heading from '@components/ui/display/Heading/Heading';
-import type { MetaFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import styles from './index.module.css';
+import { getBirthdays } from 'app/lib/birthdays';
+import { json, useLoaderData } from '@remix-run/react';
+import { isBirthdayToday } from 'app/utils/time';
 
 export const meta: MetaFunction = () => {
   return [
@@ -10,29 +13,44 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const birthdays = await getBirthdays(request);
+  return json({ birthdays });
+};
+
 const Home = () => {
+  const { birthdays } = useLoaderData<typeof loader>();
+  const todaysBirthdays = birthdays.filter((birthday) => isBirthdayToday(birthday.day, birthday.month));
+  const upcomingBirthdays = birthdays.filter((birthday) => !isBirthdayToday(birthday.day, birthday.month));
+
   return (
     <div className={styles.Home}>
-      <div className={styles.today}>
-        <Heading
-          title='Today’s Birthdays'
-          subtitle='Ready to celebrate?'
-        />
-        <BirthdayCard
-          name='John Snow'
-          date={new Date('1994-04-07')}
-          avatarSrc='https://www.tandem.net/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2F0uov5tlk8deu%2F3EhMdZzYvroc6S5lN9ntZD%2F32df91b1dc1522ccacbdf1a9aaf5e235%2Farno.jpg&w=767&q=100'
-        />
-      </div>
+      {todaysBirthdays.length > 0 && (
+        <div className={styles.today}>
+          <Heading
+            title='Today’s Birthdays'
+            subtitle='Ready to celebrate?'
+          />
+          {todaysBirthdays.map((birthday) => (
+            <BirthdayCard
+              key={birthday.id}
+              {...birthday}
+            />
+          ))}
+        </div>
+      )}
       <Heading
         title='Upcoming Birthdays'
         subtitle='Who’s next?'
       />
-      <BirthdayCard
-        name='Arno van Staden'
-        date={new Date('1994-01-24')}
-        avatarSrc='https://www.tandem.net/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2F0uov5tlk8deu%2F3EhMdZzYvroc6S5lN9ntZD%2F32df91b1dc1522ccacbdf1a9aaf5e235%2Farno.jpg&w=767&q=100'
-      />
+      <div className={styles.list}>
+        {upcomingBirthdays.map((birthday) => (
+          <BirthdayCard
+            key={birthday.id}
+            {...birthday}
+          />
+        ))}
+      </div>
     </div>
   );
 }
