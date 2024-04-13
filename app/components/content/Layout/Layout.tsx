@@ -1,4 +1,3 @@
-import Container from '../../ui/layout/Container/Container';
 import styles from './Layout.module.css';
 import MobileNavbar from './MobileNavbar/MobileNavbar';
 
@@ -7,9 +6,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = (props) => {
     <div className={styles.Layout}>
 
       <main>
-        <Container>
-          {props.children}
-        </Container>
+        {props.children}
       </main>
       <MobileNavbar />
     </div>

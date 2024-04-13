@@ -6,6 +6,34 @@
 .Layout main {
   height: 100%;
   overflow-y: auto;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px 24px 16px;
+}
+@media (min-width: 576px) {
+  .Layout main {
+    padding: 0 24px;
+  }
+}
+@media (min-width: 768px) {
+  .Layout main {
+    max-width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .Layout main {
+    max-width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .Layout main {
+    max-width: 1170px;
+  }
+}
+@media (min-width: 1500px) {
+  .Layout main {
+    max-width: 1570px;
+  }
 }
 
 /*# sourceMappingURL=Layout.module.css.map */

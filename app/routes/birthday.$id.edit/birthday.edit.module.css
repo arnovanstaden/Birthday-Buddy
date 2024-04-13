@@ -1,0 +1,12 @@
+.BirthdayEdit form {
+  display: grid;
+  gap: 24px;
+  padding-top: 32px;
+}
+.BirthdayEdit form .row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/*# sourceMappingURL=birthday.edit.module.css.map */
