@@ -53,15 +53,15 @@ const SignUp = () => {
           OR
         </Typography>
         <div className={styles.social}>
-          <IconButton name="login" />
-          <IconButton name="login" />
+          <IconButton name="apple" />
+          <IconButton name="google" />
         </div>
       </div>
       <div className={styles.bottom}>
         <Typography>
           Don't have an account yet?
         </Typography>
-        <Link to="/login">
+        <Link to="/auth/login">
           <Typography color="green">
             Sign In
           </Typography>

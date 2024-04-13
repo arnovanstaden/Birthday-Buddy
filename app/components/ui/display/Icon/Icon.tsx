@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import styles from './Icon.module.css';
 import { IconProps } from './Icon.types';
 
+const customIcons = ['apple', 'google'];
+
 const Icon: React.FC<IconProps> = ({ colour = 'green', size = 24, name, ...props }) => {
   const classes = classNames(
     styles.Icon,
@@ -10,6 +12,20 @@ const Icon: React.FC<IconProps> = ({ colour = 'green', size = 24, name, ...props
   );
 
   const { dataTestId, ...restProps } = { ...props };
+
+  const isCustomIcon = customIcons.includes(name);
+
+  if (isCustomIcon) {
+    return (
+      <img
+        src={`/icons/${name}.svg`}
+        aria-label={`${name} icon`}
+        alt={`${name} icon`}
+        width={size - 4}
+        height={size - 4}
+      />
+    );
+  }
 
   return (
     <span

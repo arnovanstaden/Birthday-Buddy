@@ -31,6 +31,13 @@ const ProfileEdit = () => {
           />
         </div>
         <div className={styles.row}>
+          <Icon name='email' />
+          <Input
+            placeholder='Email'
+            type='email'
+          />
+        </div>
+        <div className={styles.row}>
           <Icon name='event' />
           <DatePicker />
         </div>

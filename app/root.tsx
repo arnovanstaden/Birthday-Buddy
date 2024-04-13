@@ -6,7 +6,6 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
 } from "@remix-run/react";
 import './styles/global.css';
 import Layout from '@components/content/Layout/Layout';
@@ -31,7 +30,6 @@ export default function App() {
         <Layout>
           <Outlet />
         </Layout>
-        <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>

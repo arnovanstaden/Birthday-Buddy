@@ -1,6 +1,6 @@
-import { MaterialSymbolName } from '@components/ui/display/Icon/MaterialSymbolNames';
+import { IconProps } from '@components/ui/display/Icon/Icon.types';
 
 export interface IconButtonProps {
-  name: MaterialSymbolName;
+  name: IconProps['name'];
   variant?: 'contained' | 'icon';
 }
