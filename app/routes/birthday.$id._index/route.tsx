@@ -63,6 +63,16 @@ const BirthdayView: React.FC = () => {
         )}
       </div>
       <CountdownTimer date={getNextBirthday(birthday.day, birthday.month)} />
+      {birthday.notes && (
+        <div className={styles.notes}>
+          <Typography
+            variant='small'
+            color='secondary'
+          >
+            {birthday.notes}
+          </Typography>
+        </div>
+      )}
     </div>
   );
 };

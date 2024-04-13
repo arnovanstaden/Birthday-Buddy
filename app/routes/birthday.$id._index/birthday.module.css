@@ -10,5 +10,13 @@
 .BirthdayView .bio .name {
   margin-top: 24px;
 }
+.BirthdayView .notes {
+  margin-top: 32px;
+  background-color: #242424;
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  text-align: center;
+}
 
 /*# sourceMappingURL=birthday.module.css.map */

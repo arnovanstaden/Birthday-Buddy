@@ -1,3 +1,5 @@
+@import '../../styles/config';
+
 .BirthdayView {
   height: 100%;
 
@@ -10,5 +12,14 @@
     .name {
       margin-top: 24px;
     }
+  }
+
+  .notes {
+    margin-top: 32px;
+    background-color: $colour-container;
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    text-align: center;
   }
 }
