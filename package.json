@@ -4,9 +4,9 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix build",
+    "build": "remix vite:build",
     "sass": "sass --watch app/:app/",
-    "dev": "concurrently \"npm run sass\" \"remix dev\"",
+    "dev": "concurrently \"npm run sass\" \"remix vite:dev -p 3000\"",
     "lint": "eslint .",
     "lint:fix": "eslint .",
     "start": "remix-serve ./build/index.js",
@@ -47,7 +47,9 @@
     "eslint-plugin-storybook": "^0.8.0",
     "husky": "^9.0.11",
     "sass": "^1.72.0",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "vite": "^5.2.8",
+    "vite-tsconfig-paths": "^4.2.1"
   },
   "engines": {
     "node": ">=18.0.0"

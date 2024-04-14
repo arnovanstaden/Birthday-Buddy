@@ -24,11 +24,6 @@ const SignUp = () => {
       <div className={styles.content}>
         <form>
           <Input
-            type='name'
-            placeholder='Full Name'
-            name='name'
-          />
-          <Input
             type='email'
             placeholder='Email'
             name='email'
@@ -43,7 +38,7 @@ const SignUp = () => {
             placeholder='Confirm Password'
             name='confirm password'
           />
-          <Button colour="secondary">Sign In</Button>
+          <Button colour="secondary">Sign Up</Button>
         </form>
         <Typography
           color="secondary"
