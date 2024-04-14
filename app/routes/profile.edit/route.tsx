@@ -6,6 +6,7 @@ import Icon from '@components/ui/display/Icon/Icon';
 import DatePicker from '@components/content/DatePicker/DatePicker';
 import Input from '@components/ui/input/Input/Input';
 import Button from '@components/ui/input/Button/Button';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 export const meta: MetaFunction = () => {
   return [
@@ -14,27 +15,54 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+interface EditProfileForm {
+  name: string;
+  email: string;
+}
+
 const ProfileEdit = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<EditProfileForm>()
+
+  const onSubmit: SubmitHandler<EditProfileForm> = (data: EditProfileForm) => {
+    console.log(data)
+  }
+
   return (
     <div className={styles.ProfileEdit}>
       <Heading
         title="Edit Profile"
         subtitle="Want to change something?"
       />
-      <form action="">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <PhotoPicker />
         <div className={styles.row}>
           <Icon name='person' />
           <Input
-            placeholder='Name'
-            type='text'
+            inputProps={{
+              type: 'text',
+              autoComplete: 'name',
+              placeholder: 'Name',
+            }}
+            name='name'
+            register={{ ...register('name', { required: true }) }}
+            error={errors.name?.type === 'required' ? 'Name is required' : undefined}
           />
         </div>
         <div className={styles.row}>
           <Icon name='email' />
           <Input
-            placeholder='Email'
-            type='email'
+            inputProps={{
+              type: 'email',
+              autoComplete: 'email',
+              placeholder: 'Email',
+            }}
+            name='email'
+            register={{ ...register('email', { required: true }) }}
+            error={errors.email?.type === 'required' ? 'Email is required' : undefined}
           />
         </div>
         <div className={styles.row}>

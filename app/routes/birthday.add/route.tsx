@@ -7,6 +7,7 @@ import TextArea from '@components/ui/input/TextArea/TextArea';
 import Button from '@components/ui/input/Button/Button';
 import DatePicker from '@components/content/DatePicker/DatePicker';
 import PhotoPicker from '@components/content/PhotoPicker/PhotoPicker';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 export const meta: MetaFunction = () => {
   return [
@@ -15,20 +16,42 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+interface AddBirthdayForm {
+  name: string;
+  date: string;
+  notes: string;
+}
+
 const AddBirthday = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AddBirthdayForm>()
+
+  const onSubmit: SubmitHandler<AddBirthdayForm> = (data: AddBirthdayForm) => {
+    console.log(data)
+  }
+
   return (
     <div className={styles.Add}>
       <Heading
         title="Add a Birthday"
         subtitle="Don't forget again!"
       />
-      <form action="">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <PhotoPicker />
         <div className={styles.row}>
           <Icon name='person' />
           <Input
-            placeholder='Name'
-            type='text'
+            inputProps={{
+              type: 'text',
+              autoComplete: 'name',
+              placeholder: 'Name',
+            }}
+            name='name'
+            register={{ ...register('name', { required: true }) }}
+            error={errors.name?.type === 'required' ? 'Name is required' : undefined}
           />
         </div>
         <div className={styles.row}>
@@ -39,7 +62,6 @@ const AddBirthday = () => {
           <Icon name='description' />
           <TextArea
             placeholder='Birthday gifts, party ideas, etc.'
-            label='Notes'
           />
         </div>
         <Button >

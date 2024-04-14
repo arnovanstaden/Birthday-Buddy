@@ -6,6 +6,11 @@ import styles from './signUpProfile.module.css';
 import PhotoPicker from '@components/content/PhotoPicker/PhotoPicker';
 import Icon from '@components/ui/display/Icon/Icon';
 import DatePicker from '@components/content/DatePicker/DatePicker';
+import { SubmitHandler, useForm } from 'react-hook-form';
+
+interface SignUpProfileForm {
+  name: string;
+}
 
 export const meta: MetaFunction = () => {
   return [
@@ -15,19 +20,35 @@ export const meta: MetaFunction = () => {
 };
 
 const SignUpProfile = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpProfileForm>()
+
+  const onSubmit: SubmitHandler<SignUpProfileForm> = (data: SignUpProfileForm) => {
+    console.log(data)
+  }
+
   return (
     <div className={styles.SignUpProfile}>
       <Heading
         title="Your Profile"
         subtitle="Almost there!"
       />
-      <form action="">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <PhotoPicker />
         <div className={styles.row}>
           <Icon name='person' />
           <Input
-            placeholder='Name'
-            type='text'
+            inputProps={{
+              type: 'text',
+              autoComplete: 'name',
+              placeholder: 'Name',
+            }}
+            name='name'
+            register={{ ...register('name', { required: true }) }}
+            error={errors.name?.type === 'required' ? 'Name is required' : undefined}
           />
         </div>
         <div className={styles.row}>

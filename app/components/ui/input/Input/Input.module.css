@@ -27,9 +27,9 @@
   user-select: none;
   cursor: none;
 }
-.Input label {
-  font-size: 14px;
-  font-weight: 400;
+.Input small {
+  margin-top: 8px;
+  margin-left: 16px;
 }
 
 /*# sourceMappingURL=Input.module.css.map */

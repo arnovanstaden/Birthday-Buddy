@@ -1,3 +1,9 @@
-export interface InputProps extends Omit<React.HTMLProps<HTMLInputElement>, 'onChange'> {
-  onChange?: (value: string) => void;
+import { UseFormRegisterReturn } from 'react-hook-form';
+
+export interface InputProps {
+  name: string;
+  className?: string
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  register: UseFormRegisterReturn;
+  error?: string;
 }

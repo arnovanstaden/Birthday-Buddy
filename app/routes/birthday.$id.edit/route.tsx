@@ -9,6 +9,7 @@ import Button from '@components/ui/input/Button/Button';
 import TextArea from '@components/ui/input/TextArea/TextArea';
 import { json, useLoaderData } from '@remix-run/react';
 import { getBirthday } from 'app/lib/birthdays';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 export const meta: MetaFunction = () => {
   return [
@@ -24,8 +25,25 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 };
 
 
+interface EditBirthdayForm {
+  name: string;
+  date: string;
+  notes: string;
+}
+
 const BirthdayEdit = () => {
   const { birthday } = useLoaderData<typeof loader>();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<EditBirthdayForm>()
+
+  const onSubmit: SubmitHandler<EditBirthdayForm> = (data: EditBirthdayForm) => {
+    console.log(data)
+  }
+
 
   return (
     <div className={styles.BirthdayEdit}>
@@ -33,14 +51,19 @@ const BirthdayEdit = () => {
         title="Edit Birthday"
         subtitle="Want to change something?"
       />
-      <form action="">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <PhotoPicker defaultImage={birthday.avatar} />
         <div className={styles.row}>
           <Icon name='person' />
           <Input
-            placeholder='Name'
-            type='text'
-            value={birthday.name}
+            inputProps={{
+              type: 'text',
+              autoComplete: 'name',
+              placeholder: 'Name',
+            }}
+            name='name'
+            register={{ ...register('name', { required: true }) }}
+            error={errors.name?.type === 'required' ? 'Name is required' : undefined}
           />
         </div>
         <div className={styles.row}>
@@ -55,7 +78,6 @@ const BirthdayEdit = () => {
           <Icon name='description' />
           <TextArea
             placeholder='Birthday gifts, party ideas, etc.'
-            label='Notes'
             value={birthday.notes}
           />
         </div>

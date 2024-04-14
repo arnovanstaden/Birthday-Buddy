@@ -6,6 +6,7 @@ import Input from '@components/ui/input/Input/Input';
 import type { MetaFunction } from "@remix-run/node";
 import styles from './signup.module.css';
 import { Link } from '@remix-run/react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 export const meta: MetaFunction = () => {
   return [
@@ -14,7 +15,23 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+interface SignUpForm {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 const SignUp = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpForm>()
+
+  const onSubmit: SubmitHandler<SignUpForm> = (data: SignUpForm) => {
+    console.log(data)
+  }
+
   return (
     <div className={styles.SignUp}>
       <Heading
@@ -22,21 +39,34 @@ const SignUp = () => {
         subtitle="Let's get started"
       />
       <div className={styles.content}>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Input
-            type='email'
-            placeholder='Email'
+            inputProps={{
+              type: 'email',
+              autoComplete: 'email',
+              placeholder: 'Email',
+            }}
             name='email'
+            register={{ ...register('email', { required: true }) }}
+            error={errors.email?.type === 'required' ? 'Email is required' : undefined}
           />
           <Input
-            type='password'
-            placeholder='Password'
+            inputProps={{
+              type: 'password',
+              placeholder: 'Password',
+            }}
             name='password'
+            register={{ ...register('password', { required: true }) }}
+            error={errors.password?.type === 'required' ? 'Password is required' : undefined}
           />
           <Input
-            type='password'
-            placeholder='Confirm Password'
-            name='confirm password'
+            inputProps={{
+              type: 'password',
+              placeholder: 'Password',
+            }}
+            name='confirmPassword'
+            register={{ ...register('confirmPassword', { required: true }) }}
+            error={errors.password?.type === 'required' ? 'Confirming Password is required' : undefined}
           />
           <Button colour="secondary">Sign Up</Button>
         </form>
@@ -62,7 +92,7 @@ const SignUp = () => {
           </Typography>
         </Link>
       </div>
-    </div>
+    </div >
   );
 }
 

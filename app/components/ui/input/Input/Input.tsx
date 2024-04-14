@@ -1,30 +1,25 @@
 import classNames from 'classnames';
 import styles from './Input.module.css';
 import { InputProps } from './Input.types';
+import Typography from '@components/ui/display/Typography/Typography';
 
-const Input: React.FC<InputProps> = (props) => {
+const Input: React.FC<InputProps> = ({ error, ...props }) => {
   const classes = classNames(
     styles.Input,
     props.className,
+    error && styles.error,
   );
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (props.onChange) {
-      props.onChange(e.target.value);
-    }
-  }
-
   return (
     <div className={classes}>
-      {props.label && (
-        <label>
-          {props.label}
-        </label>
-      )}
       <input
-        {...props}
-        onChange={handleChange}
+        {...props.inputProps}
+        {...props.register}
       />
+      {error && (
+        <Typography variant="small" weight={300} color="green">
+          {error}
+        </Typography>
+      )}
     </div>
   );
 };

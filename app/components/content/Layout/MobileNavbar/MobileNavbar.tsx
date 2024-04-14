@@ -13,17 +13,17 @@ const MobileNavbar: React.FC = () => {
           <Icon name="home" colour={pathname === "/" ? 'green' : 'gray'} />
         </button>
       </Link>
-      <Link to="add" className={styles.link}>
+      <Link to="/birthday/add" className={styles.link}>
         <button>
-          <Icon name="add" colour={pathname === "/add" ? 'green' : 'gray'} />
+          <Icon name="add" colour={pathname === "/birthday/add" ? 'green' : 'gray'} />
         </button>
       </Link>
-      <Link to="share" className={styles.link}>
+      <Link to="/share" className={styles.link}>
         <button>
           <Icon name="share" colour={pathname === "/share" ? 'green' : 'gray'} />
         </button>
       </Link>
-      <Link to="profile" className={styles.link}>
+      <Link to="/profile" className={styles.link}>
         <button>
           <Icon name="person" colour={pathname === "/profile" ? 'green' : 'gray'} />
         </button>
