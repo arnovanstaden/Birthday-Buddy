@@ -9,6 +9,7 @@ const Input: React.FC<InputProps> = ({ error, ...props }) => {
     props.className,
     error && styles.error,
   );
+
   return (
     <div className={classes}>
       <input

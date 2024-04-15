@@ -18,6 +18,7 @@ export const meta: MetaFunction = () => {
 interface EditProfileForm {
   name: string;
   email: string;
+  avatar: File;
 }
 
 const ProfileEdit = () => {
@@ -38,7 +39,14 @@ const ProfileEdit = () => {
         subtitle="Want to change something?"
       />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <PhotoPicker />
+        <PhotoPicker
+          // defaultImage={birthday.avatar}
+          inputProps={{
+            type: 'file',
+          }}
+          name='avatar'
+          register={{ ...register('avatar', { required: true }) }}
+        />
         <div className={styles.row}>
           <Icon name='person' />
           <Input

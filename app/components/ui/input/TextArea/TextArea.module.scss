@@ -1,24 +1,33 @@
 @import '../../../../styles/_config';
 
 .TextArea {
-  display: block;
-  border-radius: 16px;
-  background-color: $colour-container;
-  border: 1px solid $colour-container;
-  outline: none;
-  padding: 16px;
-  font-weight: 500;
   width: 100%;
-  color: $colour-text-primary;
-  transition: 0.3s ease-in-out;
-  resize: none;
 
-  &::placeholder {
-    color: $colour-text-secondary;
+  textarea {
+    display: block;
+    border-radius: 16px;
+    background-color: $colour-container;
+    border: 1px solid $colour-container;
+    outline: none;
+    padding: 16px;
     font-weight: 500;
+    width: 100%;
+    color: $colour-text-primary;
+    transition: 0.3s ease-in-out;
+    resize: none;
+
+    &::placeholder {
+      color: $colour-text-secondary;
+      font-weight: 500;
+    }
+
+    &:focus {
+      border-color: $colour-primary-green-primary;
+    }
   }
 
-  &:focus {
-    border-color: $colour-primary-green-primary;
+  small {
+    margin-top: 8px;
+    margin-left: 16px;
   }
 }

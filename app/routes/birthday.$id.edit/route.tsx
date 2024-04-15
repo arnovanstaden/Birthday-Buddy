@@ -10,6 +10,7 @@ import TextArea from '@components/ui/input/TextArea/TextArea';
 import { json, useLoaderData } from '@remix-run/react';
 import { getBirthday } from 'app/lib/birthdays';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { BirthdayDateObject } from 'app/types';
 
 export const meta: MetaFunction = () => {
   return [
@@ -24,11 +25,10 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   return json({ birthday });
 };
 
-
-interface EditBirthdayForm {
+interface EditBirthdayForm extends BirthdayDateObject {
   name: string;
-  date: string;
   notes: string;
+  avatar: File;
 }
 
 const BirthdayEdit = () => {
@@ -38,12 +38,16 @@ const BirthdayEdit = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<EditBirthdayForm>()
+  } = useForm<EditBirthdayForm>({
+    defaultValues: {
+      name: birthday.name,
+      notes: birthday.notes,
+    }
+  })
 
   const onSubmit: SubmitHandler<EditBirthdayForm> = (data: EditBirthdayForm) => {
     console.log(data)
   }
-
 
   return (
     <div className={styles.BirthdayEdit}>
@@ -52,7 +56,14 @@ const BirthdayEdit = () => {
         subtitle="Want to change something?"
       />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <PhotoPicker defaultImage={birthday.avatar} />
+        <PhotoPicker
+          defaultImage={birthday.avatar}
+          inputProps={{
+            type: 'file',
+          }}
+          name='avatar'
+          register={{ ...register('avatar', { required: true }) }}
+        />
         <div className={styles.row}>
           <Icon name='person' />
           <Input
@@ -69,16 +80,21 @@ const BirthdayEdit = () => {
         <div className={styles.row}>
           <Icon name='event' />
           <DatePicker
-            day={birthday.day}
-            month={birthday.month}
-            year={birthday.year}
+            defaultValue={{
+              day: birthday.day,
+              month: birthday.month,
+              year: birthday.year,
+            }}
           />
         </div>
         <div className={styles.row}>
           <Icon name='description' />
           <TextArea
-            placeholder='Birthday gifts, party ideas, etc.'
-            value={birthday.notes}
+            textareaProps={{
+              placeholder: 'Birthday gifts, party ideas, etc.'
+            }}
+            name='notes'
+            register={{ ...register('notes', { required: true }) }}
           />
         </div>
         <Button>

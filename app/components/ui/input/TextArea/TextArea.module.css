@@ -1,4 +1,7 @@
 .TextArea {
+  width: 100%;
+}
+.TextArea textarea {
   display: block;
   border-radius: 16px;
   background-color: #242424;
@@ -11,12 +14,16 @@
   transition: 0.3s ease-in-out;
   resize: none;
 }
-.TextArea::placeholder {
+.TextArea textarea::placeholder {
   color: #959595;
   font-weight: 500;
 }
-.TextArea:focus {
+.TextArea textarea:focus {
   border-color: #29C13E;
+}
+.TextArea small {
+  margin-top: 8px;
+  margin-left: 16px;
 }
 
 /*# sourceMappingURL=TextArea.module.css.map */

@@ -1,6 +1,7 @@
+import { BirthdayDateObject } from 'app/types';
+
 export interface DatePickerProps {
   label?: string;
-  month?: number;
-  day?: number;
-  year?: number;
+  defaultValue?: BirthdayDateObject;
+  onChange?: (newValue: BirthdayDateObject) => void;
 }

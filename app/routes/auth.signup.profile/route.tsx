@@ -10,6 +10,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface SignUpProfileForm {
   name: string;
+  avatar: File;
 }
 
 export const meta: MetaFunction = () => {
@@ -37,7 +38,13 @@ const SignUpProfile = () => {
         subtitle="Almost there!"
       />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <PhotoPicker />
+        <PhotoPicker
+          inputProps={{
+            type: 'file',
+          }}
+          name='avatar'
+          register={{ ...register('avatar', { required: true }) }}
+        />
         <div className={styles.row}>
           <Icon name='person' />
           <Input

@@ -20,6 +20,7 @@ interface AddBirthdayForm {
   name: string;
   date: string;
   notes: string;
+  avatar: File;
 }
 
 const AddBirthday = () => {
@@ -40,7 +41,13 @@ const AddBirthday = () => {
         subtitle="Don't forget again!"
       />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <PhotoPicker />
+        <PhotoPicker
+          inputProps={{
+            type: 'file',
+          }}
+          name='avatar'
+          register={{ ...register('avatar', { required: true }) }}
+        />
         <div className={styles.row}>
           <Icon name='person' />
           <Input
@@ -61,7 +68,11 @@ const AddBirthday = () => {
         <div className={styles.row}>
           <Icon name='description' />
           <TextArea
-            placeholder='Birthday gifts, party ideas, etc.'
+            textareaProps={{
+              placeholder: 'Birthday gifts, party ideas, etc.'
+            }}
+            name='notes'
+            register={{ ...register('notes', { required: true }) }}
           />
         </div>
         <Button >

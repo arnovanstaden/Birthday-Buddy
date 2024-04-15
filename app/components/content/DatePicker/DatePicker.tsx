@@ -1,7 +1,12 @@
 import classNames from 'classnames';
 import styles from './DatePicker.module.css';
 import { DatePickerProps } from './DatePicker.types';
-import Select from 'react-select'
+import Select from 'react-select';
+
+interface Option {
+  value: number;
+  label: string | number;
+}
 
 const months = [
   "January",
@@ -18,26 +23,55 @@ const months = [
   "December"
 ];
 
-const monthOptions = months.map((month, index) => ({
+const monthOptions: Option[] = months.map((month, index) => ({
   value: index + 1,
   label: month
 }));
 
 const days = Array.from({ length: 31 }, (_, index) => index + 1);
 
-const dayOptions = days.map((day) => ({
+const dayOptions: Option[] = days.map((day) => ({
   value: day,
   label: day
 }));
 
 const years = Array.from({ length: 100 }, (_, index) => new Date().getFullYear() - index);
 
-const yearOptions = years.map((year) => ({
+const yearOptions: Option[] = years.map((year) => ({
   value: year,
   label: year
 }));
 
-const DatePicker: React.FC<DatePickerProps> = ({ label, ...props }) => {
+interface MySelectProps {
+  options: Option[];
+  placeholder: string;
+  value?: Option;
+}
+
+const MySelect = ({ options, placeholder, value }: MySelectProps) => (
+  <Select
+    value={value}
+    placeholder={placeholder}
+    options={options}
+    aria-label={placeholder}
+    className={styles.select}
+    components={{
+      IndicatorsContainer: () => null
+    }}
+    classNames={{
+      control: ({ isFocused }) => classNames(styles.control, isFocused && styles.focused),
+      menu: () => styles.menu,
+      singleValue: () => styles.value,
+      option: ({ isSelected }) => classNames(styles.option, isSelected && styles.selected)
+    }}
+    isSearchable={false}
+    onChange={(selectedOption) => {
+      console.log(selectedOption);
+    }}
+  />
+);
+
+const DatePicker: React.FC<DatePickerProps> = ({ label, defaultValue }) => {
   return (
     <div className={styles.DatePicker}>
       {label && (
@@ -46,61 +80,29 @@ const DatePicker: React.FC<DatePickerProps> = ({ label, ...props }) => {
         </label>
       )}
       <div className={styles.row}>
-        <Select
+        <MySelect
           placeholder="Month"
           options={monthOptions}
-          aria-label="Months"
-          className={styles.select}
-          components={{
-            IndicatorsContainer: () => null
-          }}
-          classNames={{
-            control: ({ isFocused }) => classNames(styles.control, isFocused && styles.focused),
-            menu: () => styles.menu,
-            singleValue: () => styles.value,
-            option: ({ isSelected }) => classNames(styles.option, isSelected && styles.selected)
-          }}
-          isSearchable={false}
+          value={defaultValue?.month !== undefined ? {
+            value: defaultValue.month,
+            label: months[defaultValue.month],
+          } : undefined}
         />
-        <Select
+        <MySelect
           placeholder="Day"
           options={dayOptions}
-          aria-label="Days"
-          className={styles.select}
-          value={props.day && {
-            value: props.day,
-            label: props.day
-          }}
-          components={{
-            IndicatorsContainer: () => null
-          }}
-          classNames={{
-            control: ({ isFocused }) => classNames(styles.control, isFocused && styles.focused),
-            menu: () => styles.menu,
-            singleValue: () => styles.value,
-            option: ({ isSelected }) => classNames(styles.option, isSelected && styles.selected)
-          }}
-          isSearchable={false}
+          value={defaultValue?.day !== undefined ? {
+            value: defaultValue.day,
+            label: defaultValue.day.toString(),
+          } : undefined}
         />
-        <Select
+        <MySelect
           placeholder="Year"
           options={yearOptions}
-          aria-label="Years"
-          className={styles.select}
-          value={props.year && {
-            value: props.year,
-            label: props.year
-          }}
-          components={{
-            IndicatorsContainer: () => null
-          }}
-          classNames={{
-            control: ({ isFocused }) => classNames(styles.control, isFocused && styles.focused),
-            menu: () => styles.menu,
-            singleValue: () => styles.value,
-            option: ({ isSelected }) => classNames(styles.option, isSelected && styles.selected)
-          }}
-          isSearchable={false}
+          value={defaultValue?.year !== undefined ? {
+            value: defaultValue.year,
+            label: defaultValue.year?.toString(),
+          } : undefined}
         />
       </div>
     </div>
